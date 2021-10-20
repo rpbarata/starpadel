@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+echo "=== CONFIGURING GIT HOOKS ==="
+git config core.hooksPath $APP_PATH/git/hooks
+
+echo "=== CONFIGURING GIT COMMIT TEMPLATE ==="
+git config commit.template $APP_PATH/git/commit-template

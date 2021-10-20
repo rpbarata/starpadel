@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+# General dependencies #
+apk add --update bash git nano build-base postgresql-dev nodejs yarn graphviz
+
+# User setup #
+addgroup -g 1000 meideiteam && adduser -u 1000 -G meideiteam -s /bin/bash -D meideiteam
+
+# Install development dependencies #
+if [ "$RAILS_ENV" = "development" ]; then
+  apk add --update sudo zsh openssh git-crypt
+  echo "meideiteam ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/meideiteam
+  chmod 0440 /etc/sudoers.d/meideiteam
+fi

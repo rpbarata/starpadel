@@ -1,0 +1,66 @@
+#!/bin/sh
+red="\033[0;31m"
+green="\033[0;32m"
+yellow="\033[0;33m"
+NC="\033[0m"
+
+if git rev-parse --verify HEAD >/dev/null 2>&1; then
+  against=HEAD
+else
+  # Initial commit: diff against an empty tree object
+  # Change it to match your initial commit sha
+  # branch development > first commit
+  against=202a3943
+fi
+
+# Check if rubocop is installed
+bin/bundle exec rubocop -v >/dev/null 2>&1 || {
+  echo >&2 "${red}[Ruby Style][Fatal]: Add rubocop to your Gemfile"
+  exit 1
+}
+
+echo "${green}[Ruby Style][Info]: Checking Ruby Style${NC}"
+
+# Check if rubocop rules yml exists
+if [ ! -f ".rubocop.yml" ]; then
+  echo "${yellow}[Ruby Style][Warning]: No .rubocop.yml config file.${NC}"
+fi
+
+# Run rubocop on the staged files
+bin/bundle exec rubocop --parallel
+
+if [ $? -ne 0 ]; then
+  echo "${red}[Ruby Style][Error]: Fix the issues and commit again${NC}"
+  exit 1
+fi
+
+# # Check if ESlint is installed
+# which eslint &>/dev/null
+# if [ $? -ne 0 ]; then
+#   echo >&2 "${red}[JavaScript Style][Info]: Install ESlint"
+#   exit 1
+# fi
+
+# echo "${green}[JS Style][Info]: Checking JS Style${NC}"
+
+# # Check if ruboESlintcop rules js exists
+# if [ ! -f ".eslintrc.js" ]; then
+#   echo "${yellow}[JavaScript Style][Warning]: No .eslintrc.js config file.${NC}"
+# fi
+
+# #Run ESLint
+# eslint app/javascript/**
+# if [ $? -ne 0 ]; then
+#   echo "${red}[JavaScript Style][Error]: Fix the issues and commit again${NC}"
+#   exit 1
+# fi
+
+# Run Specs
+# echo "${green}[RSpec][Info]: Checking Rspec tests${NC}"
+# bin/bundle exec rspec spec
+# if [ $? -ne 0 ]; then
+#   echo "${red}[RSpec][Error]: Fix the issues and commit again${NC}"
+#   exit 1
+# fi
+
+exit 0
