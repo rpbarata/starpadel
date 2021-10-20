@@ -1,0 +1,18 @@
+# GENERAL #
+.vscode/
+
+# DOCKER #
+.devcontainer/
+docker/development/
+docker/production/Dockerfile
+
+# GIT #
+.git/
+git/
+gitlab-ci-scripts/
+
+# KUBERNETES #
+kubernetes/
+
+# RAILS #
+config/master.key

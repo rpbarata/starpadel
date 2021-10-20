@@ -1,0 +1,29 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+inherit_gem:
+  rubocop-shopify: rubocop.yml
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'vendor/**/*'
+    - 'docker/**/*'
+    - '.vscode/**/*'
+    - '.devcontainer/**/*'
+    - '.git/**/*'
+    - node_modules/**/*
+    - db/schema.rb
+    - bin/**/*
+    - Rakefile
+    - tmp/**/*
+
+# RUBY #
+Layout/EmptyLineAfterGuardClause:
+  Enabled: true
+
+# RAILS #
+Rails/HasAndBelongsToMany:
+  Enabled: false

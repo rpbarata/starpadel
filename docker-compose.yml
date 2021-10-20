@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  rails:
+    container_name: starpadel-rails
+    build:
+      dockerfile: docker/development/Dockerfile
+      context: .
+    env_file: .env
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/project
+      - bundle_data:/bundle
+      - $HOME/.ssh:/project/docker/development/home/.ssh
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:13
+    container_name: starpadel-postgres
+    environment:
+      POSTGRES_USER: meideiteam
+      POSTGRES_PASSWORD: meideiteam
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  bundle_data:
+  postgres_data:
