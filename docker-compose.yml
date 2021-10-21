@@ -22,8 +22,8 @@ services:
     image: postgres:13
     container_name: starpadel-postgres
     environment:
-      POSTGRES_USER: meideiteam
-      POSTGRES_PASSWORD: meideiteam
+      POSTGRES_USER: "${DATABASE_USERNAME}"
+      POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

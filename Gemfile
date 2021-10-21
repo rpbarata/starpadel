@@ -50,6 +50,7 @@ gem "rails_semantic_logger"
 gem "faker"
 
 # gem "paper_trail"
+# gem "paper_trail-globalid"
 
 # gem "chartkick", "~> 3.4", ">= 3.4.2"
 # gem "groupdate", "~> 5.2", ">= 5.2.2"
@@ -57,7 +58,11 @@ gem "faker"
 # gem "sentry-ruby"
 # gem "sentry-rails"
 
+# Authorization
+gem "cancancan", "~> 3.2", ">= 3.2.1"
+
 group :development, :test do
+  gem "bullet"
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "factory_bot_rails"
@@ -68,6 +73,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'brakeman'
   # preview emails in browser
   gem "letter_opener"
   # To annotate models
@@ -99,3 +105,6 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", "~> 1.2021", ">= 1.2021.1"
+
+# GEMS TO INVESTIGATE
+# https://github.com/zdennis/activerecord-import

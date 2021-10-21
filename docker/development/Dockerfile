@@ -18,10 +18,10 @@ ENV NODE_ENV development
 
 WORKDIR $APP_PATH
 
-# COPY ./bin/.zshrc $HOME/.zshrc
-
 COPY ./bin/install-system-dependencies $APP_BIN_PATH/install-system-dependencies
 RUN install-system-dependencies
+
+# RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.2/zsh-in-docker.sh)"
 
 RUN mkdir $BUNDLE_PATH && chown meideiteam:meideiteam $BUNDLE_PATH
 
