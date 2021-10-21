@@ -1,0 +1,4 @@
+pt:
+  unauthorized:
+    manage:
+      all: "Non autorisé à %{action} %{subject}."
