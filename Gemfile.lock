@@ -110,6 +110,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.10.0)
+      devise (>= 4.8.0)
     diff-lcs (1.4.4)
     dotenv (2.7.6)
     dotenv-rails (2.7.6)
@@ -354,6 +356,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   database_cleaner-active_record
   devise
+  devise-i18n
   dotenv-rails
   factory_bot_rails
   faker

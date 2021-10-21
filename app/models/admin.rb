@@ -24,7 +24,5 @@ class Admin < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable, :registerable, :recoverable
   devise :database_authenticatable, :rememberable, :validatable
 
-  enum role: { super_admin: 1, coach_admin: 2, secretariat_admin: 2 }
-  include Trestle::Auth::ModelMethods
-  include Trestle::Auth::ModelMethods::Rememberable
+  enum role: { super_admin: 1, coach_admin: 2, secretariat_admin: 3 }
 end

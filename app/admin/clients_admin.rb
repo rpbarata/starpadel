@@ -1,6 +1,8 @@
 Trestle.resource(:clients) do
+  authorize_with cancan: Ability
+  
   menu do
-    item :clients, icon: "fa fa-star"
+    item :clients, icon: "fas fa-user-friends", priority: 2
   end
 
   search do |query|

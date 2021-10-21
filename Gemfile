@@ -38,7 +38,7 @@ gem "amazing_print"
 gem "rails_semantic_logger"
 
 gem "devise"
-# gem "devise-i18n"
+gem "devise-i18n"
 
 gem "trestle"
 gem "trestle-auth", github: "TrestleAdmin/trestle-auth", branch: "authorization",
