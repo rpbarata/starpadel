@@ -37,14 +37,14 @@ gem "dotenv-rails"
 gem "amazing_print"
 gem "rails_semantic_logger"
 
-# gem "devise"
-# gem "devise-i18n"
+gem "devise"
+gem "devise-i18n"
 
-# gem "trestle"
-# gem "trestle-auth", github: "TrestleAdmin/trestle-auth", branch: "authorization",
-#   ref: "7d164117a60ffb46f657c721874c01950c64a566"
-# gem "trestle-tinymce"
-# gem "trestle-search"
+gem "trestle"
+gem "trestle-auth", github: "TrestleAdmin/trestle-auth", branch: "authorization",
+  ref: "7d164117a60ffb46f657c721874c01950c64a566"
+gem "trestle-tinymce"
+gem "trestle-search"
 
 # TODO: Move to development, :test
 gem "faker"
