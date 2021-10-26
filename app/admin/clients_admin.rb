@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-Trestle.resource(:clients) do
+Trestle.resource(:clients, model: Client) do
   authorize_with cancan: Ability
 
   menu do
-    item :clients, icon: "fas fa-user-friends", priority: 2
+    item :clientes, icon: "fas fa-user-friends", priority: 2
   end
 
   search do |query|
