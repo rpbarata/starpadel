@@ -26,6 +26,7 @@
 # Indexes
 #
 #  index_clients_on_email                 (email) UNIQUE
+#  index_clients_on_name                  (name)
 #  index_clients_on_reset_password_token  (reset_password_token) UNIQUE
 #
 FactoryBot.define do

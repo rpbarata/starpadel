@@ -55,7 +55,7 @@ gem "faker"
 gem "chartkick", "~> 3.4", ">= 3.4.2"
 gem "groupdate", "~> 5.2", ">= 5.2.2"
 
-gem 'phonelib'
+gem "phonelib"
 
 # gem "sentry-ruby"
 # gem "sentry-rails"

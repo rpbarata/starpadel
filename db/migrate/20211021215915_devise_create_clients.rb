@@ -48,6 +48,7 @@ class DeviseCreateClients < ActiveRecord::Migration[6.1]
 
     add_index(:clients, :email,                unique: true)
     add_index(:clients, :reset_password_token, unique: true)
+    add_index(:clients, :name)
     # add_index :clients, :confirmation_token,   unique: true
     # add_index :clients, :unlock_token,         unique: true
   end
