@@ -73,7 +73,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'brakeman'
+  gem "brakeman"
   # preview emails in browser
   gem "letter_opener"
   # To annotate models

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: clients
@@ -28,6 +30,5 @@
 #
 FactoryBot.define do
   factory :client do
-    
   end
 end

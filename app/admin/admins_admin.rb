@@ -2,7 +2,7 @@
 
 Trestle.resource(:admins, model: Admin) do
   authorize_with cancan: Ability
-  
+
   remove_action :destroy
 
   menu do
@@ -37,7 +37,7 @@ Trestle.resource(:admins, model: Admin) do
       col(sm: 6) { text_field :username }
       col(sm: 6) { text_field :email }
     end
-    select :role, 
+    select :role,
       Admin.defined_enums["role"].keys.map do |status|
         [I18n.t("activerecord.enums.role_list.#{status}"), status]
       end

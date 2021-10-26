@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 Trestle.resource(:clients) do
   authorize_with cancan: Ability
-  
+
   menu do
     item :clients, icon: "fas fa-user-friends", priority: 2
   end
@@ -32,28 +34,27 @@ Trestle.resource(:clients) do
 
   # Customize the form fields shown on the new/edit views.
   #
-  form do |client|
+  form do |_client|
     text_field :name
 
-    row do 
+    row do
       col(sm: 6) { text_field :email }
       col(sm: 6) { text_field :phone_number }
     end
 
     text_field :address
 
-    row do 
+    row do
       col(sm: 6) { text_field :member_id }
       col(sm: 6) { text_field :fpp_id }
     end
 
-    row do 
+    row do
       col(sm: 4) { text_field :identification_number }
       col(sm: 4) { text_field :nif }
       col(sm: 4) { date_field :birth_date }
     end
 
     editor :comments
-
   end
 end

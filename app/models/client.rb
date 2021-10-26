@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: clients
@@ -32,7 +34,6 @@ class Client < ApplicationRecord
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :validatable
 
-  scope :members_of_club, -> { where.not(member_id: [nil, ""])}
-  scope :not_members_of_club, -> { where(member_id: [nil, ""])}
-
+  scope :members_of_club, -> { where.not(member_id: [nil, ""]) }
+  scope :not_members_of_club, -> { where(member_id: [nil, ""]) }
 end

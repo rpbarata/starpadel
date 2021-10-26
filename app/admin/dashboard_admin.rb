@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Trestle.admin(:dashboard) do
   menu do
     item :dashboard, icon: "fa fa-tachometer", priority: 1

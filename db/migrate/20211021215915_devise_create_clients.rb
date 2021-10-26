@@ -2,28 +2,28 @@
 
 class DeviseCreateClients < ActiveRecord::Migration[6.1]
   def change
-    create_table :clients do |t|
+    create_table(:clients) do |t|
       ## Database authenticatable
-      t.string :email,              null: false, default: ""
-      t.string :encrypted_password, null: false, default: ""
+      t.string(:email,              null: false, default: "")
+      t.string(:encrypted_password, null: false, default: "")
 
-      t.string :name
-      t.string :address
-      t.string :member_id
-      t.string :fpp_id
-      t.string :phone_number
-      t.string :identification_number
-      t.string :nif
-      t.date :birth_date
-      t.string :rfid_number
-      t.text :comments
-      
+      t.string(:name)
+      t.string(:address)
+      t.string(:member_id)
+      t.string(:fpp_id)
+      t.string(:phone_number)
+      t.string(:identification_number)
+      t.string(:nif)
+      t.date(:birth_date)
+      t.string(:rfid_number)
+      t.text(:comments)
+
       ## Recoverable
-      t.string   :reset_password_token
-      t.datetime :reset_password_sent_at
+      t.string(:reset_password_token)
+      t.datetime(:reset_password_sent_at)
 
       ## Rememberable
-      t.datetime :remember_created_at
+      t.datetime(:remember_created_at)
 
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
@@ -43,12 +43,11 @@ class DeviseCreateClients < ActiveRecord::Migration[6.1]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-
-      t.timestamps null: false
+      t.timestamps(null: false)
     end
 
-    add_index :clients, :email,                unique: true
-    add_index :clients, :reset_password_token, unique: true
+    add_index(:clients, :email,                unique: true)
+    add_index(:clients, :reset_password_token, unique: true)
     # add_index :clients, :confirmation_token,   unique: true
     # add_index :clients, :unlock_token,         unique: true
   end
