@@ -52,8 +52,10 @@ gem "faker"
 # gem "paper_trail"
 # gem "paper_trail-globalid"
 
-# gem "chartkick", "~> 3.4", ">= 3.4.2"
-# gem "groupdate", "~> 5.2", ">= 5.2.2"
+gem "chartkick", "~> 3.4", ">= 3.4.2"
+gem "groupdate", "~> 5.2", ">= 5.2.2"
+
+gem 'phonelib'
 
 # gem "sentry-ruby"
 # gem "sentry-rails"

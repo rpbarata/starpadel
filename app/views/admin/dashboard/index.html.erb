@@ -1,0 +1,24 @@
+<% content_for(:title, admin.admin_name.titleize) %>
+
+<%= render layout: "layout", locals: { wrapper: true, sidebar: false, hide_breadcrumbs: true } do %>
+  <%= form_tag request.path, method: :get do %>
+    <div class="row">
+      <div class="col">
+        <div class="form-group" style="display: inline-block">
+          <%= label_tag(:start_date, "Data de Inicio:") %>
+          <%= date_field_tag :start_date, params[:start_date], class: "form-control", data: { picker: true } %>
+        </div>
+        <div class="form-group" style="display: inline-block">
+          <%= label_tag(:end_date, "Data de Fim:") %>
+          <%= date_field_tag :end_date, params[:end_date], class: "form-control", data: { picker: true } %>
+        </div>
+        <div class="form-group"  style="display: inline-block">
+          <button class="btn btn-danger" type="button" onclick="this.form.submit()">Filtrar</button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <%= pie_chart clients_pie_chart_path(start_date: params[:start_date], end_date: params[:end_date]) %>
+
+<% end %>

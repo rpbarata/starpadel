@@ -96,6 +96,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    chartkick (3.4.2)
     childprocess (4.1.0)
     choice (0.2.0)
     concurrent-ruby (1.1.9)
@@ -128,6 +129,8 @@ GEM
     ffi (1.15.4)
     globalid (0.5.2)
       activesupport (>= 5.0)
+    groupdate (5.2.2)
+      activesupport (>= 5)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.2)
@@ -169,6 +172,7 @@ GEM
     parser (3.0.2.0)
       ast (~> 2.4.1)
     pg (1.2.3)
+    phonelib (0.6.53)
     public_suffix (4.0.6)
     puma (5.5.2)
       nio4r (~> 2.0)
@@ -354,16 +358,19 @@ DEPENDENCIES
   byebug
   cancancan (~> 3.2, >= 3.2.1)
   capybara (>= 3.26)
+  chartkick (~> 3.4, >= 3.4.2)
   database_cleaner-active_record
   devise
   devise-i18n
   dotenv-rails
   factory_bot_rails
   faker
+  groupdate (~> 5.2, >= 5.2.2)
   jbuilder (~> 2.7)
   letter_opener
   listen (~> 3.3)
   pg (~> 1.1)
+  phonelib
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.1)
