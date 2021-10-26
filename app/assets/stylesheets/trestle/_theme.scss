@@ -8,8 +8,12 @@
 // Customize admin theme colors:
 //
 $theme-colors: (
-  "primary":   #e5421f,
-  "secondary": #ffca40
+  "primary":   #c4261a,
+  "secondary": #ffa722
 );
 
 $sidebar-active-border-color: theme-color("secondary");
+
+.theme-bg-dark {
+  background-color: #1a1414 !important;
+}
