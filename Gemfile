@@ -46,9 +46,6 @@ gem "trestle-auth", github: "TrestleAdmin/trestle-auth", branch: "authorization"
 gem "trestle-tinymce"
 gem "trestle-search"
 
-# TODO: Move to development, :test
-gem "faker"
-
 # gem "paper_trail"
 # gem "paper_trail-globalid"
 
@@ -57,8 +54,8 @@ gem "groupdate", "~> 5.2", ">= 5.2.2"
 
 gem "phonelib"
 
-# gem "sentry-ruby"
-# gem "sentry-rails"
+gem "sentry-ruby"
+gem "sentry-rails"
 
 # Authorization
 gem "cancancan", "~> 3.2", ">= 3.2.1"
@@ -68,7 +65,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "factory_bot_rails"
-  # gem "faker"
+  gem "faker"
   gem "rspec-rails", "~> 4.0.1"
   gem "rubocop-faker"
   gem "rubocop-rspec", require: false
