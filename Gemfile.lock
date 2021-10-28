@@ -381,7 +381,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  amazing_print
+  amazing_print (~> 1.2, >= 1.2.2)
   annotate
   bootsnap (>= 1.4.4)
   brakeman
@@ -406,7 +406,7 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.1)
   rails-erd (~> 1.5.0)
-  rails_semantic_logger
+  rails_semantic_logger (~> 4.4, >= 4.4.4)
   rspec-rails (~> 4.0.1)
   rubocop
   rubocop-faker
