@@ -38,6 +38,8 @@ class Client < ApplicationRecord
   scope :members_of_club, -> { where.not(member_id: [nil, ""]) }
   scope :not_members_of_club, -> { where(member_id: [nil, ""]) }
 
+  has_paper_trail
+
   # TODO: Falta ver o tamanho dos nºs de sócio
   validates :name, presence: true
   validates :nif, length: { is: 9 }, numericality: { only_integer: true }, if: -> { nif.present? }
@@ -51,7 +53,6 @@ class Client < ApplicationRecord
   validates :member_id, numericality: { only_integer: true }, if: -> { member_id.present? }
 
   class << self
-    # TODO: Ver porquê que as data não estão a funcionar bem
     def select_by_date(start_date, end_date)
       if start_date.present? && end_date.present?
         where("created_at BETWEEN :start_date AND :end_date",
