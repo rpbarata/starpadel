@@ -34,8 +34,8 @@ gem "bootsnap", ">= 1.4.4", require: false
 gem "dotenv-rails"
 
 # Better Rails logs
-gem "amazing_print"
-gem "rails_semantic_logger"
+gem "amazing_print", "~> 1.2", ">= 1.2.2"
+gem "rails_semantic_logger", "~> 4.4", ">= 4.4.4"
 
 gem "devise"
 gem "devise-i18n"
