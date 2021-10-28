@@ -46,8 +46,8 @@ gem "trestle-auth", github: "TrestleAdmin/trestle-auth", branch: "authorization"
 gem "trestle-tinymce"
 gem "trestle-search"
 
-# gem "paper_trail"
-# gem "paper_trail-globalid"
+gem "paper_trail"
+gem "paper_trail-globalid"
 
 gem "chartkick", "~> 3.4", ">= 3.4.2"
 gem "groupdate", "~> 5.2", ">= 5.2.2"
