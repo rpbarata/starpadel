@@ -25,7 +25,7 @@
 #
 # Indexes
 #
-#  index_clients_on_email                 (email) UNIQUE
+#  index_clients_on_email                 (email)
 #  index_clients_on_name                  (name)
 #  index_clients_on_reset_password_token  (reset_password_token) UNIQUE
 #
@@ -42,15 +42,16 @@ class Client < ApplicationRecord
 
   # TODO: Falta ver o tamanho dos nºs de sócio
   validates :name, presence: true
-  validates :nif, length: { is: 9 }, numericality: { only_integer: true }, if: -> { nif.present? }
+  validates :nif, length: { is: 9 }, numericality: { only_integer: true }, uniqueness: true, if: -> { nif.present? }
   validates :identification_number,
     length: { is: 8 },
     numericality: { only_integer: true },
+    uniqueness: true,
     if: -> { identification_number.present? }
   validates :phone_number, phone: true, if: -> { phone_number.present? }
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { email.present? }
-  validates :fpp_id, numericality: { only_integer: true }, if: -> { fpp_id.present? }
-  validates :member_id, numericality: { only_integer: true }, if: -> { member_id.present? }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true, if: -> { email.present? }
+  validates :fpp_id, numericality: { only_integer: true }, uniqueness: true, if: -> { fpp_id.present? }
+  validates :member_id, numericality: { only_integer: true }, uniqueness: true, if: -> { member_id.present? }
 
   class << self
     def select_by_date(start_date, end_date)
