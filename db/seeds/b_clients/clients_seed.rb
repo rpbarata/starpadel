@@ -20,9 +20,14 @@ if ActiveModel::Type::Boolean.new.cast(ENV.fetch("SEED_CLIENTS", "false"))
     )
   end
 
-  Client.members_of_club.find_each do |client|
+  Client.find_each do |client|
     created_at_random_date = Faker::Date.between(from: 31.days.ago, to: Time.zone.today)
-    become_member_at_random_date = Faker::Date.between(from: created_at_random_date, to: Time.zone.today)
+    become_member_at_random_date =
+      if client.member_id.present?
+        Faker::Date.between(from: created_at_random_date, to: Time.zone.today)
+      else
+        nil
+      end
     client.update(created_at: created_at_random_date, become_member_at: become_member_at_random_date)
   end
 end
