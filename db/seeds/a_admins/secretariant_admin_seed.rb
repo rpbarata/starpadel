@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Rails.logger.debug("Creating Secretariant Admin")
+STDOUT.puts("Creating Secretariat Admin")
 
 admin = Admin.where(
   username: "balcao"

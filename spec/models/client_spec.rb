@@ -6,6 +6,7 @@
 #
 #  id                     :bigint           not null, primary key
 #  address                :string
+#  become_member_at       :datetime
 #  birth_date             :date
 #  comments               :text
 #  email                  :string           default(""), not null

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Rails.logger.debug("Creating Coach Admin")
+STDOUT.puts("Creating Coach Admin")
 
 admin = Admin.where(
   username: "treinadores"
