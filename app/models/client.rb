@@ -49,7 +49,7 @@ class Client < ApplicationRecord
     uniqueness: true,
     if: -> { identification_number.present? }
   validates :phone_number, phone: true, if: -> { phone_number.present? }
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true, if: -> { email.present? }
+  validates :email, format: { with: /\A[a-z0-9+\-_.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: true, if: -> { email.present? }
   validates :fpp_id, numericality: { only_integer: true }, uniqueness: true, if: -> { fpp_id.present? }
   validates :member_id, numericality: { only_integer: true }, uniqueness: true, if: -> { member_id.present? }
 
