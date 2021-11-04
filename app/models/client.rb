@@ -6,6 +6,7 @@
 #
 #  id                     :bigint           not null, primary key
 #  address                :string
+#  become_member_at       :datetime
 #  birth_date             :date
 #  comments               :text
 #  email                  :string           default(""), not null
@@ -53,6 +54,8 @@ class Client < ApplicationRecord
   validates :fpp_id, numericality: { only_integer: true }, uniqueness: true, if: -> { fpp_id.present? }
   validates :member_id, numericality: { only_integer: true }, uniqueness: true, if: -> { member_id.present? }
 
+  before_save :set_become_member_at, if: -> { will_save_change_to_member_id? }
+
   class << self
     def select_by_date(start_date, end_date)
       if start_date.present? && end_date.present?
@@ -66,5 +69,12 @@ class Client < ApplicationRecord
         all
       end
     end
+  end
+
+  private
+
+  # on: before_save if: will_save_change_to_member_id?
+  def set_become_member_at
+    self.become_member_at = member_id.present? ? Time.current : nil
   end
 end

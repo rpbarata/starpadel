@@ -22,6 +22,10 @@
   <% end %>
 
   <div class="mt-3">
+    <%= line_chart clients_line_chart_path(start_date: params[:start_date], end_date: params[:end_date]), title: "Adesão de Novos Sócios"  %>
+  </div>
+
+  <div class="mt-3">
     <%= pie_chart clients_pie_chart_path(start_date: params[:start_date], end_date: params[:end_date]), title: "Total de Clientes" %>
   </div>
 

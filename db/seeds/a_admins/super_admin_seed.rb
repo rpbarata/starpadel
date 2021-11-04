@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Rails.logger.debug("Creating Super Admin")
+STDOUT.puts("Creating Super Admins")
 
 def create_super_admin(username, email, password)
   admin = Admin.where(
