@@ -31,4 +31,5 @@ class Admin < ApplicationRecord
   devise :database_authenticatable, :rememberable, :validatable, :trackable
 
   enum role: { super_admin: 1, coach_admin: 2, secretariat_admin: 3 }
+  validates :username, presence: true, uniqueness: true
 end
