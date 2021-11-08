@@ -2,7 +2,7 @@
 set -e
 
 # General dependencies #
-apk add --update bash git nano build-base postgresql-dev nodejs yarn graphviz
+apk add --update bash git nano build-base postgresql-dev nodejs yarn graphviz font-noto
 
 # User setup #
 addgroup -g 1000 meideiteam && adduser -u 1000 -G meideiteam -s /bin/bash -D meideiteam
