@@ -53,6 +53,7 @@ class Client < ApplicationRecord
   validates :email, format: { with: /\A[a-z0-9+\-_.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: true, if: -> { email.present? }
   validates :fpp_id, numericality: { only_integer: true }, uniqueness: true, if: -> { fpp_id.present? }
   validates :member_id, numericality: { only_integer: true }, uniqueness: true, if: -> { member_id.present? }
+  validate :birth_date_in_the_past, if: -> { birth_date.present? }
 
   before_save :set_become_member_at, if: -> { will_save_change_to_member_id? }
 
@@ -76,5 +77,12 @@ class Client < ApplicationRecord
   # on: before_save if: will_save_change_to_member_id?
   def set_become_member_at
     self.become_member_at = member_id.present? ? Time.current : nil
+  end
+
+  # validate if birth_date.present?
+  def birth_date_in_the_past
+    if birth_date >= Time.zone.today.beginning_of_day
+      errors.add(:birth_date, 'não é válida')
+    end
   end
 end
