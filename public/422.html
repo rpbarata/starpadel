@@ -1,67 +1,145 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>The change you wanted was rejected (422)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <title>A mudança que queria foi rejeitada</title>
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet">
+
+  <!-- Custom stlylesheet -->
+  <link type="text/css" rel="stylesheet" href="css/style.css" />
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+    * {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+    body {
+      padding: 0;
+      margin: 0;
+    }
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    #notfound {
+      position: relative;
+      height: 100vh;
+      background-color: #3f3f3f;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASkAAAEpBAMAAAA9t8mxAAAAKlBMVEWqqqqqqqqmpqaqqqqlpaWfn5+jo6OlpaWhoaGioqKZmZmRkZGcnJytra0j0gbMAAAADnRSTlMSGBcVFBAOERMWDw4NGdttkLYAAATmSURBVHgBYgADRkEQUAK0dwY/lkxRHH5BQCw8kRCrVhhYNYXBCgpIJBMUWInwhJUwFGzagJqdQKjdxCDUv2AzmQ2St7ATi/5fJl8vur7c6b/g5vetOjVVt743m5Nzz7mnYGd1yKXtIbsr6ODRBjp4vIcNvLaCDbzRQQvHB+jg4RWMsLeCBu6cYA03DDDBN/VZxSpWsYpVrPyPA5zswMpwxQAN3NrBAB8vj30yQwN3jNDDKxO08OAEG3i9Ab2ihQfGQ/ZiFatYxSpWFVoN8OmfMMB7DWj5Bu6aD/ljghnOrGCGsy0M8EEPK7h8A/qzhXsWq+9amOG35YbdCq1iFatYxSpWB1w5HvJFB1Jp4d4OlKVN8G0DM/zaQwv39TDC6Qn0E7dwbgWymuCnERQd67KKVaxiFatYbeCtAcpdvSc2MMKppkDaK7isgxG+7EEq+rXaF9TVNVyrzcAKrWIVq1jFKlYdPD2BMiQJKl7phhG+KrUH+GgExbajtVWJ2sL5ZYV3YxWrWMUqVvVZOfNqCm4foIMnj2xMOF1WjFq4ew1lSentCRT8lLCpe0KBMlaxilWsYlWVlZfXSxWkpC2Umh3wZg/jQg8vLyHx++6QZ2bYh/8nUFGqgZ1YxSpWsYpVhVY9vFA+osgkKyVWutrDiaUP+7YelI+t4JIlUD40g6pbyv5mOBOrWMUqVrGq0Eq5kFqn1ZgwwPstaNtvDdc10C2oUbuHFzegrm9FvA6eGkF9dQfsxCpWsYpVrCq0UkAT6nJQvFLbnFxVMVL5qSm4pQVFxxl+6UCRVNlfrOqyilWsYhUrpUVruHEEXR0WPAlhQbt6HTyyhvLex1pQu8K0oOCnP+uyilWsYhWrWGn3TU1vanZQM52uSrs8w3qsTLd0VSFRO4u6t4XdCq1iFatYxSpWapCTlfrfVgvDQrugmtPRHREa76N0S4+plrUP/1ZoFatYxSpWsdIjPTzXwAQ/DqD2bfU+6IZxQYFSP1ERTweGtJj+bGCnQqtYxSpWsYqVllezgdaUtvImnUtV74NSqDXcNIOOEalDXMOt1SexhXMVWsUqVrGKVay6BXVcq8NgFAV7vsEpFMD9G1D5qYfnWygH7pxatPfqs4pVrGIVq1gpDvoTCUrC2gUtv4W/R1CPgjYONZbUwU8sVxV1ezhRoVWsYhWrWMVK32hbLchV83TK7uyryi1CraA3yVVvu2hfUD+xQqtYxSpWsYpVObzg6wGUQqm6VNaGXirLT+VnfX4vuxzahXFhhp8bqNYqVrGKVaxipfEHWlOFJj2te8vQ9eEGJCjtNVzfge5VfUpnY1cHVGUVq1jFKlaxElfPoOOhSrd0jKgMlDrYc3yAo7/9JlfVkbbwV7lCtVaxilWsYhUrHRpVj4Jeqnk6GsMzwmdr0HRQraD3qzlCBSz9d4zweQvVWsUqVrGKVay0EafMawXXbEEt2Zp5oPKTgp+01eWwhX8m0AoKtWWg3ItVrGIVq1hVaNXAzWsoO+heLc/47MN/SzfCOzNoDI827XS4qINn90HJnbQv/oZCrGIVq1jFqj6rGc62oCnVA5zsQBtxGvymDjrt6pXbfj/0oPHY2i1UqaqBY07uYhWrWMUqVvVZbeF8uSenMCcV7d+pXUEfHtUYa71Uc920ggKlTh+1sBurWMUqVrGqz+oC2Mn2vCgkV80AAAAASUVORK5CYII=), linear-gradient(hsla(0, 0%, 100%, .05), rgba(0, 0, 0, .05));
+      background-repeat: repeat, no-repeat;
+    }
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
+    #notfound .notfound {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    .notfound {
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .notfound .notfound-404 {
+      height: 158px;
+      line-height: 153px;
+    }
+
+    .notfound .notfound-404 h1 {
+      font-family: 'Josefin Sans', sans-serif;
+      color: #222;
+      font-size: 220px;
+      letter-spacing: 10px;
+      margin: 0px;
+      font-weight: 700;
+      text-shadow: 2px 2px 0px #c9c9c9, -2px -2px 0px #c9c9c9;
+    }
+
+    .notfound .notfound-404 h1>span {
+      text-shadow: 2px 2px 0px #c4261a, -2px -2px 0px #c4261a, 0px 0px 8px #8f1c14;
+    }
+
+    .notfound p {
+      font-family: 'Josefin Sans', sans-serif;
+      color: #c9c9c9;
+      font-size: 16px;
+      font-weight: 400;
+      margin-top: 0px;
+      margin-bottom: 15px;
+    }
+
+    .notfound h1 {
+      font-family: 'Josefin Sans', sans-serif;
+      color: #c9c9c9;
+      font-size: 25px;
+      font-weight: 400;
+      margin-top: 0px;
+      margin-bottom: 15px;
+    }
+
+    .notfound a {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 14px;
+      text-decoration: none;
+      text-transform: uppercase;
+      background: transparent;
+      color: #c9c9c9;
+      border: 2px solid #c9c9c9;
+      display: inline-block;
+      padding: 10px 25px;
+      font-weight: 700;
+      -webkit-transition: 0.2s all;
+      transition: 0.2s all;
+    }
+
+    .notfound a:hover {
+      color: #ffab00;
+      border-color: #ffab00;
+    }
+
+    @media only screen and (max-width: 480px) {
+      .notfound .notfound-404 {
+        height: 122px;
+        line-height: 122px;
+      }
+
+      .notfound .notfound-404 h1 {
+        font-size: 122px;
+      }
+    }
   </style>
+
 </head>
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/422.html -->
-  <div class="dialog">
-    <div>
-      <h1>The change you wanted was rejected.</h1>
-      <p>Maybe you tried to change something you didn't have access to.</p>
+<body>
+
+  <div id="notfound">
+    <div class="notfound">
+      <div class="notfound-404">
+        <h1>4<span>2</span>2</h1>
+      </div>
+      <h1>A mudança que queria foi rejeitada.</h1>
+      <p>Talvez tenha tentado mudar algo ao qual não tinha acesso.</p>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
   </div>
+
 </body>
+
 </html>
