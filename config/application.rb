@@ -22,7 +22,7 @@ module Starpadel
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.time_zone = "Lisbon"
-    config.i18n.available_locales = ["pt"]
+    config.i18n.available_locales = ["pt", "en"]
     config.i18n.default_locale = "pt"
     config.i18n.locale = "pt"
   end
