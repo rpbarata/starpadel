@@ -25,8 +25,6 @@ if ActiveModel::Type::Boolean.new.cast(ENV.fetch("SEED_CLIENTS", "false"))
     become_member_at_random_date =
       if client.member_id.present?
         Faker::Date.between(from: created_at_random_date, to: Time.zone.today)
-      else
-        nil
       end
     client.update(created_at: created_at_random_date, become_member_at: become_member_at_random_date)
   end
