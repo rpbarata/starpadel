@@ -416,6 +416,7 @@ pt:
       index: "Listar %{pluralized_model_name}"
       new: "Novo %{model_name}"
       edit: "Editar %{model_name}"
+      show: "Mostrar %{model_name}"
     buttons:
       new: "Novo %{model_name}"
       save: "Salvar %{model_name}"
@@ -453,3 +454,5 @@ pt:
         prompt: "- Selecione %{attribute_name} -"
     format:
       blank: "Nenhum"
+    tabs:
+      client: "Cliente"

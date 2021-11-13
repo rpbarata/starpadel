@@ -30,6 +30,11 @@ Trestle.resource(:admins, model: Admin) do
     column :username, link: true
     column :email, link: true
     column :role, ->(admin) { admin.translate(:role) }
+
+    actions do |toolbar, _instance, _admin|
+      toolbar.edit
+      toolbar.show
+    end
   end
 
   form do |_admin|
@@ -61,4 +66,8 @@ Trestle.resource(:admins, model: Admin) do
       login!(instance)
     end
   end if Devise.sign_in_after_reset_password
+
+  controller do
+    include FixActionUpdateConcern
+  end
 end

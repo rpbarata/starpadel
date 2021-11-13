@@ -1,0 +1,55 @@
+<% class_name = instance.class.name.underscore %>
+
+<% if current_user.super_admin? || current_user.secretariat_admin? %>
+  <div class="btn-toolbar primary-toolbar d-flex justify-content-end" role="toolbar">
+    <%= link_to "Editar", edit_clients_admin_path(instance), class: "btn btn-warning" %>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="col">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'name', value: instance.name } %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'email', value: instance.email } %>
+  </div>
+  <div class="col-6">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'phone_number', value: instance.phone_number } %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'address', value: instance.address } %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'member_id', value: instance.member_id } %>
+  </div>
+  <div class="col-6">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'fpp_id', value: instance.fpp_id } %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'identification_number', value: instance.identification_number } %>
+  </div>
+  <div class="col-4">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'nif', value: instance.nif } %>
+  </div>
+  <div class="col-4">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'birth_date', value: instance.birth_date } %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'comments', value: instance.comments } %>
+  </div>
+</div>

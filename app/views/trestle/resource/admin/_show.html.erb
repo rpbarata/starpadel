@@ -1,0 +1,11 @@
+<% class_name = instance.class.name.underscore %>
+
+<% if current_user.super_admin? %>
+  <div class="btn-toolbar primary-toolbar d-flex justify-content-end" role="toolbar">
+    <%= link_to "Editar", edit_admins_admin_path(instance), class: "btn btn-warning" %>
+  </div>
+<% end %>
+
+<%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'username', value: instance.username } %>
+<%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'email', value: instance.email } %>
+<%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'role', value: instance.role } %>

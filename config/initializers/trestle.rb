@@ -73,6 +73,7 @@ Trestle.configure do |config|
   # Specify helper modules to expose to the admin.
   #
   # config.helper :all
+  config.helper(ApplicationHelper)
 
   # Register callbacks to run before, after or around all Trestle actions.
   #
