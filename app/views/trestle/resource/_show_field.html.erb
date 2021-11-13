@@ -1,0 +1,46 @@
+<dt>
+  <span class="label label-info">
+    <%= t("activerecord.attributes.#{class_name}.#{field}") %>
+  </span>
+</dt>
+<dd class="well">
+  <% if value.is_a?(TrueClass) %>
+    <span class="badge badge-success"><i class="fa fa-check"></i></span>
+  <% elsif value.is_a?(FalseClass) %>
+    <span class="badge badge-danger"><i class="fa fa-times"></i></span>
+  <% elsif value.instance_of?(Date) %>
+    <%= value.strftime(t("datetime.formats.date")) %>
+  <% elsif value.instance_of?(DateTime) %>
+    <%= value.strftime(t("datetime.formats.datetime")) %>
+  <% elsif value.instance_of?(Time) %>
+    <%= value.strftime(t("datetime.formats.time")) %>
+  <% elsif value.is_a?(ActiveRecord::Base) %>
+    <% name = value[:name].present? ? value.name : value[:title].present? ? value.title : value[:username].present? ? value.username : value.id %>
+    <%= admin_link_to(name, value) %>
+  <% elsif value.is_a?(ActiveRecord::Associations::CollectionProxy) %>
+    <% value.each_with_index do |record, index| %>
+      <% if record.is_a?(Protocol) %>
+        <% name = record.name_with_code.present? ? record.name_with_code : record.id %>
+      <% else %>
+        <% name = record[:name].present? ? record.name : record.id %>
+      <% end %>
+      <p class="mb-0"><%= admin_link_to(name, record) %></p>
+    <% end %>
+  <% elsif instance.defined_enums.key?(field) %>
+    <%= t("activerecord.enums.#{field}_list.#{value}") if value.present? %>
+  <% elsif value.is_a?(String) && value.include?("https://") %>
+    <% if value.is_a?(ActiveStorage::Attached) %>
+      <%= link_to(value, class: "btn-pdf", style: "margin-top: 5px; width: 175px;", remote: false) do %>
+        <span> Download </span>
+      <% end %>
+    <% else %>
+      <%= link_to(nil, value, style: "margin-top: 5px; width: 175px;", remote: false) %>
+    <% end %>
+  <% elsif value.is_a?(Hash) %>
+    <pre><%= JSON.pretty_generate(value) %></pre>
+  <% elsif field == "comments" %>
+    <%= value.html_safe %>
+  <% else %>
+    <%= value %>
+  <% end %>
+</dd>

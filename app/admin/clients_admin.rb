@@ -30,6 +30,11 @@ Trestle.resource(:clients, model: Client) do
         status_tag(icon("fa fa-times"), :danger)
       end
     end
+
+    actions do |toolbar, _instance, _admin|
+      toolbar.edit
+      toolbar.show
+    end
   end
 
   # Customize the form fields shown on the new/edit views.
@@ -56,5 +61,9 @@ Trestle.resource(:clients, model: Client) do
     end
 
     editor :comments
+  end
+
+  controller do
+    include FixActionUpdateConcern
   end
 end

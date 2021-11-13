@@ -1,0 +1,167 @@
+<% instance_attributes = @instance_selected_attributes || instance.attributes %>
+<% if instance.class.column_names.include?("name") %>
+  <% instance_name = "- #{instance.name}" %>
+<% elsif instance.class.column_names.include?("title") %>
+  <% instance_name = "- #{instance.title}" %>
+<% else %>
+  <% instance_name = "" %>
+<% end %>
+
+<% title = admin.t("titles.show", default: "Show %{model_name}", instance_name: instance_name ) %>
+
+<% content_for(:title, title) %>
+<% breadcrumb(title) unless admin.singular? %>
+
+<header class="content-header">
+  <div class="content-header-title">
+    <h1><%= title %></h1>
+    <% unless local_assigns.fetch(:hide_breadcrumbs, false) %>
+      <ol class="breadcrumb">
+        <% breadcrumbs.each do |breadcrumb| %>
+          <li class="breadcrumb-item<% if breadcrumb == breadcrumbs.last %> active<% end %>">
+            <%= link_to breadcrumb.label, breadcrumb.path %>
+          </li>
+        <% end %>
+      </ol>
+    <% end %>
+  </div>
+  <div class="row">
+    <% @header_partials&.each do |partial| %>
+      <div class="column mr-5">
+        <%= render partial[:path], partial[:options] %>
+      </div>
+    <% end %>
+  </div>
+</header>
+
+<div class="main-content-area">
+  <%= render "trestle/flash/flash" %>
+
+  <ul class="nav nav-tabs">
+    <% @tabs&.each_with_index do |tab, index| %>
+      <li class="nav-item" >
+        <a class="nav-link <%= active_tab(tab[:tab_id],index, params[:page]) %>" role="tab" data-toggle="tab" href="#<%= tab[:tab_id] %>" aria-selected="false"><%= I18n.t("admin.tabs.#{tab[:tab_name]}") %></a>
+      </li>
+    <% end %>
+  </ul>
+
+  <div class="main-content-container">
+    <div class="main-content">
+      <% if @tabs.present? %>
+        <% @tabs&.each_with_index do |tab, index| %>
+          <div id="<%= tab[:tab_id] %>" class="tab-pane <%= active_tab(tab[:tab_id],index, params[:page]) %>" role="tabpanel">
+
+            <% if tab.has_key?(:partial) %>
+              <%= render partial: tab[:partial], locals: tab[:partial_locals] %>
+            <% else %>
+              <% if tab.has_key?(:render_new) %>
+                <%= render partial: 'render_create_tab', locals: { render_new: tab[:render_new], instance: instance } %>
+              <% end %>
+
+              <% if tab.has_key?(:record) %>
+                <% if true && lookup_context.exists?("trestle/resource/#{tab[:tab_name]}/show", [], true) %>
+                  <%= render partial: "trestle/resource/#{tab[:tab_name]}/show", locals: { instance: tab[:instance] } %>
+                <% else %>
+                  <% tab[:record].as_json(except: :photo).delete_if { |k,v| v.nil? || v == "" }.each do |key, value| %>
+                    <dt>
+                      <span class="<%#= field.type_css_class %> <%#= field.css_class %> label label-info">
+                        <%= I18n.t("activerecord.attributes.#{tab[:tab_name]}.#{key}") %>
+                      </span>
+                    </dt>
+                    <dd class="well">
+                      <% if value.is_a?(TrueClass) %>
+                        <span class="badge badge-success"><i class="fa fa-check"></i></span>
+                      <% elsif value.is_a?(FalseClass) %>
+                        <span class="badge badge-danger"><i class="fa fa-times"></i></span>
+                      <% elsif tab[:instance].defined_enums.key?(key) %>
+                        <%= I18n.t("activerecord.enums.#{key}_list.#{value}") %>
+                      <% elsif value.is_a?(String) %>
+                        <% if value.include?("https://") %>
+                          <%= link_to(value, class: "btn-pdf", style: "margin-top: 20px; width: 175px;", remote: false) do %>
+                            <span> Download </span>
+                          <% end %>
+                        <% else %>
+                          <%= value %>
+                        <% end %>
+                      <% else %>
+                        <%= value %>
+                      <% end %>
+                    </dd>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= render "custom_tab", tab: tab  %>
+              <% end %>
+
+              <% tab[:has_many_fields]&.each do |field_collection| %>
+                <dt>
+                  <span class="label label-info">
+                    <%= I18n.t("activerecord.attributes.#{tab[:tab_name]}.#{field_collection.klass.name.underscore.pluralize}") %>
+                  </span>
+                </dt>
+                <% if field_collection.present? && field_collection.first.name.present? %>
+                  <dd><%= field_collection.pluck(:name).join(',') %></dd>
+                <% elsif field_collection.present? %>
+                  <dd><%= field_collection.pluck(:name).join(',') %></dd>
+                <% else %>
+                  <dd>None</dd>
+                <% end %>
+              <% end %>
+
+              <% tab[:extra_fields]&.each do |extra_field| %>
+                <div class="shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 20px;">
+                  <span class="label label-info"><%= extra_field[:title] %></span>
+                  <% extra_field[:fields].compact.each do |key, value| %>
+                    <dt>
+                      <span class="label label-info">
+                        <%= key %>
+                      </span>
+                    </dt>
+                    <dd class="well">
+                      <% if value.is_a?(TrueClass) %>
+                        <span class="badge badge-success"><i class="fa fa-check"></i></span>
+                      <% elsif value.is_a?(FalseClass) %>
+                        <span class="badge badge-danger"><i class="fa fa-times"></i></span>
+                      <%# elsif tab[:instance].defined_enums.key?(key) %>
+                        <%#= I18n.t("activerecord.enums.#{key}_list.#{value}") %>
+                      <% else %>
+                        <%= value %>
+                      <% end %>
+                    </dd>
+                  <% end %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      <% else %>
+        <% if File.exists?(Rails.root.join("app/views/trestle/resource/#{instance.class.name.downcase}/_show.html.erb")) %>
+          <%= render partial: "trestle/resource/#{instance.class.name.downcase}/show", locals: { instance: instance } %>
+        <% else %>
+          <% instance_attributes.delete_if { |k,v| v.nil? || v == "" }.each do |key, value| %>
+            <dt>
+              <span class="<%#= field.type_css_class %> <%#= field.css_class %> label label-info">
+                <%= I18n.t("activerecord.attributes.#{instance.class.name.underscore}.#{key}") %>
+              </span>
+            </dt>
+            <dd class="well">
+              <% if value.is_a?(TrueClass) %>
+                <span class="badge badge-success"><i class="fa fa-check"></i></span>
+              <% elsif value.is_a?(FalseClass) %>
+                <span class="badge badge-error"><i class="fa fa-uncheck"></i></span>
+              <% elsif instance.defined_enums.key?(key) %>
+                <%= I18n.t("activerecord.enums.#{key}_list.#{value}") %>
+              <% elsif value.is_a?(Hash) %>
+                <pre><%= JSON.pretty_generate(value) %></pre>
+              <% elsif key == "comments" %>
+                <%= value.html_safe %>
+              <% else %>
+                <%= value %>
+              <% end %>
+            </dd>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
