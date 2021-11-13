@@ -50,7 +50,9 @@ class Client < ApplicationRecord
     uniqueness: true,
     if: -> { identification_number.present? }
   validates :phone_number, phone: true, if: -> { phone_number.present? }
-  validates :email, format: { with: /\A[a-z0-9+\-_.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: true, if: -> { email.present? }
+  validates :email, format: { with: /\A[a-z0-9+\-_.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: true, if: -> {
+                                                                                                         email.present?
+                                                                                                       }
   validates :fpp_id, numericality: { only_integer: true }, uniqueness: true, if: -> { fpp_id.present? }
   validates :member_id, numericality: { only_integer: true }, uniqueness: true, if: -> { member_id.present? }
   validate :birth_date_in_the_past, if: -> { birth_date.present? }
@@ -82,7 +84,7 @@ class Client < ApplicationRecord
   # validate if birth_date.present?
   def birth_date_in_the_past
     if birth_date >= Time.zone.today.beginning_of_day
-      errors.add(:birth_date, 'não é válida')
+      errors.add(:birth_date, "não é válida")
     end
   end
 end
