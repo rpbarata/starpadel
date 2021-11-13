@@ -52,6 +52,7 @@ http://localhost:3000/
 |   Feature   |   feature   |                          Code to create a new functionality                          |
 | Improvement | improvement | Code clean up or adaptations to improve code readability, organization or performance |
 |   Styling   |   styling   |                         Code purely dedicated to stylization                         |
+|   DevOps    |    devops   | Code pipeline, production environment, docker configuration, etc |
 
 ## Labeled commentaries
 
