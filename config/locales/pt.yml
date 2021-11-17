@@ -36,6 +36,7 @@ pt:
         nif: NIF
         phone_number: Número de Telemóvel
         is_adult: Adulto?
+        is_master_member: Sócio Master
     errors:
       models:
         admin:

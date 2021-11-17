@@ -8,3 +8,7 @@
 
 //= require chartkick
 //= require Chart.bundle
+
+document.addEventListener('turbolinks:load', () => {
+
+})
