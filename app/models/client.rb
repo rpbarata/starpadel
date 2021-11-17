@@ -40,6 +40,8 @@ class Client < ApplicationRecord
   scope :members_of_club, -> { where.not(member_id: [nil, ""]) }
   scope :not_members_of_club, -> { where(member_id: [nil, ""]) }
   scope :master_members, -> { where(is_master_member: true) }
+  scope :adults, -> { where("birth_date <= :today", today: (Time.now.end_of_day - 18.years))}
+  scope :childrens, -> { where("birth_date > :today", today: (Time.now.end_of_day - 18.years))}
 
   has_paper_trail
 
