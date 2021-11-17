@@ -74,6 +74,10 @@ class Client < ApplicationRecord
     end
   end
 
+  def is_adult?
+    ((Time.zone.now - birth_date.to_time) / 1.year.seconds).floor >= 18
+  end
+
   private
 
   # on: before_save if: will_save_change_to_member_id?

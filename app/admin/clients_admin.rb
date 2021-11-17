@@ -30,6 +30,13 @@ Trestle.resource(:clients, model: Client) do
         status_tag(icon("fa fa-times"), :danger)
       end
     end
+    column :is_adult, align: :center do |client|
+      if client.is_adult?
+        status_tag(icon("fa fa-check"), :success)
+      else
+        status_tag(icon("fa fa-times"), :danger)
+      end
+    end
 
     actions do |toolbar, _instance, _admin|
       toolbar.edit
