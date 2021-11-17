@@ -1,4 +1,4 @@
-FROM ruby:3.0-alpine3.14
+FROM ruby:3.0.2-alpine3.14
 
 # GENERAL ENVS #
 ENV APP_PATH /project

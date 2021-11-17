@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
-if ActiveModel::Type::Boolean.new.cast(ENV.fetch("SEED_CLIENTS", "false"))
+if ActiveModel::Type::Boolean.new.cast(ENV.fetch("SEED_CLIENTS", "false")) && !Client.any?
   STDOUT.puts("Creating Secretariat Admin")
 
   Faker::Config.locale = "en"
 
-  500.times do |_i|
+  500.times do |i|
     Client.create!(
       address: Faker::Address.full_address,
       birth_date: Faker::Date.birthday(min_age: 8, max_age: 80),
       email: Faker::Internet.unique.email,
-      fpp_id: [true, false].sample ? Faker::Number.unique.number(digits: 5) : nil,
+      fpp_id: Faker::Boolean.boolean(true_ratio: 0.7) ? Faker::Number.unique.number(digits: 10) : nil,
       identification_number: Faker::Number.unique.number(digits: 8),
-      member_id: [true, false].sample ? Faker::Number.unique.number(digits: 4) : nil,
+      member_id: Faker::Boolean.boolean(true_ratio: 0.7) ? Faker::Number.unique.number(digits: 10) : nil,
       name: Faker::Name.name_with_middle,
       nif: Faker::Number.unique.number(digits: 9),
       # phone_number: Faker::PhoneNumber.cell_phone_in_e164,
