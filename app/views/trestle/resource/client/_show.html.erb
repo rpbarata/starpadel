@@ -37,14 +37,17 @@
 </div>
 
 <div class="row">
-  <div class="col-4">
+  <div class="col-3">
     <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'identification_number', value: instance.identification_number } %>
   </div>
-  <div class="col-4">
+  <div class="col-3">
     <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'nif', value: instance.nif } %>
   </div>
-  <div class="col-4">
+  <div class="col-3">
     <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'birth_date', value: instance.birth_date } %>
+  </div>
+  <div class="col-3">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'is_adult', value: instance.is_adult? } %>
   </div>
 </div>
 
