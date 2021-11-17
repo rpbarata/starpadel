@@ -17,6 +17,7 @@ Trestle.resource(:clients, model: Client) do
     scope :all, default: true
     scope "Sócios", -> { collection.members_of_club }
     scope "Não Sócios", -> { collection.not_members_of_club }
+    scope "Sócios Master", -> { collection.master_members }
   end
 
   # Customize the table columns shown on the index view.
@@ -32,6 +33,13 @@ Trestle.resource(:clients, model: Client) do
     end
     column :is_adult, align: :center do |client|
       if client.is_adult?
+        status_tag(icon("fa fa-check"), :success)
+      else
+        status_tag(icon("fa fa-times"), :danger)
+      end
+    end
+    column :is_master_member, align: :center do |client|
+      if client.is_master_member
         status_tag(icon("fa fa-check"), :success)
       else
         status_tag(icon("fa fa-times"), :danger)
@@ -57,8 +65,12 @@ Trestle.resource(:clients, model: Client) do
     text_field :address
 
     row do
-      col(sm: 6) { text_field :member_id }
+      col(sm: 6) { text_field :member_id, id: "member_id_input" }
       col(sm: 6) { text_field :fpp_id }
+    end
+
+    row(class: "mb-3") do 
+      col(sm: 4) { check_box :is_master_member, id: "is_master_member_cb" }
     end
 
     row do

@@ -12,6 +12,7 @@
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  identification_number  :string
+#  is_master_member       :boolean          default(FALSE)
 #  name                   :string
 #  nif                    :string
 #  phone_number           :string

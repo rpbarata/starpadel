@@ -12,6 +12,7 @@
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  identification_number  :string
+#  is_master_member       :boolean          default(FALSE)
 #  name                   :string
 #  nif                    :string
 #  phone_number           :string
@@ -38,6 +39,7 @@ class Client < ApplicationRecord
 
   scope :members_of_club, -> { where.not(member_id: [nil, ""]) }
   scope :not_members_of_club, -> { where(member_id: [nil, ""]) }
+  scope :master_members, -> { where(is_master_member: true) }
 
   has_paper_trail
 
@@ -56,6 +58,7 @@ class Client < ApplicationRecord
   validates :fpp_id, numericality: { only_integer: true }, uniqueness: true, if: -> { fpp_id.present? }
   validates :member_id, numericality: { only_integer: true }, uniqueness: true, if: -> { member_id.present? }
   validate :birth_date_in_the_past, if: -> { birth_date.present? }
+  validate :validate_is_master_member, if: -> { is_master_member.present? }
 
   before_save :set_become_member_at, if: -> { will_save_change_to_member_id? }
 
@@ -89,6 +92,12 @@ class Client < ApplicationRecord
   def birth_date_in_the_past
     if birth_date >= Time.zone.today.beginning_of_day
       errors.add(:birth_date, "não é válida")
+    end
+  end
+
+  def validate_is_master_member
+    if is_master_member.present? && !member_id.present?
+      errors.add(:is_master_member, "deve ser sócio")
     end
   end
 end
