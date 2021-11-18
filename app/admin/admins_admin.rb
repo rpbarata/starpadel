@@ -26,8 +26,12 @@ Trestle.resource(:admins, model: Admin) do
     end
   end
 
+  collection do
+    Admin.all.order(username: :asc)
+  end
+
   table do
-    column :username, link: true
+    column :username, link: true, sort: { default: true, default_order: :asc }
     column :email, link: true
     column :role, ->(admin) { admin.translate(:role) }
 

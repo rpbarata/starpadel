@@ -50,11 +50,11 @@
     <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'birth_date', value: instance.birth_date } %>
   </div>
   <div class="col-3">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'is_adult', value: instance.is_adult? } %>
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'is_adult', value: instance.adult? } %>
   </div>
 </div>
 
-<div class="row">
+<div class="row mt-5">
   <div class="col">
     <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'comments', value: instance.comments } %>
   </div>

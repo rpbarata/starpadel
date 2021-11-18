@@ -5,7 +5,7 @@ if ActiveModel::Type::Boolean.new.cast(ENV.fetch("SEED_CLIENTS", "false")) && !C
 
   Faker::Config.locale = "en"
 
-  500.times do |i|
+  500.times do |_i|
     Client.create!(
       address: Faker::Address.full_address,
       birth_date: Faker::Date.birthday(min_age: 8, max_age: 80),

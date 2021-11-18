@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class CheckBox < Trestle::Form::Field
   def initialize(builder, template, name, options = {}, &block)
     super

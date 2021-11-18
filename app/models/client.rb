@@ -40,8 +40,8 @@ class Client < ApplicationRecord
   scope :members_of_club, -> { where.not(member_id: [nil, ""]) }
   scope :not_members_of_club, -> { where(member_id: [nil, ""]) }
   scope :master_members, -> { where(is_master_member: true) }
-  scope :adults, -> { where("birth_date <= :today", today: (Time.now.end_of_day - 18.years))}
-  scope :childrens, -> { where("birth_date > :today", today: (Time.now.end_of_day - 18.years))}
+  scope :adults, -> { where("birth_date <= :today", today: (Time.zone.now.end_of_day - 18.years)) }
+  scope :childrens, -> { where("birth_date > :today", today: (Time.zone.now.end_of_day - 18.years)) }
 
   has_paper_trail
 
@@ -54,9 +54,10 @@ class Client < ApplicationRecord
     uniqueness: true,
     if: -> { identification_number.present? }
   validates :phone_number, phone: true, if: -> { phone_number.present? }
-  validates :email, format: { with: /\A[a-z0-9+\-_.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: true, if: -> {
-                                                                                                         email.present?
-                                                                                                       }
+  validates :email,
+    format: { with: /\A[a-z0-9+\-_.]+@[a-z\d\-.]+\.[a-z]+\z/i },
+    uniqueness: true,
+    if: -> { email.present? }
   validates :fpp_id, numericality: { only_integer: true }, uniqueness: true, if: -> { fpp_id.present? }
   validates :member_id, numericality: { only_integer: true }, uniqueness: true, if: -> { member_id.present? }
   validate :birth_date_in_the_past, if: -> { birth_date.present? }
@@ -79,7 +80,7 @@ class Client < ApplicationRecord
     end
   end
 
-  def is_adult?
+  def adult?
     ((Time.zone.now - birth_date.to_time) / 1.year.seconds).floor >= 18
   end
 
@@ -98,7 +99,7 @@ class Client < ApplicationRecord
   end
 
   def validate_is_master_member
-    if is_master_member.present? && !member_id.present?
+    if is_master_member.present? && member_id.blank?
       errors.add(:is_master_member, "deve ser sócio")
     end
   end
