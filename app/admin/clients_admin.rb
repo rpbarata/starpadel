@@ -67,12 +67,12 @@ Trestle.resource(:clients, model: Client) do
     text_field :address
 
     row do
-      col(sm: 6) { text_field :member_id, id: "member_id_input" }
+      col(sm: 6) { text_field :member_id }
       col(sm: 6) { text_field :fpp_id }
     end
 
     row(class: "mb-3") do 
-      col(sm: 4) { check_box :is_master_member, id: "is_master_member_cb" }
+      col(sm: 4) { check_box :is_master_member }
     end
 
     row do
