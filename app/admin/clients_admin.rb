@@ -29,7 +29,7 @@ Trestle.resource(:clients, model: Client) do
   # Customize the table columns shown on the index view.
   #
   table do
-    column :name, sort: { default: true, default_order: :asc }
+    column :name, link: true, sort: { default: true, default_order: :asc }, class: "media-title-column"
     column :member_of_club, align: :center do |client|
       if client.member_id.present?
         status_tag(icon("fa fa-check"), :success)
@@ -37,15 +37,15 @@ Trestle.resource(:clients, model: Client) do
         status_tag(icon("fa fa-times"), :danger)
       end
     end
-    column :is_adult, align: :center do |client|
-      if client.adult?
+    column :is_master_member, align: :center do |client|
+      if client.is_master_member
         status_tag(icon("fa fa-check"), :success)
       else
         status_tag(icon("fa fa-times"), :danger)
       end
     end
-    column :is_master_member, align: :center do |client|
-      if client.is_master_member
+    column :is_adult, align: :center do |client|
+      if client.adult?
         status_tag(icon("fa fa-check"), :success)
       else
         status_tag(icon("fa fa-times"), :danger)
@@ -71,12 +71,15 @@ Trestle.resource(:clients, model: Client) do
     text_field :address
 
     row do
-      col(sm: 6) { text_field :member_id }
+      col(sm: 6) do
+        row do
+          col { text_field :member_id }
+        end
+        row do
+          col { check_box :is_master_member }
+        end
+      end
       col(sm: 6) { text_field :fpp_id }
-    end
-
-    row(class: "mb-3") do
-      col(sm: 4) { check_box :is_master_member }
     end
 
     row do

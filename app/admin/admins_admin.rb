@@ -31,8 +31,8 @@ Trestle.resource(:admins, model: Admin) do
   end
 
   table do
-    column :username, link: true, sort: { default: true, default_order: :asc }
-    column :email, link: true
+    column :username, link: true, sort: { default: true, default_order: :asc }, class: "media-title-column"
+    column :email
     column :role, ->(admin) { admin.translate(:role) }
 
     actions do |toolbar, _instance, _admin|

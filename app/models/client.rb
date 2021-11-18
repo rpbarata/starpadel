@@ -99,7 +99,7 @@ class Client < ApplicationRecord
   end
 
   def validate_is_master_member
-    if is_master_member.present? && member_id.blank?
+    if member_id.blank?
       errors.add(:is_master_member, "deve ser sócio")
     end
   end

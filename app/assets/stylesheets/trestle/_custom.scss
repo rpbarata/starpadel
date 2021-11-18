@@ -9,7 +9,20 @@
 
 .app-sidebar-title {
   display: block;
-
   padding: 8 px 8 px;
+}
 
+.media-title-column {
+  a {
+    white-space: normal;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  small {
+    display: block;
+  }
 }
