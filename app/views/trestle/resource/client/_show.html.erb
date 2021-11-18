@@ -28,8 +28,11 @@
 </div>
 
 <div class="row">
-  <div class="col-6">
+  <div class="col-3">
     <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'member_id', value: instance.member_id } %>
+  </div>
+  <div class="col-3">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'is_master_member', value: instance.is_master_member } %>
   </div>
   <div class="col-6">
     <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'fpp_id', value: instance.fpp_id } %>
