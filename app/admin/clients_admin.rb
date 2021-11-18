@@ -60,7 +60,7 @@ Trestle.resource(:clients, model: Client) do
 
   # Customize the form fields shown on the new/edit views.
   #
-  form do |_client|
+  form do |client|
     text_field :name
 
     row do
