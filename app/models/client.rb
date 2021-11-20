@@ -81,7 +81,7 @@ class Client < ApplicationRecord
   end
 
   def adult?
-    ((Time.zone.now - birth_date.to_time) / 1.year.seconds).floor >= 18
+    birth_date.present? && ((Time.zone.now - birth_date.to_time) / 1.year.seconds).floor >= 18
   end
 
   private
