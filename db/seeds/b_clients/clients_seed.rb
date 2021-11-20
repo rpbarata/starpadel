@@ -6,17 +6,19 @@ if ActiveModel::Type::Boolean.new.cast(ENV.fetch("SEED_CLIENTS", "false")) && !C
   Faker::Config.locale = "en"
 
   500.times do |_i|
+    is_member = Faker::Boolean.boolean(true_ratio: 0.7)
     Client.create!(
       address: Faker::Address.full_address,
       birth_date: Faker::Date.birthday(min_age: 8, max_age: 80),
       email: Faker::Internet.unique.email,
-      fpp_id: Faker::Boolean.boolean(true_ratio: 0.7) ? Faker::Number.unique.number(digits: 10) : nil,
+      fpp_id: Faker::Boolean.boolean(true_ratio: 0.45) ? Faker::Number.unique.number(digits: 10) : nil,
       identification_number: Faker::Number.unique.number(digits: 8),
-      member_id: Faker::Boolean.boolean(true_ratio: 0.7) ? Faker::Number.unique.number(digits: 10) : nil,
+      member_id: is_member ? Faker::Number.unique.number(digits: 10) : nil,
       name: Faker::Name.name_with_middle,
       nif: Faker::Number.unique.number(digits: 9),
       # phone_number: Faker::PhoneNumber.cell_phone_in_e164,
-      comments: Faker::Lorem.paragraph(sentence_count: 5, supplemental: true, random_sentences_to_add: 10)
+      comments: Faker::Lorem.paragraph(sentence_count: 5, supplemental: true, random_sentences_to_add: 10),
+      is_master_member: is_member ? Faker::Boolean.boolean(true_ratio: 0.3) : false
     )
   end
 
