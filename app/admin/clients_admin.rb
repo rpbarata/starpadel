@@ -76,7 +76,7 @@ Trestle.resource(:clients, model: Client) do
           col { text_field :member_id }
         end
         row do
-          col { check_box :is_master_member, disabled: !client.member_id.present? }
+          col { check_box :is_master_member, disabled: client.member_id.blank? }
         end
       end
       col(sm: 6) { text_field :fpp_id }

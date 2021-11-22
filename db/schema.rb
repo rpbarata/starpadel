@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_17_224814) do
+ActiveRecord::Schema.define(version: 2021_11_22_100941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(version: 2021_11_17_224814) do
     t.string "encrypted_password", default: "", null: false
     t.string "name"
     t.string "address"
-    t.string "member_id"
-    t.string "fpp_id"
+    t.integer "member_id"
+    t.integer "fpp_id"
     t.string "phone_number"
     t.string "identification_number"
     t.string "nif"
@@ -57,6 +57,19 @@ ActiveRecord::Schema.define(version: 2021_11_17_224814) do
     t.index ["email"], name: "index_clients_on_email"
     t.index ["name"], name: "index_clients_on_name"
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.decimal "green_time_member_price", precision: 8, scale: 2
+    t.decimal "green_time_not_member_price", precision: 8, scale: 2
+    t.decimal "red_time_member_price", precision: 8, scale: 2
+    t.decimal "red_time_not_member_price", precision: 8, scale: 2
+    t.string "name"
+    t.integer "number"
+    t.boolean "is_pack"
+    t.text "comments"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "versions", force: :cascade do |t|
