@@ -6,7 +6,9 @@ Trestle.admin(:dashboard) do
   end
 
   controller do
-    before_action :set_clients, only: [:clients_line_chart, :clients_pie_chart, :index]
+    before_action :set_clients, 
+      only: [:clients_line_chart, :clients_pie_chart, :index, :clients_members_pie_chart, 
+        :adults_and_childrens_pie_chart]
 
     def clients_pie_chart
       @clients_pie_chart = {
@@ -18,20 +20,30 @@ Trestle.admin(:dashboard) do
     end
 
     def clients_line_chart
-      # counting = 0
-      # new_hash = {}
-      # @clients.group_by_day(:created_at).size.each do |k, v|
-      #   counting += v
-      #   new_hash[k] = counting
-      # end
-
       @clients_line_chart = [
-        # { name: "Total Clients", data: new_hash },
         { name: "Adesão Total de Clientes", data: @clients.group_by_day(:created_at).size },
         { name: "Adesão de Novos Sócios", data: @clients.members_of_club.group_by_day(:become_member_at).size },
       ]
 
       render(json: @clients_line_chart.chart_json)
+    end
+
+    def clients_members_pie_chart
+      @clients_members_pie_chart = {
+        "Sócios": @clients.members_of_club.size,
+        "Sócios Master": @clients.master_members.size,
+      }
+
+      render(json: @clients_members_pie_chart.chart_json)
+    end
+
+    def adults_and_childrens_pie_chart
+      @adults_and_childrens_pie_chart = {
+        "Adultos": @clients.adults.size,
+        "Crianças": @clients.childrens.size,
+      }
+
+      render(json: @adults_and_childrens_pie_chart.chart_json)
     end
 
     private
@@ -47,5 +59,7 @@ Trestle.admin(:dashboard) do
   routes do
     get :clients_pie_chart, as: "clients_pie_chart"
     get :clients_line_chart, as: "clients_line_chart"
+    get :clients_members_pie_chart, as: "clients_members_pie_chart"
+    get :adults_and_childrens_pie_chart, as: "adults_and_childrens_pie_chart"
   end
 end

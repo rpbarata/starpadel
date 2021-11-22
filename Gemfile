@@ -40,6 +40,8 @@ gem "rails_semantic_logger", "~> 4.4", ">= 4.4.4"
 gem "devise"
 gem "devise-i18n"
 
+gem 'rails-i18n', '~> 6.0.0' # For 6.0.0 or higher
+
 gem "trestle"
 gem "trestle-auth", github: "TrestleAdmin/trestle-auth", branch: "authorization",
   ref: "7d164117a60ffb46f657c721874c01950c64a566"
