@@ -22,8 +22,11 @@
 #
 # Indexes
 #
+#  index_admins_on_email                 (email)
 #  index_admins_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_admins_on_role                  (role)
 #  index_admins_on_username              (username) UNIQUE
+#  index_admins_on_username_and_email    (username,email)
 #
 FactoryBot.define do
   factory :admin do

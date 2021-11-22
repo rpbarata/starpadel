@@ -18,12 +18,12 @@ Trestle.resource(:clients, model: Client) do
   end
 
   scopes do
-    scope :all, default: true
-    scope "Sócios", -> { collection.members_of_club }
-    scope "Não Sócios", -> { collection.not_members_of_club }
-    scope "Sócios Master", -> { collection.master_members }
-    scope "Adultos", -> { collection.adults }
-    scope "Crianças", -> { collection.childrens }
+    scope :all, default: true, label: t("activerecord.scopes.default")
+    scope :members_of_club, label: t("activerecord.scopes.clients.members_of_club")
+    scope :not_members_of_club, label: t("activerecord.scopes.clients.not_members_of_club")
+    scope :master_members, label: t("activerecord.scopes.clients.master_members")
+    scope :adults, label: t("activerecord.scopes.clients.adults")
+    scope :childrens, label: t("activerecord.scopes.clients.childrens")
   end
 
   # Customize the table columns shown on the index view.

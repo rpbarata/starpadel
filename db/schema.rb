@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_100941) do
+ActiveRecord::Schema.define(version: 2021_11_22_104426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +30,10 @@ ActiveRecord::Schema.define(version: 2021_11_22_100941) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_admins_on_email"
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+    t.index ["role"], name: "index_admins_on_role"
+    t.index ["username", "email"], name: "index_admins_on_username_and_email"
     t.index ["username"], name: "index_admins_on_username", unique: true
   end
 
@@ -54,7 +57,11 @@ ActiveRecord::Schema.define(version: 2021_11_22_100941) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "become_member_at"
     t.boolean "is_master_member", default: false
+    t.index ["birth_date"], name: "index_clients_on_birth_date"
+    t.index ["created_at"], name: "index_clients_on_created_at"
     t.index ["email"], name: "index_clients_on_email"
+    t.index ["is_master_member"], name: "index_clients_on_is_master_member"
+    t.index ["member_id"], name: "index_clients_on_member_id"
     t.index ["name"], name: "index_clients_on_name"
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
   end

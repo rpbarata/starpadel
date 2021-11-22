@@ -64,6 +64,18 @@ pt:
         super_admin: Super Administrador
         secretariat_admin: Balcão
         coach_admin: Treinador
+    scopes:
+      default: Todos
+      admins:
+        super_admin: Super Administradores
+        secretariat_admin: Balcão
+        coach_admin: Treinadores
+      clients:
+        members_of_club: Sócios
+        not_members_of_club: Não Sócios
+        master_members: Sócios Master
+        adults: Adultos
+        childrens: Crianças
   devise:
     confirmations:
       confirmed: "A sua conta foi confirmada com sucesso."

@@ -27,7 +27,11 @@
 #
 # Indexes
 #
+#  index_clients_on_birth_date            (birth_date)
+#  index_clients_on_created_at            (created_at)
 #  index_clients_on_email                 (email)
+#  index_clients_on_is_master_member      (is_master_member)
+#  index_clients_on_member_id             (member_id)
 #  index_clients_on_name                  (name)
 #  index_clients_on_reset_password_token  (reset_password_token) UNIQUE
 #

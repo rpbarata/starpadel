@@ -12,10 +12,10 @@ Trestle.resource(:admins, model: Admin) do
   end
 
   scopes do
-    scope :all, default: true
-    scope "Super Administradores", -> { collection.super_admin }
-    scope "Balcão", -> { collection.secretariat_admin }
-    scope "Treinador", -> { collection.coach_admin }
+    scope :all, default: true,  label: t("activerecord.scopes.default")
+    scope :super_admin,         label: t("activerecord.scopes.admins.super_admin")
+    scope :secretariat_admin,   label: t("activerecord.scopes.admins.secretariat_admin")
+    scope :coach_admin,         label: t("activerecord.scopes.admins.coach_admin")
   end
 
   search do |query|
