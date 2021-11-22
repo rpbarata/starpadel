@@ -22,8 +22,8 @@
 #  rfid_number            :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  fpp_id                 :string
-#  member_id              :string
+#  fpp_id                 :integer
+#  member_id              :integer
 #
 # Indexes
 #
@@ -37,8 +37,8 @@ class Client < ApplicationRecord
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :validatable
 
-  scope :members_of_club, -> { where.not(member_id: [nil, ""]) }
-  scope :not_members_of_club, -> { where(member_id: [nil, ""]) }
+  scope :members_of_club, -> { where.not(member_id: nil) }
+  scope :not_members_of_club, -> { where(member_id: nil) }
   scope :master_members, -> { where(is_master_member: true) }
   scope :adults, -> { where("birth_date <= :today", today: (Time.zone.now.end_of_day - 18.years)) }
   scope :childrens, -> { where("birth_date > :today", today: (Time.zone.now.end_of_day - 18.years)) }
@@ -47,10 +47,12 @@ class Client < ApplicationRecord
 
   # TODO: Falta ver o tamanho dos nºs de sócio
   validates :name, presence: true
-  validates :nif, length: { is: 9 }, numericality: { only_integer: true }, uniqueness: true, if: -> { nif.present? }
+  validates :nif,
+    length: { is: 9 },
+    numericality: { only_integer: true, greater_than_or_equal_to: 0 }, uniqueness: true, if: -> { nif.present? }
   validates :identification_number,
     length: { is: 8 },
-    numericality: { only_integer: true },
+    numericality: { only_integer: true, greater_than_or_equal_to: 0 },
     uniqueness: true,
     if: -> { identification_number.present? }
   validates :phone_number, phone: true, if: -> { phone_number.present? }
@@ -58,8 +60,10 @@ class Client < ApplicationRecord
     format: { with: /\A[a-z0-9+\-_.]+@[a-z\d\-.]+\.[a-z]+\z/i },
     uniqueness: true,
     if: -> { email.present? }
-  validates :fpp_id, numericality: { only_integer: true }, uniqueness: true, if: -> { fpp_id.present? }
-  validates :member_id, numericality: { only_integer: true }, uniqueness: true, if: -> { member_id.present? }
+  validates :fpp_id,
+    numericality: { only_integer: true, greater_than_or_equal_to: 0 }, uniqueness: true, if: -> { fpp_id.present? }
+  validates :member_id,
+    numericality: { only_integer: true, greater_than_or_equal_to: 0 }, uniqueness: true, if: -> { member_id.present? }
   validate :birth_date_in_the_past, if: -> { birth_date.present? }
   validate :validate_is_master_member, if: -> { is_master_member.present? }
 

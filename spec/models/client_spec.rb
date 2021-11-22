@@ -22,8 +22,8 @@
 #  rfid_number            :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  fpp_id                 :string
-#  member_id              :string
+#  fpp_id                 :integer
+#  member_id              :integer
 #
 # Indexes
 #
