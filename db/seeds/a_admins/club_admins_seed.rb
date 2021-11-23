@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def create_admin(username, email, password, role)
   admin = Admin.where(
     username: username
@@ -23,12 +25,14 @@ def create_admin(username, email, password, role)
   end
 end
 
-
 STDOUT.puts("Verifying Club Super Admin")
-create_admin(ENV["CLUB_SUPER_ADMIN_USERNAME"], ENV["CLUB_SUPER_ADMIN_EMAIL"], ENV["CLUB_SUPER_ADMIN_PASSWORD"], :super_admin)
+create_admin(ENV["CLUB_SUPER_ADMIN_USERNAME"], ENV["CLUB_SUPER_ADMIN_EMAIL"], ENV["CLUB_SUPER_ADMIN_PASSWORD"],
+  :super_admin)
 
 STDOUT.puts("Verifying Secretariat Admin")
-create_admin(ENV["CLUB_SECRETARIAT_ADMIN_USERNAME"], ENV["CLUB_SECRETARIAT_ADMIN_EMAIL"], ENV["CLUB_SECRETARIAT_ADMIN_PASSWORD"], :secretariat_admin)
+create_admin(ENV["CLUB_SECRETARIAT_ADMIN_USERNAME"], ENV["CLUB_SECRETARIAT_ADMIN_EMAIL"],
+  ENV["CLUB_SECRETARIAT_ADMIN_PASSWORD"], :secretariat_admin)
 
 STDOUT.puts("Verifying Coach Admin")
-create_admin(ENV["CLUB_COACH_ADMIN_USERNAME"], ENV["CLUB_COACH_ADMIN_EMAIL"], ENV["CLUB_COACH_ADMIN_PASSWORD"], :coach_admin)
+create_admin(ENV["CLUB_COACH_ADMIN_USERNAME"], ENV["CLUB_COACH_ADMIN_EMAIL"], ENV["CLUB_COACH_ADMIN_PASSWORD"],
+  :coach_admin)
