@@ -1,27 +1,5 @@
 # frozen_string_literal: true
 
-if ActiveModel::Type::Boolean.new.cast(ENV.fetch("SEED_CLIENTS", "false")) && !Client.any?
-  STDOUT.puts("Creating Secretariat Admin")
-
-  Faker::Config.locale = "en"
-
-  500.times do |index|
-    Client.create!(client_hash(index))
-  end
-
-  Client.find_each.with_index do |client, index|
-    # Faker::Config.random = Random.new(index)
-    created_at_random_date = Faker::Date.between(from: 31.days.ago, to: Time.zone.today)
-
-    become_member_at_random_date =
-      if client.member_id.present?
-        # Faker::Config.random = Random.new(index)
-        Faker::Date.between(from: created_at_random_date, to: Time.zone.today)
-      end
-    client.update(created_at: created_at_random_date, become_member_at: become_member_at_random_date)
-  end
-end
-
 def client_hash(seed)
   Faker::Config.random = Random.new(seed)
   is_member = Faker::Boolean.boolean(true_ratio: 0.7)
@@ -36,13 +14,13 @@ def client_hash(seed)
   email = Faker::Internet.email
 
   Faker::Config.random = Random.new(seed)
-  fpp_id = Faker::Boolean.boolean(true_ratio: 0.45) ? Faker::Number.number(digits: 4) : nil
+  fpp_id = Faker::Boolean.boolean(true_ratio: 0.45) ? seed : nil
 
   Faker::Config.random = Random.new(seed)
   identification_number = Faker::Number.number(digits: 8)
 
   Faker::Config.random = Random.new(seed)
-  member_id = is_member ? Faker::Number.number(digits: 5) : nil
+  member_id = is_member ? seed : nil
 
   Faker::Config.random = Random.new(seed)
   name = Faker::Name.name_with_middle
@@ -72,4 +50,26 @@ def client_hash(seed)
     comments: comments,
     is_master_member: is_master_member,
   }
+end
+
+if ActiveModel::Type::Boolean.new.cast(ENV.fetch("SEED_CLIENTS", "false")) && !Client.any?
+  STDOUT.puts("Seeding with deterministic clients for testing")
+
+  Faker::Config.locale = "en"
+
+  500.times do |index|
+    Client.create!(client_hash(index))
+  end
+
+  Client.find_each.with_index do |client, index|
+    # Faker::Config.random = Random.new(index)
+    created_at_random_date = Faker::Date.between(from: 31.days.ago, to: Time.zone.today)
+
+    become_member_at_random_date =
+      if client.member_id.present?
+        # Faker::Config.random = Random.new(index)
+        Faker::Date.between(from: created_at_random_date, to: Time.zone.today)
+      end
+    client.update(created_at: created_at_random_date, become_member_at: become_member_at_random_date)
+  end
 end
