@@ -26,7 +26,8 @@ if [ ! -f "$HOME/.setup_complete" ]; then
   # if [ ! -d "$HOME/.oh-my-zsh" ]; then sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -) --unattended"; fi
 
   echo "=== SETTING UP DATABASE ==="
-  rails db:create db:migrate db:seed
+  rails db:create db:migrate
+  rails db:seed
 
   touch "$HOME/.setup_complete"
 fi
@@ -35,7 +36,8 @@ echo "=== CONFIGURING GIT ==="
 config-git
 
 echo "=== APPLYING LATEST MIGRATIONS ==="
-rails db:migrate db:seed
+rails db:migrate
+rails db:seed
 
 echo "=== COMPILING ASSETS ==="
 rails assets:precompile --trace
