@@ -35,4 +35,9 @@ class Admin < ApplicationRecord
 
   enum role: { super_admin: 1, coach_admin: 2, secretariat_admin: 3 }
   validates :username, presence: true, uniqueness: true
+
+  # Skips email validations. For now this is not necessary
+  def email_required?
+    false
+  end
 end

@@ -20,7 +20,7 @@ Trestle.resource(:admins, model: Admin) do
 
   search do |query|
     if query
-      collection.where("email ILIKE :q OR username ILIKE :q", q_id: query&.to_i, q: "%#{query}%")
+      collection.where("username ILIKE :q", q_id: query&.to_i, q: "%#{query}%")
     else
       collection
     end
@@ -32,7 +32,6 @@ Trestle.resource(:admins, model: Admin) do
 
   table do
     column :username, link: true, sort: { default: true, default_order: :asc }, class: "media-title-column"
-    column :email
     column :role, ->(admin) { admin.translate(:role) }
 
     actions do |toolbar, _instance, _admin|
@@ -44,10 +43,9 @@ Trestle.resource(:admins, model: Admin) do
   form do |_admin|
     row do
       col(sm: 6) { text_field :username }
-      col(sm: 6) { text_field :email }
+      col(sm: 6) { select :role,
+        Admin.defined_enums["role"].keys.map { |status| [I18n.t("activerecord.enums.role_list.#{status}"), status] } }
     end
-    select :role,
-      Admin.defined_enums["role"].keys.map { |status| [I18n.t("activerecord.enums.role_list.#{status}"), status] }
     row do
       col(sm: 6) { password_field :password }
       col(sm: 6) { password_field :password_confirmation }
