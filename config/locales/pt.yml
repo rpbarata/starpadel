@@ -468,3 +468,8 @@ pt:
       blank: "Nenhum"
     tabs:
       client: "Cliente"
+    datepicker:
+      formats:
+        date: "d/m/Y"
+        datetime: "d/m/Y H:i"
+        time: "H:i"
