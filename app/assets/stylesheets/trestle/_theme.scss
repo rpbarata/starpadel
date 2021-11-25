@@ -8,12 +8,19 @@
 // Customize admin theme colors:
 //
 $theme-colors: (
-  "primary":   #c4261a,
-  "secondary": #ffa722
+  "primary": #c4261a,
+  "secondary": #ffa722,
 );
 
 $sidebar-active-border-color: theme-color("secondary");
 
 .theme-bg-dark {
   background-color: #3f3f3f !important;
+}
+
+.flatpickr-current-month .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
+  background-color: rgba(0, 0, 0, 0);
+  outline: none;
+  padding: 0;
+  color: theme-color("primary");
 }
