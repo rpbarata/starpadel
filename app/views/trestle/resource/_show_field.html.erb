@@ -39,7 +39,7 @@
   <% elsif value.is_a?(Hash) %>
     <pre><%= JSON.pretty_generate(value) %></pre>
   <% elsif field == "comments" %>
-    <%= value.html_safe %>
+    <%= value&.html_safe %>
   <% else %>
     <%= value %>
   <% end %>

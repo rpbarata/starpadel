@@ -37,17 +37,6 @@ ActiveRecord::Schema.define(version: 2021_11_26_002348) do
     t.index ["username"], name: "index_admins_on_username", unique: true
   end
 
-  create_table "client_lessons", force: :cascade do |t|
-    t.boolean "completed"
-    t.datetime "completed_at"
-    t.bigint "client_id", null: false
-    t.bigint "lesson_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["client_id"], name: "index_client_lessons_on_client_id"
-    t.index ["lesson_id"], name: "index_client_lessons_on_lesson_id"
-  end
-
   create_table "clients", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -77,19 +66,6 @@ ActiveRecord::Schema.define(version: 2021_11_26_002348) do
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
   end
 
-  create_table "lessons", force: :cascade do |t|
-    t.decimal "green_time_member_price", precision: 8, scale: 2
-    t.decimal "green_time_not_member_price", precision: 8, scale: 2
-    t.decimal "red_time_member_price", precision: 8, scale: 2
-    t.decimal "red_time_not_member_price", precision: 8, scale: 2
-    t.string "name"
-    t.integer "number"
-    t.boolean "is_pack"
-    t.text "comments"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "lessons_types", force: :cascade do |t|
     t.string "name"
     t.text "comments"
@@ -116,6 +92,4 @@ ActiveRecord::Schema.define(version: 2021_11_26_002348) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
-  add_foreign_key "client_lessons", "clients"
-  add_foreign_key "client_lessons", "lessons"
 end
