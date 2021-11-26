@@ -7,6 +7,9 @@ pt:
       client:
         one: Cliente
         other: Clientes
+      lessons_type: 
+        one: Tipo de Aula
+        other: Tipos de Aulas
     attributes:
       admin:
         id: Identificador
@@ -34,6 +37,19 @@ pt:
         phone_number: Número de Telemóvel
         is_adult: Adulto?
         is_master_member: Sócio Master?
+      lessons_type:
+        id: Identificador
+        created_at: Criado em
+        updated_at: Atualizado em
+        comments: Observações
+        green_time_member_price: Preço SÓCIO GT
+        green_time_not_member_price: Preço Ñ SÓCIO GT
+        is_pack: É pack?
+        name: Nome
+        number_of_lessons: Nº de Aulas
+        red_time_member_price: Preço SÓCIO RT
+        red_time_not_member_price: Preço Ñ SÓCIO RT
+        is_active: Ativo?
     errors:
       models:
         admin:
@@ -76,6 +92,9 @@ pt:
         master_members: Sócios Master
         adults: Adultos
         childrens: Crianças
+      lessons_types:
+        packs: Packs de Aulas
+        not_packs: Aulas
   devise:
     confirmations:
       confirmed: "A sua conta foi confirmada com sucesso."

@@ -18,4 +18,13 @@ document.addEventListener('turbolinks:load', () => {
       $('#client_is_master_member')[0].checked = false
     }
   });
+
+  $('#lessons_type_is_pack').click(function(e){
+    if (e.currentTarget.checked) {
+      $('#number_of_lessons_row')[0].style.visibility = "visible";
+    } else {
+      $('#number_of_lessons_row')[0].style.visibility = "hidden";
+      $('#lessons_type_number_of_lessons')[0].value = "";
+    }
+  })
 })
