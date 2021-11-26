@@ -28,7 +28,7 @@ class CheckBox < Trestle::Form::Field
   end
 
   def field
-    content_tag(:div, class: "custom-control custom-checkbox") do
+    content_tag(:div, class: "custom-control #{switch? ? "custom-switch" : "custom-checkbox"}") do
       safe_join([
         builder.raw_check_box(name, options.merge(class: "custom-control-input")),
         builder.label(name, options[:label] || admin.human_attribute_name(name), class: label_class),
@@ -46,5 +46,9 @@ class CheckBox < Trestle::Form::Field
 
   def errors
     error_keys.map { |key| builder.errors(key) }.flatten
+  end
+
+  def switch?
+    options[:switch]
   end
 end
