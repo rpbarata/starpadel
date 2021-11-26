@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_104426) do
+ActiveRecord::Schema.define(version: 2021_11_26_002348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,17 @@ ActiveRecord::Schema.define(version: 2021_11_22_104426) do
     t.index ["role"], name: "index_admins_on_role"
     t.index ["username", "email"], name: "index_admins_on_username_and_email"
     t.index ["username"], name: "index_admins_on_username", unique: true
+  end
+
+  create_table "client_lessons", force: :cascade do |t|
+    t.boolean "completed"
+    t.datetime "completed_at"
+    t.bigint "client_id", null: false
+    t.bigint "lesson_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_client_lessons_on_client_id"
+    t.index ["lesson_id"], name: "index_client_lessons_on_lesson_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -79,6 +90,20 @@ ActiveRecord::Schema.define(version: 2021_11_22_104426) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "lessons_types", force: :cascade do |t|
+    t.string "name"
+    t.text "comments"
+    t.decimal "green_time_member_price", precision: 8, scale: 2
+    t.decimal "green_time_not_member_price", precision: 8, scale: 2
+    t.decimal "red_time_member_price", precision: 8, scale: 2
+    t.decimal "red_time_not_member_price", precision: 8, scale: 2
+    t.boolean "is_pack"
+    t.integer "number_of_lessons"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_active", default: true
+  end
+
   create_table "versions", force: :cascade do |t|
     t.string "item_type"
     t.string "{:null=>false}"
@@ -91,4 +116,6 @@ ActiveRecord::Schema.define(version: 2021_11_22_104426) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  add_foreign_key "client_lessons", "clients"
+  add_foreign_key "client_lessons", "lessons"
 end
