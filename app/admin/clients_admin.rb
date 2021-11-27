@@ -93,5 +93,18 @@ Trestle.resource(:clients, model: Client) do
 
   controller do
     include FixActionUpdateConcern
+
+    def show
+      super
+
+      client = instance
+      @client_lessons = client.client_lessons.includes([:lessons_type]).order(lesson_group: :desc)
+
+      @tabs = [
+        { tab_id: "tab-client", tab_name: "client", record: client.as_json, instance: instance },
+        { tab_id: "tab-client_lessons", tab_name: "client_lessons", records: @client_lessons.page(params[:page]).per(50),
+          trestle_class: ClientLessonsAdmin, },
+      ]
+    end
   end
 end

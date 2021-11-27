@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 STDOUT.puts("Seeding with LessonsType GRUPO 3 avulso")
 
-lessons_type = 
+lessons_type =
   LessonsType.where(
     name: "GRUPO 3 avulso"
   ).first_or_initialize(
     green_time_not_member_price: 20,
-    red_time_not_member_price: 25, 
+    red_time_not_member_price: 25,
     green_time_member_price: 19,
     red_time_member_price: 23.75,
     is_active: true,

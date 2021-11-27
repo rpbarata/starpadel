@@ -51,6 +51,12 @@
         <% @tabs&.each_with_index do |tab, index| %>
           <div id="<%= tab[:tab_id] %>" class="tab-pane <%= active_tab(tab[:tab_id],index, params[:page]) %>" role="tabpanel">
 
+          <% if tab[:tab_id] == "tab-client_lessons" && (current_user.super_admin? || current_user.secretariat_admin?) %>
+            <div class="btn-toolbar primary-toolbar d-flex justify-content-end" role="toolbar">
+              <%= link_to "Creditar", new_client_lessons_admin_path(client_id: instance.id), class: "btn btn-success" %>
+            </div>
+          <% end %>
+
             <% if tab.has_key?(:partial) %>
               <%= render partial: tab[:partial], locals: tab[:partial_locals] %>
             <% else %>
@@ -58,7 +64,13 @@
                 <%= render partial: 'render_create_tab', locals: { render_new: tab[:render_new], instance: instance } %>
               <% end %>
 
-              <% if tab.has_key?(:record) %>
+                <% if tab.has_key?(:records) %>
+                  <%#= render "admin/filters", filter_url: "#{request.path}#!#{tab[:tab_id]}", filters: tab[:filters], filter_dates: tab[:filter_dates] %>
+                  <%= table tab[:trestle_class].table, collection: tab[:records] %>
+                  <footer class="main-content-footer">
+                    <%= pagination collection: tab[:records], remote: false, params: { anchor: "!#{tab[:tab_id]}" } %>
+                  </footer>
+              <% elsif tab.has_key?(:record) %>
                 <% if true && lookup_context.exists?("trestle/resource/#{tab[:tab_name]}/show", [], true) %>
                   <%= render partial: "trestle/resource/#{tab[:tab_name]}/show", locals: { instance: tab[:instance] } %>
                 <% else %>
