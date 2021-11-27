@@ -43,8 +43,10 @@ Trestle.resource(:admins, model: Admin) do
   form do |_admin|
     row do
       col(sm: 6) { text_field :username }
-      col(sm: 6) { select :role,
-        Admin.defined_enums["role"].keys.map { |status| [I18n.t("activerecord.enums.role_list.#{status}"), status] } }
+      col(sm: 6) do
+        select :role,
+          Admin.defined_enums["role"].keys.map { |status| [I18n.t("activerecord.enums.role_list.#{status}"), status] }
+      end
     end
     row do
       col(sm: 6) { password_field :password }

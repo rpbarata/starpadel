@@ -10,6 +10,9 @@ pt:
       lessons_type: 
         one: Tipo de Aula
         other: Tipos de Aulas
+      client_lesson:
+        one: Aula
+        other: Aulas
     attributes:
       admin:
         id: Identificador
@@ -50,6 +53,18 @@ pt:
         red_time_member_price: Preço SÓCIO RT
         red_time_not_member_price: Preço Ñ SÓCIO RT
         is_active: Ativo?
+      client_lesson:
+        id: Identificador
+        created_at: Criado em
+        updated_at: Atualizado em
+        client_id: Cliente
+        lessons_type_id: Tipo de Aulas
+        client: Cliente
+        lessons_type: Tipo de Aulas
+        comments: Obervações
+        end_time: Hora de Fim
+        start_time: Hora de Inicio
+        lesson_group: Pack ID
     errors:
       models:
         admin:
@@ -487,6 +502,7 @@ pt:
       blank: "Nenhum"
     tabs:
       client: "Cliente"
+      client_lessons: Aulas
     datepicker:
       formats:
         date: "d/m/Y"

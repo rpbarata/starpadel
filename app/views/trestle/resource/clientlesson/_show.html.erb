@@ -1,0 +1,40 @@
+<% class_name = instance.class.name.underscore %>
+
+<% if current_user.super_admin? %>
+  <div class="btn-toolbar primary-toolbar d-flex justify-content-end" role="toolbar">
+    <%= link_to "Editar", edit_client_lessons_admin_path(instance), class: "btn btn-warning" %>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="col">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'client', value: instance.client } %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'lessons_type', value: instance.lessons_type } %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'lesson_group', value: instance.lesson_group } %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'start_time', value: instance.start_time } %>
+  </div>
+  <div class="col-6">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'end_time', value: instance.end_time } %>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'comments', value: instance.comments } %>
+  </div>
+</div>

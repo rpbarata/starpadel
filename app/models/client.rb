@@ -41,6 +41,8 @@ class Client < ApplicationRecord
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :validatable
 
+  has_many :client_lessons
+
   scope :members_of_club, -> { where.not(member_id: nil) }
   scope :not_members_of_club, -> { where(member_id: nil) }
   scope :master_members, -> { where(is_master_member: true) }
