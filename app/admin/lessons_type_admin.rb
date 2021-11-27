@@ -3,9 +3,11 @@
 Trestle.resource(:lessons_type, model: LessonsType) do
   authorize_with cancan: Ability
 
+  remove_action :destroy
+
   menu do
     group :Administração, priority: :last do
-      item :"Tipos de Aulas", icon: "fas fa-users", priority: 1
+      item :"Tipos de Aulas", icon: "fa fa-table", priority: 1
     end
   end
 
@@ -45,6 +47,13 @@ Trestle.resource(:lessons_type, model: LessonsType) do
       end
     end
     column :number_of_lessons, ->(lesson_type) { lesson_type.format_number_of_lessons }
+    column :is_active, align: :center do |lesson_type|
+      if lesson_type.is_active
+        status_tag(icon("fa fa-check"), :success)
+      else
+        status_tag(icon("fa fa-times"), :danger)
+      end
+    end
 
     actions do |toolbar, _instance, _admin|
       toolbar.edit
@@ -75,6 +84,8 @@ Trestle.resource(:lessons_type, model: LessonsType) do
     end
 
     editor :comments
+
+    hidden_field :initial_number_of_lessons, value: lesson_type.number_of_lessons
   end
 
   controller do
