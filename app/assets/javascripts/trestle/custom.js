@@ -24,7 +24,7 @@ document.addEventListener('turbolinks:load', () => {
       $('#number_of_lessons_row')[0].style.visibility = "visible";
     } else {
       $('#number_of_lessons_row')[0].style.visibility = "hidden";
-      $('#lessons_type_number_of_lessons')[0].value = "";
+      $('#lessons_type_number_of_lessons')[0].value = $('#lessons_type_initial_number_of_lessons')[0].value;
     }
   })
 })

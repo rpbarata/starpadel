@@ -8,7 +8,7 @@ Trestle.admin(:dashboard) do
   controller do
     before_action :set_clients,
       only: [:clients_line_chart, :clients_pie_chart, :index, :clients_members_pie_chart,
-             :adults_and_childrens_pie_chart,]
+             :adults_and_childrens_pie_chart, :lessons_type_pie_chart]
 
     def clients_pie_chart
       @clients_pie_chart = {
@@ -46,6 +46,12 @@ Trestle.admin(:dashboard) do
       render(json: @adults_and_childrens_pie_chart.chart_json)
     end
 
+    # def lessons_type_pie_chart
+    #   temp = ClientLesson.joins(:lessons_type).group("client_lessons.lesson_group", "lessons_types.name").count
+
+    #   render(json: @lessons_type_pie_chart.chart_json)
+    # end
+
     private
 
     def set_clients
@@ -61,5 +67,6 @@ Trestle.admin(:dashboard) do
     get :clients_line_chart, as: "clients_line_chart"
     get :clients_members_pie_chart, as: "clients_members_pie_chart"
     get :adults_and_childrens_pie_chart, as: "adults_and_childrens_pie_chart"
+    # get :lessons_type_pie_chart, as: "lessons_type_pie_chart"
   end
 end
