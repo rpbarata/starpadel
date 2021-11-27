@@ -35,9 +35,9 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
 
   form do |client_lesson|
     row do
-      # if params[:client_id].present?
-      #   hidden_field :client_id, value: params[:client_id]
-      # else
+      if params[:client_id].present?
+        hidden_field :client_id, value: params[:client_id]
+      end
       col(sm: 12) do
         select :client_id,
           options_from_collection_for_select(Client.all.order(name: :asc), :id, :name, instance.client_id || params[:client_id]),
