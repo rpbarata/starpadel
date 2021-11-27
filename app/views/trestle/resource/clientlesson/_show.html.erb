@@ -2,7 +2,7 @@
 
 <% if current_user.super_admin? %>
   <div class="btn-toolbar primary-toolbar d-flex justify-content-end" role="toolbar">
-    <%= link_to "Editar", edit_client_lessons_admin_path(instance), class: "btn btn-warning" %>
+    <%= link_to "Editar", edit_client_lessons_admin_path(instance), class: "btn btn-warning", data: {behavior: "dialog"} %>
   </div>
 <% end %>
 
@@ -15,12 +15,6 @@
 <div class="row">
   <div class="col">
     <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'lessons_type', value: instance.lessons_type } %>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'lesson_group', value: instance.lesson_group } %>
   </div>
 </div>
 

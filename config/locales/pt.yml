@@ -13,6 +13,9 @@ pt:
       client_lesson:
         one: Aula
         other: Aulas
+      client_lessons_group:
+        one: Aula Creditada
+        other: Aulas Creditadas
     attributes:
       admin:
         id: Identificador
@@ -65,6 +68,16 @@ pt:
         end_time: Hora de Fim
         start_time: Hora de Inicio
         lesson_group: Pack ID
+      client_lessons_group:
+        id: Identificador
+        created_at: Criada em
+        updated_at: Atualizada em
+        comments: Obervações
+        client_id: Cliente
+        lessons_type_id: Tipo de Aulas
+        client: Cliente
+        lessons_type: Tipo de Aulas
+        first_lesson_date: Primeira Aula
     errors:
       models:
         admin:
@@ -503,6 +516,8 @@ pt:
     tabs:
       client: "Cliente"
       client_lessons: Aulas
+      credited_lessons: Aulas Creditadas
+      lessons: Aulas
     datepicker:
       formats:
         date: "d/m/Y"

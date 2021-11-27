@@ -18,7 +18,7 @@
 #  updated_at                  :datetime         not null
 #
 class LessonsType < ApplicationRecord
-  has_many :client_lessons
+  has_many :client_lessons_groups, dependent: :restrict_with_error
 
   scope :packs, -> { where(is_pack: true) }
   scope :not_packs, -> { where(is_pack: [false, nil, ""]) }

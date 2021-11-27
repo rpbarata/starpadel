@@ -10,7 +10,11 @@
 <% title = admin.t("titles.show", default: "Show %{model_name}", instance_name: instance_name ) %>
 
 <% content_for(:title, title) %>
-<% breadcrumb(title) unless admin.singular? %>
+<% breadcrumb(title) %>
+
+<% if @hide_breadcrumbs.present? %>
+  <% local_assigns[:hide_breadcrumbs] = @hide_breadcrumbs %>
+<% end %>
 
 <header class="content-header">
   <div class="content-header-title">
@@ -51,9 +55,9 @@
         <% @tabs&.each_with_index do |tab, index| %>
           <div id="<%= tab[:tab_id] %>" class="tab-pane <%= active_tab(tab[:tab_id],index, params[:page]) %>" role="tabpanel">
 
-          <% if tab[:tab_id] == "tab-client_lessons" && (current_user.super_admin? || current_user.secretariat_admin?) %>
+          <% if tab[:tab_id] == "tab-credited_lessons" && (current_user.super_admin? || current_user.secretariat_admin?) %>
             <div class="btn-toolbar primary-toolbar d-flex justify-content-end" role="toolbar">
-              <%= link_to "Creditar", new_client_lessons_admin_path(client_id: instance.id), class: "btn btn-success" %>
+              <%= link_to "Creditar", new_client_lessons_groups_admin_path(client_id: instance.id), class: "btn btn-success" %>
             </div>
           <% end %>
 
