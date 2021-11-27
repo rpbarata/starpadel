@@ -1,0 +1,14 @@
+<% class_name = instance.class.name.underscore %>
+
+<div class="row">
+  <div class="col-6">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'client', value: instance.client } %>
+  </div>
+
+  <div class="col-6">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'lessons_type', value: instance.lessons_type } %>
+  </div>
+</div>
+
+<br>
+<%= table ClientLessonsAdmin.table, collection: @lessons.page(params[:page]).per(50) %>

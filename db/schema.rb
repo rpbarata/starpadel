@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_235956) do
+ActiveRecord::Schema.define(version: 2021_11_27_175234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,9 +45,20 @@ ActiveRecord::Schema.define(version: 2021_11_26_235956) do
     t.text "comments"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "lesson_group"
+    t.bigint "client_lessons_group_id", null: false
     t.index ["client_id"], name: "index_client_lessons_on_client_id"
+    t.index ["client_lessons_group_id"], name: "index_client_lessons_on_client_lessons_group_id"
     t.index ["lessons_type_id"], name: "index_client_lessons_on_lessons_type_id"
+  end
+
+  create_table "client_lessons_groups", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.bigint "lessons_type_id", null: false
+    t.text "comments"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_client_lessons_groups_on_client_id"
+    t.index ["lessons_type_id"], name: "index_client_lessons_groups_on_lessons_type_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -105,6 +116,9 @@ ActiveRecord::Schema.define(version: 2021_11_26_235956) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  add_foreign_key "client_lessons", "client_lessons_groups"
   add_foreign_key "client_lessons", "clients"
   add_foreign_key "client_lessons", "lessons_types"
+  add_foreign_key "client_lessons_groups", "clients"
+  add_foreign_key "client_lessons_groups", "lessons_types"
 end

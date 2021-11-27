@@ -8,7 +8,7 @@ Trestle.admin(:dashboard) do
   controller do
     before_action :set_clients,
       only: [:clients_line_chart, :clients_pie_chart, :index, :clients_members_pie_chart,
-             :adults_and_childrens_pie_chart, :lessons_type_pie_chart]
+             :adults_and_childrens_pie_chart, :lessons_type_pie_chart,]
 
     def clients_pie_chart
       @clients_pie_chart = {

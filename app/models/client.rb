@@ -41,7 +41,7 @@ class Client < ApplicationRecord
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :validatable
 
-  has_many :client_lessons
+  has_many :client_lessons_groups, dependent: :restrict_with_error
 
   scope :members_of_club, -> { where.not(member_id: nil) }
   scope :not_members_of_club, -> { where(member_id: nil) }
