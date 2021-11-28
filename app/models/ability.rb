@@ -9,12 +9,16 @@ class Ability
 
     if user.coach_admin?
       can([:index, :read], Client)
-      can([:index, :show], LessonsType)
+      can([:index, :read], LessonsType)
+      can(:manage, ClientLesson)
+      can(:manage, ClientLessonsGroup)
     end
 
     if user.secretariat_admin?
       can(:manage, Client)
       can([:index, :show], LessonsType)
+      can(:manage, ClientLesson)
+      can(:manage, ClientLessonsGroup)
     end
   end
 end
