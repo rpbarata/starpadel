@@ -23,8 +23,7 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     column :client, link: true, class: "media-title-column"
     column :lessons_type, sort: false, link: true, class: "media-title-column"
     column :created_at, sort: { default: true, default_order: :desc }
-    column :first_lesson_date
-
+    
     actions do |toolbar, _instance, _admin|
       toolbar.show
     end

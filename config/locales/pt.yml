@@ -77,7 +77,6 @@ pt:
         lessons_type_id: Tipo de Aulas
         client: Cliente
         lessons_type: Tipo de Aulas
-        first_lesson_date: Primeira Aula
     errors:
       models:
         admin:

@@ -28,10 +28,6 @@ class ClientLessonsGroup < ApplicationRecord
 
   after_create :generate_client_lessons
 
-  def first_lesson_date
-    client_lessons.order(start_time: :asc).first&.start_time
-  end
-
   private
 
   def generate_client_lessons
