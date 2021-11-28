@@ -457,6 +457,7 @@ pt:
   admin:
     search:
       placeholder: "Procurar..."
+      results: "Procurar Resultados"
     auth:
       my_account: "Minha Conta"
       login: "Entrar"

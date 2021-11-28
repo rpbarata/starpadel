@@ -45,7 +45,9 @@ Trestle.resource(:clients, model: Client) do
       end
     end
     column :is_adult, align: :center do |client|
-      if client.adult?
+      if client.birth_date.blank?
+        "Sem Data de Nascimento"
+      elsif client.adult?
         status_tag(icon("fa fa-check"), :success)
       else
         status_tag(icon("fa fa-times"), :danger)
