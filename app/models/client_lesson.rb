@@ -27,9 +27,9 @@
 #  fk_rails_...  (lessons_type_id => lessons_types.id)
 #
 class ClientLesson < ApplicationRecord
-  belongs_to :client_lessons_group
+  belongs_to :client_lessons_group, dependent: :destroy
   belongs_to :lessons_type
-  belongs_to :client
+  belongs_to :client, dependent: :destroy
 
   validate :validate_dates, if: -> { start_time.present? && end_time.present? }
 

@@ -41,7 +41,7 @@ class Client < ApplicationRecord
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :validatable
 
-  has_many :client_lessons_groups, dependent: :restrict_with_error
+  has_many :client_lessons_groups, dependent: :destroy
 
   scope :members_of_club, -> { where.not(member_id: nil) }
   scope :not_members_of_club, -> { where(member_id: nil) }
@@ -85,7 +85,8 @@ class Client < ApplicationRecord
       elsif end_date.present?
         where("created_at < :end_date", end_date: end_date.end_of_day).distinct
       else
-        all
+        where("created_at BETWEEN :start_date AND :end_date",
+          start_date: (Time.zone.now.beginning_of_day - 31.days), end_date: Time.zone.now.end_of_day).distinct
       end
     end
   end

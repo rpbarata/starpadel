@@ -28,6 +28,22 @@ class ClientLessonsGroup < ApplicationRecord
 
   after_create :generate_client_lessons
 
+  class << self
+    def select_by_date(start_date, end_date)
+      if start_date.present? && end_date.present?
+        where("client_lessons_groups.created_at BETWEEN :start_date AND :end_date",
+          start_date: start_date.beginning_of_day, end_date: end_date.end_of_day).distinct
+      elsif start_date.present?
+        where("client_lessons_groups.created_at > :start_date", start_date: start_date.beginning_of_day).distinct
+      elsif end_date.present?
+        where("client_lessons_groups.created_at < :end_date", end_date: end_date.end_of_day).distinct
+      else
+        where("client_lessons_groups.created_at BETWEEN :start_date AND :end_date",
+          start_date: (Time.zone.now.beginning_of_day - 31.days), end_date: Time.zone.now.end_of_day).distinct
+      end
+    end
+  end
+
   private
 
   def generate_client_lessons
