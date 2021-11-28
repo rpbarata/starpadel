@@ -1,8 +1,8 @@
 <% class_name = instance.class.name.underscore %>
 
 <% if current_user.super_admin? %>
-  <div class="btn-toolbar primary-toolbar d-flex justify-content-end" role="toolbar">
-    <%= link_to "Editar", edit_client_lessons_admin_path(instance), class: "btn btn-warning", data: {behavior: "dialog"} %>
+  <div class="btn-toolbar primary-toolbar d-flex justify-content-end mb-3" role="toolbar">
+    <%= link_to "Editar", edit_client_lessons_admin_path(instance), class: "btn btn-warning", data: { behavior: "dialog" } %>
   </div>
 <% end %>
 

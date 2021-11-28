@@ -31,14 +31,19 @@ class ClientLesson < ApplicationRecord
   belongs_to :lessons_type
   belongs_to :client, dependent: :destroy
 
-  validate :validate_dates, if: -> { start_time.present? && end_time.present? }
+  validate :validate_dates
+
+  scope :done, -> { where.not(start_time: nil, end_time: nil)}
 
   private
 
   def validate_dates
-    if start_time > end_time
-      errors.add(:start_time, "a data de inicio deve ser antes da data de fim")
-      errors.add(:end_time, "a data de inicio deve ser antes da data de fim")
+    if !start_time.present? && end_time.present?
+      errors.add(:start_time, "não pode estar em branco")
+      errors.add(:end_time, "")
+    elsif start_time > end_time
+      errors.add(:start_time, "deve ser antes da data de fim")
+      errors.add(:end_time, "deve ser depois da data de início")
     end
   end
 end

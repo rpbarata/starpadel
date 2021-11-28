@@ -49,6 +49,10 @@ class ClientLessonsGroup < ApplicationRecord
     end
   end
 
+  def remaining_lessons_str
+    "#{client_lessons.done.size} de #{lessons_type.number_of_lessons}"
+  end
+
   private
 
   def generate_client_lessons

@@ -79,6 +79,7 @@ pt:
         client: Cliente
         lessons_type: Tipo de Aulas
         time_period: Horário
+        remaining_lessons_str: Nº de Aulas
     errors:
       models:
         admin:

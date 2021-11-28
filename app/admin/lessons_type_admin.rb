@@ -62,30 +62,32 @@ Trestle.resource(:lessons_type, model: LessonsType) do
   end
 
   form do |lesson_type|
-    text_field :name
+    
+    # h5 "oi" if lesson_type.client_lessons_groups.any?
+    text_field :name, disabled: lesson_type.client_lessons_groups.any?
 
     row do
-      col(sm: 6) { number_field :green_time_not_member_price, min: 0, step: 0.01, prepend: "€" }
-      col(sm: 6) { number_field :red_time_not_member_price, min: 0, step: 0.01, prepend: "€" }
+      col(sm: 6) { number_field :green_time_not_member_price, min: 0, step: 0.01, prepend: "€", disabled: lesson_type.client_lessons_groups.any? }
+      col(sm: 6) { number_field :red_time_not_member_price, min: 0, step: 0.01, prepend: "€", disabled: lesson_type.client_lessons_groups.any? }
     end
 
     row do
-      col(sm: 6) { number_field :green_time_member_price, min: 0, step: 0.01, prepend: "€" }
-      col(sm: 6) { number_field :red_time_member_price, min: 0, step: 0.01, prepend: "€" }
+      col(sm: 6) { number_field :green_time_member_price, min: 0, step: 0.01, prepend: "€", disabled: lesson_type.client_lessons_groups.any? }
+      col(sm: 6) { number_field :red_time_member_price, min: 0, step: 0.01, prepend: "€", disabled: lesson_type.client_lessons_groups.any? }
     end
 
     row do
-      col(sm: 3, md: 2) { check_box :is_pack }
+      col(sm: 3, md: 2) { check_box :is_pack, disabled: lesson_type.client_lessons_groups.any? }
       col(sm: 6) { check_box :is_active }
     end
 
     row(id: "number_of_lessons_row", style: "visibility: #{lesson_type.is_pack ? "visible" : "hidden"}") do
-      col(sm: 12) { number_field :number_of_lessons, min: 0, step: 1 }
+      col(sm: 12) { number_field :number_of_lessons, min: 0, step: 1, disabled: lesson_type.client_lessons_groups.any? }
     end
 
     editor :comments
 
-    hidden_field :initial_number_of_lessons, value: lesson_type.number_of_lessons
+    hidden_field :initial_number_of_lessons, value: lesson_type.number_of_lessons, disabled: true
   end
 
   controller do
