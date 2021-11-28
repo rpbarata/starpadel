@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_27_175234) do
+ActiveRecord::Schema.define(version: 2021_11_28_191517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2021_11_27_175234) do
     t.text "comments"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "time_period"
     t.index ["client_id"], name: "index_client_lessons_groups_on_client_id"
     t.index ["lessons_type_id"], name: "index_client_lessons_groups_on_lessons_type_id"
   end

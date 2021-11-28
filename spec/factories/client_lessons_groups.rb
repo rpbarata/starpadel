@@ -6,6 +6,7 @@
 #
 #  id              :bigint           not null, primary key
 #  comments        :text
+#  time_period     :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  client_id       :bigint           not null

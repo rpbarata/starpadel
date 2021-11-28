@@ -6,6 +6,7 @@
 #
 #  id              :bigint           not null, primary key
 #  comments        :text
+#  time_period     :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  client_id       :bigint           not null
@@ -26,7 +27,11 @@ class ClientLessonsGroup < ApplicationRecord
   belongs_to :client
   has_many :client_lessons, dependent: :restrict_with_error
 
+  enum time_period: { green_time: 1, red_time: 2 }
+
   after_create :generate_client_lessons
+
+  validates :time_period, presence: true
 
   class << self
     def select_by_date(start_date, end_date)

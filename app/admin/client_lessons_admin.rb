@@ -42,6 +42,8 @@ Trestle.resource(:client_lessons, model: ClientLesson) do
   end
 
   controller do
+    include FixActionUpdateConcern
+
     def show
       super
 

@@ -1,16 +1,29 @@
 <% class_name = instance.class.name.underscore %>
 
 <div class="row">
-  <div class="col-6">
+  <div class="col-4">
     <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'client', value: instance.client } %>
   </div>
 
-  <div class="col-6">
+  <div class="col-4">
     <dt>
       <span class="label label-info">
         <%= t("activerecord.attributes.#{class_name}.lessons_type") %>
         <dd class="well">
           <%= link_to(instance.lessons_type.name, lessons_type_admin_path(instance.lessons_type)) %>
+        </dd>
+      </span>
+    </dt>
+  </div>
+
+  <div class="col-4">
+    <dt>
+      <span class="label label-info">
+        <%= t("activerecord.attributes.#{class_name}.time_period") %>
+        <dd class="well">
+          <span class="badge badge-<%= instance.green_time? ? 'success' : 'danger'%>">
+            <%= t("activerecord.enums.time_period_list.#{instance.time_period}") %>
+          </span>
         </dd>
       </span>
     </dt>
