@@ -21,7 +21,9 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
 
   table do
     column :client, link: true, class: "media-title-column"
-    column :lessons_type, sort: false, link: true, class: "media-title-column"
+    column :lessons_type, sort: false, link: true, class: "media-title-column" do |lesson|
+      link_to(lesson.lessons_type.name, lessons_type_admin_path(lesson.lessons_type))
+    end
     column :created_at, sort: { default: true, default_order: :desc }
 
     actions do |toolbar, _instance, _admin|

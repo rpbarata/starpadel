@@ -6,7 +6,14 @@
   </div>
 
   <div class="col-6">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'lessons_type', value: instance.lessons_type } %>
+    <dt>
+      <span class="label label-info">
+        <%= t("activerecord.attributes.#{class_name}.lessons_type") %>
+        <dd class="well">
+          <%= link_to(instance.lessons_type.name, lessons_type_admin_path(instance.lessons_type)) %>
+        </dd>
+      </span>
+    </dt>
   </div>
 </div>
 
