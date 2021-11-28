@@ -63,7 +63,7 @@ if ActiveModel::Type::Boolean.new.cast(ENV.fetch("SEED_CLIENTS", "false")) && !C
 
   Client.find_each.with_index do |client, _index|
     # Faker::Config.random = Random.new(index)
-    created_at_random_date = Faker::Date.between(from: 31.days.ago, to: Time.zone.today)
+    created_at_random_date = Faker::Date.between(from: 6.months.ago, to: Time.zone.today)
 
     become_member_at_random_date =
       if client.member_id.present?
