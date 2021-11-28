@@ -24,6 +24,12 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     column :lessons_type, sort: false, link: true, class: "media-title-column" do |lesson|
       link_to(lesson.lessons_type.name, lessons_type_admin_path(lesson.lessons_type))
     end
+    column :time_period do |lesson|
+      if lesson.time_period.present?
+        status_tag(I18n.t("activerecord.enums.time_period.#{lesson.time_period}"),
+          lesson.green_time? ? :success : :danger)
+      end
+    end
     column :created_at, sort: { default: true, default_order: :desc }
 
     actions do |toolbar, _instance, _admin|
@@ -53,6 +59,15 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
         select :lessons_type_id,
           options_from_collection_for_select(LessonsType.actives.order(name: :asc), :id, :name, instance.lessons_type_id),
           include_blank: "Escolha um tipo de aula", disabled: !client_lesson.new_record?
+      end
+    end
+
+    row do
+      col(sm: 12) do
+        select :time_period,
+          ClientLessonsGroup.defined_enums["time_period"].keys.map { |status|
+            [I18n.t("activerecord.enums.time_period.#{status}"), status]
+          }
       end
     end
 

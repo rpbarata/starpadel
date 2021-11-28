@@ -68,6 +68,7 @@ pt:
         end_time: Hora de Fim
         start_time: Hora de Inicio
         lesson_group: Pack ID
+        time_period: Horário
       client_lessons_group:
         id: Identificador
         created_at: Criada em
@@ -77,6 +78,7 @@ pt:
         lessons_type_id: Tipo de Aulas
         client: Cliente
         lessons_type: Tipo de Aulas
+        time_period: Horário
     errors:
       models:
         admin:
@@ -107,6 +109,9 @@ pt:
         super_admin: Super Administrador
         secretariat_admin: Balcão
         coach_admin: Treinador
+      time_period:
+        green_time: Green Time
+        red_time: Red Time
     scopes:
       default: Todos
       admins:

@@ -10,11 +10,20 @@
   <div class="col">
     <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'client', value: instance.client } %>
   </div>
-</div>
-
-<div class="row">
   <div class="col">
     <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'lessons_type', value: instance.lessons_type } %>
+  </div>
+  <div class="col">
+    <dt>
+      <span class="label label-info">
+        <%= t("activerecord.attributes.#{class_name}.time_period") %>
+        <dd class="well">
+          <span class="badge badge-<%= instance.client_lessons_group.green_time? ? 'success' : 'danger'%>">
+            <%= t("activerecord.enums.time_period_list.#{instance.client_lessons_group.time_period}") %>
+          </span>
+        </dd>
+      </span>
+    </dt>
   </div>
 </div>
 
