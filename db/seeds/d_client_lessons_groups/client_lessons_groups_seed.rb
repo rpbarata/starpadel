@@ -19,7 +19,6 @@ if ActiveModel::Type::Boolean.new.cast(ENV.fetch("SEED_LESSONS", "false")) && !C
   end
 end
 
-
 ClientLessonsGroup.find_each do |client_lessons_group|
   client_lessons_group.update(time_period: [:green_time, :red_time].sample)
 end
