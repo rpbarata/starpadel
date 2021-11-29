@@ -33,12 +33,12 @@ class ClientLesson < ApplicationRecord
 
   validate :validate_dates
 
-  scope :done, -> { where.not(start_time: nil, end_time: nil)}
+  scope :done, -> { where.not(start_time: nil, end_time: nil) }
 
   private
 
   def validate_dates
-    if !start_time.present? && end_time.present?
+    if start_time.blank? && end_time.present?
       errors.add(:start_time, "não pode estar em branco")
       errors.add(:end_time, "")
     elsif start_time > end_time

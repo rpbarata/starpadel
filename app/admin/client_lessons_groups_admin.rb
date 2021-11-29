@@ -9,14 +9,20 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     item :"Aulas Creditadas", icon: "far fa-calendar-alt", priority: 3
   end
 
-  search do |query|
-    if query
-      collection.joins(:client).where("clients.name ILIKE :q", q_id: query&.to_i, q: "%#{query}%")
-    end
+  scopes do
+    scope :all, default: true,  label: t("activerecord.scopes.default")
+    scope :green_time,          label: t("activerecord.scopes.client_lessons_group.green_time")
+    scope :red_time,            label: t("activerecord.scopes.client_lessons_group.red_time")
   end
 
+  # search do |query|
+  #   if query
+  #     collection.joins(:client).where("clients.name ILIKE :q", q_id: query&.to_i, q: "%#{query}%")
+  #   end
+  # end
+
   collection do
-    ClientLessonsGroup.includes([:client, :lessons_type, :client]).all.order(created_at: :desc)
+    ClientLessonsGroup.includes([:client, :lessons_type]).all.order(created_at: :desc)
   end
 
   table do
@@ -77,6 +83,13 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
 
   controller do
     include FixActionUpdateConcern
+    include TrestleFiltersConcern
+
+    def index
+      super
+
+      initialize_client_lessons_groups_filters if @collection.present?
+    end
 
     def show
       super

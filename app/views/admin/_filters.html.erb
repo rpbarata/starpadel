@@ -1,0 +1,34 @@
+<% if filters.present? || filter_dates.present? %>
+  <div class="main-content" style= "display: grid; width:100%;padding: 16px 0">
+    <%= form_tag filter_url, method: :get do %>
+      <%= hidden_field_tag :q, params[:q] if params[:q].present? %>
+      <%= hidden_field_tag :scope, params[:scope] if params[:scope].present? %>
+      <div class="mb-1">
+        <% filters&.each do |filter| %>
+          <div class="form-group" style="display: inline-block; width: 200px;margin-right:8px">
+            <%= label_tag(filter[:name], filter[:label]) %>
+            <%= select_tag filter[:name], options_for_select(filter[:options], params[filter[:name]]), oncreate:"this.form.submit()", onchange: "this.form.submit()", class: "form-control", autocomplete: "off", placeholder: admin.t("search.placeholder", default: "Search"), data: { enable_select2: true } %>
+          </div>
+        <% end %>
+      </div>
+
+      <% if filter_dates.present? %>
+        <div style="display: inline-block;">
+          <div class="form-group" style="display: inline-block">
+            <%= label_tag(:start_date, "Data de Início:") %>
+            <%= date_field_tag :start_date, params[:start_date], class: "form-control", data: { picker: true } %>
+          </div>
+          <div class="form-group" style="display: inline-block">
+            <%= label_tag(:end_date, "Data de Fim:") %>
+            <%= date_field_tag :end_date, params[:end_date], class: "form-control", data: { picker: true } %>
+          </div>
+          <div class="form-group"  style="display: inline-block">
+            <button class="btn btn-light has-icon" type="button" onclick="this.form.submit()">
+              <i class="fas fa-filter" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
