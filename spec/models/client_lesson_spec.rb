@@ -18,7 +18,11 @@
 #
 #  index_client_lessons_on_client_id                (client_id)
 #  index_client_lessons_on_client_lessons_group_id  (client_lessons_group_id)
+#  index_client_lessons_on_created_at               (created_at)
+#  index_client_lessons_on_end_time                 (end_time)
 #  index_client_lessons_on_lessons_type_id          (lessons_type_id)
+#  index_client_lessons_on_start_time               (start_time)
+#  index_client_lessons_on_start_time_and_end_time  (start_time,end_time)
 #
 # Foreign Keys
 #

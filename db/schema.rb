@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_28_191517) do
+ActiveRecord::Schema.define(version: 2021_11_30_164907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,7 +48,11 @@ ActiveRecord::Schema.define(version: 2021_11_28_191517) do
     t.bigint "client_lessons_group_id", null: false
     t.index ["client_id"], name: "index_client_lessons_on_client_id"
     t.index ["client_lessons_group_id"], name: "index_client_lessons_on_client_lessons_group_id"
+    t.index ["created_at"], name: "index_client_lessons_on_created_at"
+    t.index ["end_time"], name: "index_client_lessons_on_end_time"
     t.index ["lessons_type_id"], name: "index_client_lessons_on_lessons_type_id"
+    t.index ["start_time", "end_time"], name: "index_client_lessons_on_start_time_and_end_time"
+    t.index ["start_time"], name: "index_client_lessons_on_start_time"
   end
 
   create_table "client_lessons_groups", force: :cascade do |t|
@@ -59,7 +63,9 @@ ActiveRecord::Schema.define(version: 2021_11_28_191517) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "time_period"
     t.index ["client_id"], name: "index_client_lessons_groups_on_client_id"
+    t.index ["created_at"], name: "index_client_lessons_groups_on_created_at"
     t.index ["lessons_type_id"], name: "index_client_lessons_groups_on_lessons_type_id"
+    t.index ["time_period"], name: "index_client_lessons_groups_on_time_period"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -103,6 +109,9 @@ ActiveRecord::Schema.define(version: 2021_11_28_191517) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "is_active", default: true
+    t.index ["is_active"], name: "index_lessons_types_on_is_active"
+    t.index ["is_pack"], name: "index_lessons_types_on_is_pack"
+    t.index ["name"], name: "index_lessons_types_on_name"
   end
 
   create_table "versions", force: :cascade do |t|

@@ -17,6 +17,12 @@
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
 #
+# Indexes
+#
+#  index_lessons_types_on_is_active  (is_active)
+#  index_lessons_types_on_is_pack    (is_pack)
+#  index_lessons_types_on_name       (name)
+#
 FactoryBot.define do
   factory :lessons_type do
     name { "MyString" }
