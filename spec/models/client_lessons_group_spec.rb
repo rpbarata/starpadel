@@ -15,7 +15,9 @@
 # Indexes
 #
 #  index_client_lessons_groups_on_client_id        (client_id)
+#  index_client_lessons_groups_on_created_at       (created_at)
 #  index_client_lessons_groups_on_lessons_type_id  (lessons_type_id)
+#  index_client_lessons_groups_on_time_period      (time_period)
 #
 # Foreign Keys
 #
