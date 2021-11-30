@@ -1,0 +1,21 @@
+<table class="trestle-table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Green Time</th>
+      <th scope="col">Red Time</th>
+      <th scope="col">Total</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lessons_type_summary.each do |exams_stats| %>
+      <tr>
+        <th><%= exams_stats[:lesson_type_name] %></th>
+        <td><%= exams_stats[:green_time] %></td>
+        <td><%= exams_stats[:red_time] %></td>
+        <td><%= exams_stats[:total] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

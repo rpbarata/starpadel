@@ -62,6 +62,8 @@ gem "cancancan", "~> 3.2", ">= 3.2.1"
 
 gem "faker" # This is not save to be in where.
 
+gem "render_async"
+
 group :development, :test do
   gem "bullet"
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

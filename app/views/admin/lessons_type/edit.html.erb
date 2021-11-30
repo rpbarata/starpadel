@@ -11,11 +11,17 @@
   <%= t.delete %>
 <% end %>
 
-<%= trestle_form_for instance, url: admin.actions.include?(:update) ? admin.instance_path(instance, action: :update) : "#", method: :patch do |f| %>
-  <% if instance.client_lessons_groups.any? %>
-    <div class="alert alert-warning" role="alert">
-      Este tipo de aula já foi vendido a alguns clientes. A edição está limitada.
+<% if instance.client_lessons_groups.any? %>
+  <div class="alert alert-warning" role="alert">
+    <%= icon("alert-icon fas fa-exclamation-triangle") %>
+    <div class="alert-content">
+      <h3>Atenção!</h3>
+      <p>A edição está limitada. Este tipo de aula já foi vendido a alguns clientes.</p>
+      <%= yield if block_given? %>
     </div>
-  <% end %>
+  </div>
+<% end %>
+
+<%= trestle_form_for instance, url: admin.actions.include?(:update) ? admin.instance_path(instance, action: :update) : "#", method: :patch do |f| %>
   <%= render partial: "form", layout: dialog_request? ? "dialog" : "layout" %>
 <% end %>

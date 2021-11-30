@@ -46,9 +46,24 @@
     </div>
   </div>
 
+  <div class="row mt-5">
+    <div class="col">
+      <h4 class="font-weight-bold text-center">Tipos de Aula Creditadas</h1>
+    </div>
+  </div>
+
   <div class="row">
-    <div class="col-6">
-      <%= pie_chart lessons_type_pie_chart_path(start_date: params[:start_date], end_date: params[:end_date]), title: "Tipos de Aula Creditadas" %>
+    <div class="col">
+      <%= render_async lessons_type_summary_table_path(start_date: params[:start_date], end_date: params[:end_date]) do %>
+        <div class="text-left" style="margin-left: 100px; margin-bottom: 36px;">
+          <div class="spinner-border" role="status", style="color: #c4261a;">
+            <span class="sr-only">A carregar...</span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col mt-4">
+      <%= bar_chart lessons_type_pie_chart_path(start_date: params[:start_date], end_date: params[:end_date]) %>
     </div>
   </div>
 <% end %>

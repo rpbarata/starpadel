@@ -8,7 +8,7 @@ ENV HOME "$APP_PATH/docker/development/home"
 
 # RUBY ENVS #
 ENV BUNDLE_PATH /bundle
-ENV BUNDLE_BIN "${BUNDLE_PATH}/ruby/3.0.0/bin"
+ENV BUNDLE_BIN "${BUNDLE_PATH}/ruby/3.0.2/bin"
 ENV PATH "${PATH}:${BUNDLE_BIN}"
 ENV BUNDLE_JOBS 4
 ENV RAILS_ENV development
