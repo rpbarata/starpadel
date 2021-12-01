@@ -37,7 +37,7 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
       end
     end
     column :created_at, sort: { default: true, default_order: :desc }
-    column :remaining_lessons_str, align: :center
+    column :remaining_lessons_str, align: :center, sort: false
 
     actions do |toolbar, _instance, _admin|
       toolbar.show

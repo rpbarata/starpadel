@@ -95,6 +95,7 @@ Trestle.resource(:clients, model: Client) do
 
   controller do
     include FixActionUpdateConcern
+    include TrestleFiltersConcern
 
     def show
       super
@@ -102,10 +103,13 @@ Trestle.resource(:clients, model: Client) do
       client = instance
       @credited_lessons = client.client_lessons_groups.includes([:lessons_type]).order(created_at: :desc)
 
+      initialize_client_lessons_groups_filters
+
       @tabs = [
         { tab_id: "tab-client", tab_name: "client", record: client.as_json, instance: instance },
         { tab_id: "tab-credited_lessons", tab_name: "credited_lessons",
-          records: @credited_lessons.page(params[:page]).per(50), trestle_class: ClientLessonsGroupsAdmin, },
+          records: @credited_lessons.page(params[:page]).per(50), trestle_class: ClientLessonsGroupsAdmin,
+          filters: @filter_dropdown_lists, search: true, filter_dates: @filter_dates, },
       ]
     end
   end
