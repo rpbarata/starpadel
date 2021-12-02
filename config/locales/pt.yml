@@ -80,6 +80,8 @@ pt:
         lessons_type: Tipo de Aulas
         time_period: Horário
         remaining_lessons_str: Nº de Aulas
+        payment_left_str: Pagamento
+        new_payment: Pagamento
     errors:
       models:
         admin:

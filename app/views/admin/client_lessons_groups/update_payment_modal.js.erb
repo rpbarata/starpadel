@@ -1,0 +1,8 @@
+<% if @errors.present? %>
+  $("#modal-errors").html("");
+  $("#modal-errors").append("<div class='alert' role='alert'><ul id='errors-div'></ul></div>");
+  <% @errors.full_messages.each do |error| %>
+    $("#errors-div").append("<li style='color: #721c24;'><%= error %></li>");
+  <% end %>
+  $("#modal-errors").closest('div.modal').animate({ scrollTop: 0 }, 'slow');
+<% end %>

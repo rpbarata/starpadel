@@ -38,9 +38,13 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     end
     column :created_at, sort: { default: true, default_order: :desc }
     column :remaining_lessons_str, align: :center, sort: false
+    column :payment_left_str, sort: false
 
-    actions do |toolbar, _instance, _admin|
+    actions do |toolbar, instance, _admin|
       toolbar.show
+      admin_link_to("Pagar", instance, action: :payment_modal,
+        params: { index_params: params.to_enum.to_h.merge(from: request.controller_class.to_s) },
+        class: "btn btn-success", data: { behavior: "dialog" })
     end
   end
 
@@ -85,6 +89,9 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     include FixActionUpdateConcern
     include TrestleFiltersConcern
 
+    before_action :load_instance,
+      only: [:show, :edit, :update, :destroy, :payment_modal, :update_payment_modal]
+
     def index
       super
 
@@ -96,6 +103,42 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
 
       client_lesson_group = instance
       @lessons = client_lesson_group.client_lessons.order(created_at: :desc)
+    end
+
+    def update_payment_modal    
+      instance.new_payment = payment_modal_params[:new_payment]
+      instance.add_payment(payment_modal_params)
+
+      if instance.save
+        flash[:message] = "Pagamento Registado"
+        render_url = 
+          if params[:client_lessons_group][:index_params][:from] == "ClientLessonsGroupsAdmin::AdminController"
+            client_lessons_groups_admin_index_path
+          elsif params[:client_lessons_group][:index_params][:from] == "ClientsAdmin::AdminController"
+            client_id = params[:client_lessons_group][:index_params][:id]
+            "#{clients_admin_path(client_id)}/#!tab-credited_lessons"
+          end
+
+        respond_to do |format|
+          format.js { render(js: "window.location.href='" + render_url + "'") }
+        end
+      else
+        @errors = instance.errors
+        render("admin/client_lessons_groups/update_payment_modal.js")
+        return
+      end
+    end
+
+    private
+    def payment_modal_params
+      params.require(:client_lessons_group).permit(:new_payment)
+    end
+  end
+
+  routes do
+    member do
+      get :payment_modal
+      patch :update_payment_modal
     end
   end
 end

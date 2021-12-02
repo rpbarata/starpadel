@@ -35,7 +35,7 @@ class ClientLesson < ApplicationRecord
   belongs_to :lessons_type
   belongs_to :client, dependent: :destroy
 
-  validate :validate_dates
+  validate :validate_dates, if: -> { start_time.present? || end_time.present? }
 
   scope :done, -> { where.not(start_time: nil, end_time: nil) }
 

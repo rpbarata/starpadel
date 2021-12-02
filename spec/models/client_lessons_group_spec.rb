@@ -6,6 +6,8 @@
 #
 #  id              :bigint           not null, primary key
 #  comments        :text
+#  lesson_price    :decimal(8, 2)    default(0.0)
+#  payment         :decimal(8, 2)    default(0.0)
 #  time_period     :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
