@@ -1,11 +1,11 @@
 <% class_name = instance.class.name.underscore %>
 
 <div class="row">
-  <div class="col-4">
+  <div class="col-3">
     <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'client', value: instance.client } %>
   </div>
 
-  <div class="col-4">
+  <div class="col-3">
     <dt>
       <span class="label label-info">
         <%= t("activerecord.attributes.#{class_name}.lessons_type") %>
@@ -16,7 +16,7 @@
     </dt>
   </div>
 
-  <div class="col-4">
+  <div class="col-3">
     <dt>
       <span class="label label-info">
         <%= t("activerecord.attributes.#{class_name}.time_period") %>
@@ -24,6 +24,35 @@
           <span class="badge badge-<%= instance.green_time? ? 'success' : 'danger'%>">
             <%= t("activerecord.enums.time_period_list.#{instance.time_period}") %>
           </span>
+        </dd>
+      </span>
+    </dt>
+  </div>
+
+  <div class="col-3">
+    <dt>
+      <span class="label label-info">
+        <%= t("activerecord.attributes.#{class_name}.payment_left_str") %>
+        <dd class="well">
+          <% if instance.paid %>
+            <span class="badge badge-success">
+              Pago
+            </span>
+          <% else %>
+            <div class="row">
+              <div class="col">
+                <%= instance.payment_left_str %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <%= admin_link_to("Pagar", instance, action: :payment_modal,
+                    params: { index_params: params.to_enum.to_h.merge(from: request.controller_class.to_s) },
+                    class: "btn btn-success", data: { behavior: "dialog" }) %>
+              </div>
+            </div>
+          <% end %>
         </dd>
       </span>
     </dt>

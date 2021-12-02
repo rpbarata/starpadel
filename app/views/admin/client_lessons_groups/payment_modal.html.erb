@@ -7,21 +7,26 @@
 
 <%= form_with model: instance, url: update_payment_modal_client_lessons_groups_admin_url(instance), method: :patch, local: false do |f| %>
   <div class="modal-body">
-
     <div id="modal-errors"></div>
 
     <div class="row">
       <div class="col">
         <div class="form-group">
-          <%= f.label :new_payment, class: 'control-label text-center' %>
-          <%= f.number_field :new_payment, class: 'form-control', required: true, step: 0.01, min: 0 %>
+          <%= f.label :new_payment, class: 'control-label' %>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">€</div>
+            </div>
+            <%= f.number_field :new_payment, class: 'form-control', required: true, step: 0.01, min: 0 %>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="modal-footer">
-    <%= f.submit "Registar Pagamento", class:"btn btn-success" %>
-  </div>
+      <%= f.submit "Registar Pagamento", class:"btn btn-success" %>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+    </div>
 
     <% params[:index_params]&.each do |key,value| %>
       <%= f.hidden_field "index_params[#{key}]", value: value %>

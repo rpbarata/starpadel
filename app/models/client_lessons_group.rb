@@ -62,16 +62,18 @@ class ClientLessonsGroup < ApplicationRecord
   end
 
   def payment_left_str
-    "#{ActionController::Base.helpers.number_to_currency(payment, unit: "€")} de #{ActionController::Base.helpers.number_to_currency(lesson_price, unit: "€")}"
+    "#{ActionController::Base.helpers.number_to_currency(payment,
+      unit: "€")} de #{ActionController::Base.helpers.number_to_currency(lesson_price, unit: "€")}"
   end
 
   def add_payment(params)
     self.payment += params[:new_payment].to_d
   end
-  
+
   def paid
     payment == lesson_price
   end
+
   private
 
   def generate_client_lessons
@@ -84,19 +86,17 @@ class ClientLessonsGroup < ApplicationRecord
   end
 
   def set_lesson_price
-    self.lesson_price = 
+    self.lesson_price =
       if client.member_id.present?
         if green_time?
           lessons_type.green_time_member_price
         else
           lessons_type.red_time_member_price
         end
+      elsif green_time?
+        lessons_type.green_time_not_member_price
       else
-        if green_time?
-          lessons_type.green_time_not_member_price
-        else
-          lessons_type.red_time_not_member_price
-        end
+        lessons_type.red_time_not_member_price
       end
 
     save!

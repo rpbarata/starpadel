@@ -111,15 +111,20 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
       @lessons = client_lesson_group.client_lessons.order(created_at: :desc)
     end
 
-    def update_payment_modal    
+    def update_payment_modal
       instance.new_payment = payment_modal_params[:new_payment]
       instance.add_payment(payment_modal_params)
 
       if instance.save
         flash[:message] = "Pagamento Registado"
-        render_url = 
+        render_url =
           if params[:client_lessons_group][:index_params][:from] == "ClientLessonsGroupsAdmin::AdminController"
-            client_lessons_groups_admin_index_path
+            if params[:client_lessons_group][:index_params][:action] == "index"
+              client_lessons_groups_admin_index_path
+            elsif params[:client_lessons_group][:index_params][:action] == "show"
+              client_lessons_group_id = params[:client_lessons_group][:index_params][:id]
+              client_lessons_groups_admin_path(client_lessons_group_id)
+            end
           elsif params[:client_lessons_group][:index_params][:from] == "ClientsAdmin::AdminController"
             client_id = params[:client_lessons_group][:index_params][:id]
             "#{clients_admin_path(client_id)}/#!tab-credited_lessons"
@@ -131,11 +136,12 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
       else
         @errors = instance.errors
         render("admin/client_lessons_groups/update_payment_modal.js")
-        return
+        nil
       end
     end
 
     private
+
     def payment_modal_params
       params.require(:client_lessons_group).permit(:new_payment)
     end

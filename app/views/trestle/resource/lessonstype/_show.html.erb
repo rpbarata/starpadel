@@ -14,19 +14,19 @@
 
 <div class="row">
   <div class="col-6">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'green_time_not_member_price', value: instance.green_time_not_member_price } %>
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'green_time_not_member_price', value: number_to_currency(instance.green_time_not_member_price, unit: "€") } %>
   </div>
   <div class="col-6">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'red_time_not_member_price', value: instance.red_time_not_member_price } %>
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'red_time_not_member_price', value: number_to_currency(instance.red_time_not_member_price) } %>
   </div>
 </div>
 
 <div class="row">
   <div class="col-6">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'green_time_member_price', value: instance.green_time_member_price } %>
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'green_time_member_price', value: number_to_currency(instance.green_time_member_price) } %>
   </div>
   <div class="col-6">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'red_time_member_price', value: instance.red_time_member_price } %>
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'red_time_member_price', value: number_to_currency(instance.red_time_member_price) } %>
   </div>
 </div>
 
