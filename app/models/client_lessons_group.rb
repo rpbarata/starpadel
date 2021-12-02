@@ -69,7 +69,9 @@ class ClientLessonsGroup < ApplicationRecord
     self.payment += params[:new_payment].to_d
   end
   
-
+  def paid
+    payment == lesson_price
+  end
   private
 
   def generate_client_lessons

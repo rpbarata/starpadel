@@ -38,13 +38,19 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     end
     column :created_at, sort: { default: true, default_order: :desc }
     column :remaining_lessons_str, align: :center, sort: false
-    column :payment_left_str, sort: false
+    column :payment_left_str, sort: false do |lesson|
+      if lesson.paid
+        status_tag("Pago", :success)
+      else
+        lesson.payment_left_str
+      end
+    end
 
     actions do |toolbar, instance, _admin|
       toolbar.show
       admin_link_to("Pagar", instance, action: :payment_modal,
         params: { index_params: params.to_enum.to_h.merge(from: request.controller_class.to_s) },
-        class: "btn btn-success", data: { behavior: "dialog" })
+        class: "btn btn-success", data: { behavior: "dialog" }) unless instance.paid
     end
   end
 
