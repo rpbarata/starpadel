@@ -6,6 +6,7 @@ Trestle.admin(:dashboard) do
   end
 
   controller do
+    include LessonsTypeSummaryConcern
     before_action :set_clients,
       only: [:clients_line_chart, :clients_pie_chart, :index, :clients_members_pie_chart,
              :adults_and_childrens_pie_chart,]
@@ -76,6 +77,16 @@ Trestle.admin(:dashboard) do
       render(json: @lessons_type_pie_chart.chart_json)
     end
 
+    def lessons_type_summary_table
+      start_date = params[:start_date]&.in_time_zone
+      end_date = params[:end_date]&.in_time_zone
+
+      @client_lessons_groups = ClientLessonsGroup.select_by_date(start_date, end_date)
+      @lessons_type_summary = lessons_type_summary
+
+      render(partial: "admin/lessons_type_summary")
+    end
+
     private
 
     def set_clients
@@ -93,5 +104,6 @@ Trestle.admin(:dashboard) do
     get :adults_and_childrens_pie_chart, as: "adults_and_childrens_pie_chart"
     get :lessons_type_pie_chart, as: "lessons_type_pie_chart"
     get :lessons_type_line_chart, as: "lessons_type_line_chart"
+    get :lessons_type_summary_table, as: "lessons_type_summary_table"
   end
 end

@@ -88,4 +88,14 @@ Rails.application.configure do
     Bullet.rails_logger = true
     Bullet.add_footer = true
   end
+
+  # http://meta-lambda.com/rails-5-web-console-and-docker
+  require "socket"
+  require "ipaddr"
+
+  # rubocop:disable Naming/InclusiveLanguage
+  config.web_console.whitelisted_ips = Socket.ip_address_list.reduce([]) do |res, addrinfo|
+    addrinfo.ipv4? ? res << IPAddr.new(addrinfo.ip_address).mask(24) : res
+  end
+  # rubocop:enable Naming/InclusiveLanguage
 end
