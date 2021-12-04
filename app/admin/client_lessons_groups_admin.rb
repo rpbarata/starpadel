@@ -108,7 +108,13 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
       super
 
       client_lesson_group = instance
-      @lessons = client_lesson_group.client_lessons.order(created_at: :desc)
+      @events = client_lesson_group.client_lessons.order(created_at: :desc)
+
+      @tabs = [
+        { tab_id: "tab-clientlessonsgroup", tab_name: "clientlessonsgroup", record: client_lesson_group.as_json, instance: instance },
+        { tab_id: "tab-calendar", tab_name: "calendar",
+          records: @events.page(params[:page]).per(50), trestle_class: ClientLessonsAdmin,},
+      ]
     end
 
     def update_payment_modal

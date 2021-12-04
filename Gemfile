@@ -64,6 +64,8 @@ gem "faker" # This is not save to be in where.
 
 gem "render_async"
 
+gem "simple_calendar", "~> 2.4"
+
 group :development, :test do
   gem "bullet"
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

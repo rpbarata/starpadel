@@ -70,8 +70,11 @@
 
                 <% if tab.has_key?(:records) %>
                   <%= render "admin/filters", filter_url: "#{request.path}#!#{tab[:tab_id]}", filters: tab[:filters], filter_dates: tab[:filter_dates] %>
-                  <%= table tab[:trestle_class].table, collection: tab[:records] %>
-                  
+                  <% if tab[:tab_name] == "calendar" %>
+                    <%= render "admin/calendar", events: @events %>
+                  <% else %>
+                    <%= table tab[:trestle_class].table, collection: tab[:records] %>
+                  <% end %>
                   <footer class="main-content-footer">
                     <%= pagination collection: tab[:records], remote: false, params: { anchor: "!#{tab[:tab_id]}" } %>
                   </footer>

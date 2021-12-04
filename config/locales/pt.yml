@@ -1,4 +1,8 @@
 pt:
+  simple_calendar:
+    previous: "<<"
+    next: ">>"
+    week: Semana
   activerecord:
     models:
       admin:
