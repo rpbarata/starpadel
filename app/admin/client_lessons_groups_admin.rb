@@ -47,10 +47,10 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     end
 
     actions do |toolbar, instance, _admin|
-      toolbar.show
-      admin_link_to("Pagar", instance, action: :payment_modal,
+      toolbar.link("Pagar", instance, action: :payment_modal,
         params: { index_params: params.to_enum.to_h.merge(from: request.controller_class.to_s) },
-        class: "btn btn-success", data: { behavior: "dialog" }) unless instance.paid
+        style: :success, data: { behavior: "dialog" }) unless instance.paid
+      toolbar.show
     end
   end
 
@@ -143,7 +143,7 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     private
 
     def payment_modal_params
-      params.require(:client_lessons_group).permit(:new_payment)
+      params.require(:client_lessons_group).permit(:new_payment, :voucher_id)
     end
   end
 

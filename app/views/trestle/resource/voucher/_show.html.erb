@@ -1,0 +1,31 @@
+<% class_name = instance.class.name.underscore %>
+
+<div class="row">
+  <div class="col-4">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'client', value: instance.client } %>
+  </div>
+  <div class="col-4">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'code', value: instance.code } %>
+  </div>
+  <div class="col-4">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'value', value: instance.value } %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'created_at', value: instance.created_at } %>
+  </div>
+  <div class="col-6">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'validity', value: instance.validity } %>
+  </div>
+</div>
+
+<br>
+<div class="row">
+  <div class="col">
+    <%= link_to("Descontar", new_movements_admin_path(voucher_id: instance.id, client_id: instance.client_id), class: "btn btn-success") %>
+  </div>
+</div>
+
+<%= table MovementsAdmin.table, collection: @movements.page(params[:page]).per(50) %>

@@ -27,11 +27,12 @@
 #  fk_rails_...  (lessons_type_id => lessons_types.id)
 #
 class ClientLessonsGroup < ApplicationRecord
-  attr_accessor :new_payment
+  attr_accessor :new_payment, :voucher_id
 
   belongs_to :lessons_type
   belongs_to :client
   has_many :client_lessons, dependent: :restrict_with_error
+  has_many :movements
 
   enum time_period: { green_time: 1, red_time: 2 }
 
@@ -55,6 +56,14 @@ class ClientLessonsGroup < ApplicationRecord
           start_date: (Time.zone.now.beginning_of_day - 31.days), end_date: Time.zone.now.end_of_day).distinct
       end
     end
+
+    def get(client_id = nil)
+      if client_id.present?
+        where(client_id: client_id)
+      else
+        all
+      end
+    end
   end
 
   def remaining_lessons_str
@@ -68,10 +77,26 @@ class ClientLessonsGroup < ApplicationRecord
 
   def add_payment(params)
     self.payment += params[:new_payment].to_d
+
+    if params[:voucher_id].present?
+      movement = Movement.new(
+        from_client_lessons_group: true,
+        value: params[:new_payment].to_d,
+        client_lessons_group_id: id,
+        voucher_id: params[:voucher_id],
+        client_id: client.id
+      )
+
+      movement.save
+    end
   end
 
   def paid
     payment == lesson_price
+  end
+
+  def formated_str
+    "#{client.name} - #{lessons_type.name}"
   end
 
   private
