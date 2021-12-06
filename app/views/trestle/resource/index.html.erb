@@ -4,6 +4,16 @@
   <%= t.new %>
 <% end %>
 
+<% if @export_clients_url.present? %>
+  <% toolbar(:secondary) do |t| %>
+    <%= link_to("#{@export_clients_url}?#{export_clients_params(params)}", class: "btn-export", remote: false) do %>
+      <i class="far fa-file-excel"></i><span>Exportar Clientes</span>
+    <% end %>
+    <br>
+    <p>Este export é apenas um proof of concept. Nem sei se vai funcionar em staging...</p>
+  <% end %>
+<% end %>
+
 <% content_for(:utilities) do %>
   <%= render "scopes" %>
 <% end if admin.scopes.any? %>
