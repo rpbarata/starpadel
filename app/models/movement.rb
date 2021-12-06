@@ -35,10 +35,12 @@ class Movement < ApplicationRecord
 
   validates :description, presence: true, if: -> { client_lessons_group_id.blank? }
   validates :value, numericality: { greater_than_or_equal_to: 0 }, presence: true
+  validate :validate_voucher_value
 
   before_save :set_date
-  after_create :set_description, if: -> { client_lessons_group_id.present? && description.blank? }
-  after_create :update_voucher
+  before_create :set_description, if: -> { client_lessons_group_id.present? && description.blank? }
+  before_create :update_voucher
+  
 
   private
 
@@ -48,8 +50,6 @@ class Movement < ApplicationRecord
 
   def set_description
     self.description = "Pagamento: #{client_lessons_group&.lessons_type&.name}"
-
-    save!
   end
 
   def update_voucher
@@ -57,5 +57,14 @@ class Movement < ApplicationRecord
     new_voucher_value_used = old_voucher_value_used + value
 
     voucher.update(value_used: new_voucher_value_used)
+  end
+
+  def validate_voucher_value
+    old_voucher_value_used = voucher.value_used
+    new_voucher_value_used = old_voucher_value_used + value
+
+    if new_voucher_value_used > voucher.value
+      errors.add(:value, "ultrapassa o valor disponível do voucher")
+    end
   end
 end

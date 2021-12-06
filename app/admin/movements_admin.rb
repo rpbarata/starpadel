@@ -35,7 +35,7 @@ Trestle.resource(:movements, model: Movement) do
   #   collection.reorder("voucher.code #{order} NULLS LAST")
   # end
 
-  form dialog: true do |_movement|
+  form dialog: true do |movement|
     row do
       col(sm: 12) do
         select :client_id,
@@ -77,13 +77,13 @@ Trestle.resource(:movements, model: Movement) do
       col(sm: 12) { text_field :description }
     end
 
-    editor :comments
+    # editor :comments
 
-    if params[:voucher_id].present?
-      hidden_field :voucher_id, value: params[:voucher_id]
+    if params[:voucher_id].present? || instance.voucher_id.present?
+      hidden_field :voucher_id, value: params[:voucher_id] || instance.voucher_id
     end
-    if params[:client_id].present?
-      hidden_field :client_id, value: params[:client_id]
+    if params[:client_id].present? || instance.client_id.present?
+      hidden_field :client_id, value: params[:client_id] || instance.client_id
     end
   end
 
@@ -94,7 +94,7 @@ Trestle.resource(:movements, model: Movement) do
           format.html do
             flash[:message] =
               flash_message("create.success", title: "Success!",
-message: "The %{lowercase_model_name} was successfully created.")
+                message: "The %{lowercase_model_name} was successfully created.")
             # redirect_to_return_location(:create, instance, default: admin.instance_path(instance))
             redirect_to(vouchers_admin_path(instance.voucher))
           end

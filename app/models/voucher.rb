@@ -37,6 +37,7 @@ class Voucher < ApplicationRecord
   validates :value, numericality: { greater_than_or_equal_to: 0 }, presence: true
   validates :code, presence: true
   validate :validate_validity, if: -> { validity.present? }
+  validate :use_voucher
 
   before_validation :generate_code, on: :create
 
@@ -92,6 +93,12 @@ class Voucher < ApplicationRecord
   def validate_validity
     if validity < Time.zone.now
       errors.add(:validity, "já passou")
+    end
+  end
+
+  def use_voucher
+    if value_used > value
+      errors.add(:general, "o valor usado ultrapassa o valor do voucher")
     end
   end
 end
