@@ -97,6 +97,12 @@ Trestle.resource(:clients, model: Client) do
     include FixActionUpdateConcern
     include TrestleFiltersConcern
 
+    def index
+      super
+
+      @export_clients_url = export_clients_admin_index_path
+    end
+
     def show
       super
 
@@ -115,5 +121,34 @@ Trestle.resource(:clients, model: Client) do
           records: @vouchers.page(params[:page]).per(50), trestle_class: VouchersAdmin, },
       ]
     end
+
+    def export
+      @collection = Client.all.order(name: :asc)
+
+      @collection = @collection.where("name ILIKE :q", q: "%#{params[:q]}%") if params[:q].present?
+
+      if params[:scope].present?
+        case params[:scope]
+        when "members_of_club"
+          @collection = @collection.members_of_club
+        when "not_members_of_club"
+          @collection = @collection.not_members_of_club
+        when "master_members"
+          @collection = @collection.master_members
+        when "adults"
+          @collection = @collection.adults
+        when "childrens"
+          @collection = @collection.childrens
+        end
+      end
+
+      filename = Exports::ClientsXlsxJob.perform_now(@collection.pluck(:id))
+
+      send_file(filename, disposition: "attachment", type: "application/xlsx")
+    end
+  end
+
+  routes do
+    get :export, on: :collection
   end
 end

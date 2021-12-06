@@ -32,3 +32,25 @@
   background-color: #faba5f;
   border-color: #f0c992;
 }
+
+.btn-export {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: black;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 3px;
+}
+
+.btn-export:hover {
+  background-color: lighten(black, 10);
+  color: white;
+  text-decoration: none;
+}
+
+.btn-export i {
+  font-size: 16px !important;
+  margin-right: 8px;
+}
