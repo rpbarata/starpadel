@@ -87,6 +87,15 @@ Trestle.admin(:dashboard) do
       render(partial: "admin/lessons_type_summary")
     end
 
+    def vouchers_line_chart
+      start_date = params[:start_date]&.in_time_zone
+      end_date = params[:end_date]&.in_time_zone
+
+      @vouchers_line_chart = Voucher.select_by_date(start_date, end_date).group_by_day(:created_at).size
+
+      render(json: @vouchers_line_chart.chart_json)
+    end
+
     private
 
     def set_clients
@@ -105,5 +114,6 @@ Trestle.admin(:dashboard) do
     get :lessons_type_pie_chart, as: "lessons_type_pie_chart"
     get :lessons_type_line_chart, as: "lessons_type_line_chart"
     get :lessons_type_summary_table, as: "lessons_type_summary_table"
+    get :vouchers_line_chart, as: "vouchers_line_chart"
   end
 end

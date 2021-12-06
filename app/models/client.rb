@@ -42,6 +42,8 @@ class Client < ApplicationRecord
   #        :recoverable, :rememberable, :validatable
 
   has_many :client_lessons_groups, dependent: :destroy
+  has_many :vouchers, dependent: :destroy
+  has_many :movements, dependent: :destroy
 
   scope :members_of_club, -> { where.not(member_id: nil) }
   scope :not_members_of_club, -> { where(member_id: nil) }

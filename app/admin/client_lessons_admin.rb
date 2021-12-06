@@ -3,14 +3,13 @@
 Trestle.resource(:client_lessons, model: ClientLesson) do
   authorize_with cancan: Ability
 
-  remove_action :destroy
+  remove_action :destroy, :show
 
-  table do
+  table(autolink: false) do
     column :start_time
     column :end_time
     actions do |toolbar, _instance, _admin|
       toolbar.edit
-      toolbar.show
     end
   end
 
@@ -38,16 +37,44 @@ Trestle.resource(:client_lessons, model: ClientLesson) do
       end
     end
 
-    editor :comments
+    # editor :comments
   end
 
   controller do
-    include FixActionUpdateConcern
+    # include FixActionUpdateConcern
 
     def show
       super
 
       @hide_breadcrumbs = true
+    end
+
+    def update
+      if update_instance
+        respond_to do |format|
+          format.html do
+            flash[:message] =
+              flash_message("update.success", title: "Success!",
+message: "The %{lowercase_model_name} was successfully updated.")
+            # redirect_to(client_lessons_groups_admin_path(instance.client_lessons_group))
+            # redirect_to_return_location(:update, instance.client_lessons_group, default: admin.instance_path(instance.client_lessons_group))
+          end
+          format.json { render(json: instance, status: :ok) }
+
+          yield format if block_given?
+        end
+      else
+        respond_to do |format|
+          format.html do
+            flash.now[:error] =
+              flash_message("update.failure", title: "Warning!", message: "Please correct the errors below.")
+            render("show", status: :unprocessable_entity)
+          end
+          format.json { render(json: instance.errors, status: :unprocessable_entity) }
+
+          yield format if block_given?
+        end
+      end
     end
   end
 end

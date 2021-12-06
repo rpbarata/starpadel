@@ -12,6 +12,15 @@
     <div class="row">
       <div class="col">
         <div class="form-group">
+          <%= f.label :voucher_id, class: 'control-label' %>
+          <%= f.select(:voucher_id, options_from_collection_for_select(instance.client.vouchers, :id, :format_srt), { include_blank: "Não usar um voucher" }, { data: { enable_select2: true } }) %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
           <%= f.label :new_payment, class: 'control-label' %>
           <div class="input-group">
             <div class="input-group-prepend">

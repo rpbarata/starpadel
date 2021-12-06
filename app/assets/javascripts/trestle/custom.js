@@ -19,12 +19,24 @@ document.addEventListener('turbolinks:load', () => {
     }
   });
 
-  $('#lessons_type_is_pack').click(function(e){
+  $('#lessons_type_is_pack').click(function (e) {
     if (e.currentTarget.checked) {
       $('#number_of_lessons_row')[0].style.visibility = "visible";
     } else {
       $('#number_of_lessons_row')[0].style.visibility = "hidden";
       $('#lessons_type_number_of_lessons')[0].value = $('#lessons_type_initial_number_of_lessons')[0].value;
+    }
+  })
+
+  $('#movement_from_client_lessons_group').click(function (e) {
+    if (e.currentTarget.checked) {
+      console.log("checked")
+      $('#movement_lesson_row')[0].style.display = "block";
+      $('#movement_description_row')[0].style.display = "none";
+    } else {
+      console.log("not checked")
+      $('#movement_lesson_row')[0].style.display = "none";
+      $('#movement_description_row')[0].style.display = "block";
     }
   })
 })

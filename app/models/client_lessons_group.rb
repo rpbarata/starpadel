@@ -27,11 +27,15 @@
 #  fk_rails_...  (lessons_type_id => lessons_types.id)
 #
 class ClientLessonsGroup < ApplicationRecord
-  attr_accessor :new_payment
+  attr_accessor :new_payment, :voucher_id
+
+  scope :paid, -> { where("payment = lesson_price") }
+  scope :unpaid, -> { where("payment < lesson_price") }
 
   belongs_to :lessons_type
   belongs_to :client
   has_many :client_lessons, dependent: :restrict_with_error
+  has_many :movements
 
   enum time_period: { green_time: 1, red_time: 2 }
 
@@ -40,6 +44,8 @@ class ClientLessonsGroup < ApplicationRecord
 
   validates :time_period, presence: true
   validate :validate_new_payment
+  # validates_associated :movements
+  # validate :validate_movement
 
   class << self
     def select_by_date(start_date, end_date)
@@ -53,6 +59,14 @@ class ClientLessonsGroup < ApplicationRecord
       else
         where("client_lessons_groups.created_at BETWEEN :start_date AND :end_date",
           start_date: (Time.zone.now.beginning_of_day - 31.days), end_date: Time.zone.now.end_of_day).distinct
+      end
+    end
+
+    def get(client_id = nil)
+      if client_id.present?
+        where(client_id: client_id)
+      else
+        all
       end
     end
   end
@@ -70,8 +84,24 @@ class ClientLessonsGroup < ApplicationRecord
     self.payment += params[:new_payment].to_d
   end
 
-  def paid
+  def create_movement(voucher_id, value)
+    movement = Movement.new(
+      from_client_lessons_group: true,
+      value: value,
+      client_lessons_group_id: id,
+      voucher_id: voucher_id,
+      client_id: client.id
+    )
+
+    movement.save
+  end
+
+  def paid?
     payment == lesson_price
+  end
+
+  def formated_str
+    "#{client.name} - #{lessons_type.name}"
   end
 
   private
@@ -105,6 +135,13 @@ class ClientLessonsGroup < ApplicationRecord
   def validate_new_payment
     if payment > lesson_price
       errors.add(:new_payment, "não pode exceder o valor em dívida")
+    end
+  end
+
+  def validate_movement
+    byebug
+    unless movement.valid?
+      errors.add(:new_payment, "bad bad boy")
     end
   end
 end

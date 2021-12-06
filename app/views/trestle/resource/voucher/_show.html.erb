@@ -1,0 +1,46 @@
+<% class_name = instance.class.name.underscore %>
+
+<div class="row">
+  <div class="col-4">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'client', value: instance.client } %>
+  </div>
+  <div class="col-4">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'code', value: instance.code } %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'created_at', value: instance.created_at } %>
+  </div>
+  <div class="col-4">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'validity', value: instance.formated_validity } %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'value', value: number_to_currency(instance.value) } %>
+  </div>
+  <div class="col-4">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'value_used', value: number_to_currency(instance.value_used) } %>
+  </div>
+  <div class="col-4">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'value_remaining', value: number_to_currency(instance.value_remaining) } %>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col">
+    <h3 style="font-size: 2.0rem; font-weight: 200; margin-top: 0; margin-bottom: 0.5rem;">Movimentos</h3>
+  </div>
+  <div class="col d-flex flex-row-reverse">
+    <% unless instance.fully_used? %>
+      <%= link_to("Descontar", new_movements_admin_path(voucher_id: instance.id, client_id: instance.client_id), class: "btn btn-success") %>
+    <% end %>
+  </div>
+</div>
+
+<%= table MovementsAdmin.table, collection: @movements.page(params[:page]).per(50) %>

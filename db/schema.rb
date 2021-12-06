@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_01_221832) do
+ActiveRecord::Schema.define(version: 2021_12_06_012021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,22 @@ ActiveRecord::Schema.define(version: 2021_12_01_221832) do
     t.index ["name"], name: "index_lessons_types_on_name"
   end
 
+  create_table "movements", force: :cascade do |t|
+    t.bigint "voucher_id", null: false
+    t.datetime "date"
+    t.decimal "value", precision: 8, scale: 2, default: "0.0"
+    t.string "description"
+    t.text "comments"
+    t.bigint "client_lessons_group_id"
+    t.boolean "from_client_lessons_group"
+    t.bigint "client_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_movements_on_client_id"
+    t.index ["client_lessons_group_id"], name: "index_movements_on_client_lessons_group_id"
+    t.index ["voucher_id"], name: "index_movements_on_voucher_id"
+  end
+
   create_table "versions", force: :cascade do |t|
     t.string "item_type"
     t.string "{:null=>false}"
@@ -128,9 +144,25 @@ ActiveRecord::Schema.define(version: 2021_12_01_221832) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  create_table "vouchers", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.decimal "value", precision: 8, scale: 2, default: "0.0"
+    t.text "comments"
+    t.string "code"
+    t.datetime "validity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.decimal "value_used", default: "0.0"
+    t.index ["client_id"], name: "index_vouchers_on_client_id"
+  end
+
   add_foreign_key "client_lessons", "client_lessons_groups"
   add_foreign_key "client_lessons", "clients"
   add_foreign_key "client_lessons", "lessons_types"
   add_foreign_key "client_lessons_groups", "clients"
   add_foreign_key "client_lessons_groups", "lessons_types"
+  add_foreign_key "movements", "client_lessons_groups"
+  add_foreign_key "movements", "clients"
+  add_foreign_key "movements", "vouchers"
+  add_foreign_key "vouchers", "clients"
 end

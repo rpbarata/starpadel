@@ -25,7 +25,7 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     ClientLessonsGroup.includes([:client, :lessons_type]).all.order(created_at: :desc)
   end
 
-  table do
+  table(autolink: false) do
     column :client, link: true, class: "media-title-column"
     column :lessons_type, sort: false, link: true, class: "media-title-column" do |lesson|
       link_to(lesson.lessons_type.name, lessons_type_admin_path(lesson.lessons_type))
@@ -39,7 +39,7 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     column :created_at, sort: { default: true, default_order: :desc }
     column :remaining_lessons_str, align: :center, sort: false
     column :payment_left_str, sort: false do |lesson|
-      if lesson.paid
+      if lesson.paid?
         status_tag("Pago", :success)
       else
         lesson.payment_left_str
@@ -47,10 +47,10 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     end
 
     actions do |toolbar, instance, _admin|
-      toolbar.show
-      admin_link_to("Pagar", instance, action: :payment_modal,
+      toolbar.link("Pagar", instance, action: :payment_modal,
         params: { index_params: params.to_enum.to_h.merge(from: request.controller_class.to_s) },
-        class: "btn btn-success", data: { behavior: "dialog" }) unless instance.paid
+        style: :success, data: { behavior: "dialog" }) unless instance.paid?
+      toolbar.show
     end
   end
 
@@ -113,9 +113,19 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
 
     def update_payment_modal
       instance.new_payment = payment_modal_params[:new_payment]
+      # instance.voucher_id = payment_modal_params[:voucher_id]
       instance.add_payment(payment_modal_params)
 
-      if instance.save
+      
+      movement_is_valid = true
+      if(payment_modal_params[:voucher_id].present?)
+        movement_is_valid = instance.create_movement(payment_modal_params[:voucher_id], payment_modal_params[:new_payment].to_d)
+        unless movement_is_valid
+          instance.errors.add(:new_payment, "ultrapassa o valor do voucher")
+        end
+      end
+
+      if movement_is_valid && instance.save
         flash[:message] = "Pagamento Registado"
         render_url =
           if params[:client_lessons_group][:index_params][:from] == "ClientLessonsGroupsAdmin::AdminController"
@@ -143,7 +153,7 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     private
 
     def payment_modal_params
-      params.require(:client_lessons_group).permit(:new_payment)
+      params.require(:client_lessons_group).permit(:new_payment, :voucher_id)
     end
   end
 

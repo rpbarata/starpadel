@@ -57,7 +57,11 @@
 
           <% if tab[:tab_id] == "tab-credited_lessons" && (current_user.super_admin? || current_user.secretariat_admin?) %>
             <div class="btn-toolbar primary-toolbar d-flex justify-content-end" role="toolbar">
-              <%= link_to "Creditar", new_client_lessons_groups_admin_path(client_id: instance.id), class: "btn btn-success" %>
+              <%= link_to "Creditar", new_client_lessons_groups_admin_path(client_id: instance.id), class: "btn btn-success", data: { behavior: "dialog" } %>
+            </div>
+          <% elsif tab[:tab_id] == "tab-vouchers" && (current_user.super_admin? || current_user.secretariat_admin?) %>
+            <div class="btn-toolbar primary-toolbar d-flex justify-content-end" role="toolbar">
+              <%= link_to "Adicionar", new_vouchers_admin_path(client_id: instance.id, from_client: true), class: "btn btn-success", data: { behavior: "dialog" } %>
             </div>
           <% end %>
 

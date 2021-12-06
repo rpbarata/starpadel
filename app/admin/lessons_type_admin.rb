@@ -27,7 +27,7 @@ Trestle.resource(:lessons_type, model: LessonsType) do
     scope :not_packs, label: t("activerecord.scopes.lessons_types.not_packs")
   end
 
-  table do
+  table(autolink: false) do
     column :name, link: true, sort: { default: true, default_order: :asc }, class: "media-title-column"
     column :green_time_member_price, ->(lesson_type) {
                                        number_to_currency(lesson_type.green_time_member_price, unit: "€")
@@ -67,22 +67,22 @@ Trestle.resource(:lessons_type, model: LessonsType) do
 
     row do
       col(sm: 6) do
-        number_field :green_time_not_member_price, min: 0, step: 0.01, prepend: "€",
+        number_field :green_time_not_member_price, min: 0, step: 0.01, prepend: icon("fas fa-euro-sign"),
           disabled: lesson_type.client_lessons_groups.any?
       end
       col(sm: 6) do
-        number_field :red_time_not_member_price, min: 0, step: 0.01, prepend: "€",
+        number_field :red_time_not_member_price, min: 0, step: 0.01, prepend: icon("fas fa-euro-sign"),
           disabled: lesson_type.client_lessons_groups.any?
       end
     end
 
     row do
       col(sm: 6) do
-        number_field :green_time_member_price, min: 0, step: 0.01, prepend: "€",
+        number_field :green_time_member_price, min: 0, step: 0.01, prepend: icon("fas fa-euro-sign"),
           disabled: lesson_type.client_lessons_groups.any?
       end
       col(sm: 6) do
-        number_field :red_time_member_price, min: 0, step: 0.01, prepend: "€",
+        number_field :red_time_member_price, min: 0, step: 0.01, prepend: icon("fas fa-euro-sign"),
           disabled: lesson_type.client_lessons_groups.any?
       end
     end

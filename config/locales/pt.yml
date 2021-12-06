@@ -16,6 +16,12 @@ pt:
       client_lessons_group:
         one: Aula Creditada
         other: Aulas Creditadas
+      voucher:
+        one: Voucher
+        other: Vouchers
+      movement:
+        one: Movimento
+        other: Movimentos
     attributes:
       admin:
         id: Identificador
@@ -82,6 +88,34 @@ pt:
         remaining_lessons_str: Nº de Aulas
         payment_left_str: Estado do Pagamento
         new_payment: Pagamento
+      movement:
+        id: Identificador
+        created_at: Criada em
+        updated_at: Atualizada em
+        comments: Obervações
+        date: Data
+        description: Descrição
+        from_client_lessons_group: Pagar Aula?
+        value: Valor
+        client_lessons_group_id: Aula
+        voucher_id: Voucher
+        client_lessons_group: Aula
+        voucher: Voucher
+        client: Cliente
+        client_id: Cliente
+      voucher:
+        id: Identificador
+        created_at: Criada em
+        updated_at: Atualizada em
+        comments: Obervações
+        code: Código
+        validity: Validade
+        value: Valor
+        client_id: Cliente
+        client: Cliente
+        active: Ativo?
+        value_used: Valor Utilizado
+        value_remaining: Valor por Utilizar
     errors:
       models:
         admin:
@@ -133,6 +167,9 @@ pt:
       client_lessons_group:
         green_time: Green Time
         red_time: Red Time
+      vouchers:
+        not_expired: Válidos
+        expired: Expirados
   devise:
     confirmations:
       confirmed: "A sua conta foi confirmada com sucesso."
@@ -529,6 +566,7 @@ pt:
       client_lessons: Aulas
       credited_lessons: Aulas Creditadas
       lessons: Aulas
+      vouchers: Vouchers
     datepicker:
       formats:
         date: "d/m/Y"
