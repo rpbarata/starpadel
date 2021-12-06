@@ -13,7 +13,7 @@
       <div class="col">
         <div class="form-group">
           <%= f.label :voucher_id, class: 'control-label' %>
-          <%= f.select(:voucher_id, options_from_collection_for_select(instance.client.vouchers, :id, :format_srt), { include_blank: "Não usar um voucher" }, { data: { enable_select2: true } }) %>
+          <%= f.select(:voucher_id, options_from_collection_for_select(instance.client.vouchers.not_expired, :id, :format_srt), { include_blank: "Não usar um voucher" }, { data: { enable_select2: true } }) %>
         </div>
       </div>
     </div>
@@ -31,13 +31,14 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="modal-footer">
-      <%= f.submit "Registar Pagamento", class:"btn btn-success" %>
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-    </div>
+  <div class="modal-footer">
+    <%= f.submit "Registar Pagamento", class:"btn btn-success" %>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+  </div>
 
-    <% params[:index_params]&.each do |key,value| %>
-      <%= f.hidden_field "index_params[#{key}]", value: value %>
-    <% end %>
+  <% params[:index_params]&.each do |key,value| %>
+    <%= f.hidden_field "index_params[#{key}]", value: value %>
   <% end %>
+<% end %>
