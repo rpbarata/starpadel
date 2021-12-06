@@ -27,7 +27,7 @@ Trestle.resource(:lessons_type, model: LessonsType) do
     scope :not_packs, label: t("activerecord.scopes.lessons_types.not_packs")
   end
 
-  table do
+  table(autolink: false) do
     column :name, link: true, sort: { default: true, default_order: :asc }, class: "media-title-column"
     column :green_time_member_price, ->(lesson_type) {
                                        number_to_currency(lesson_type.green_time_member_price, unit: "€")

@@ -5,17 +5,17 @@ Trestle.resource(:movements, model: Movement) do
 
   remove_action :destroy
 
-  menu do
-    item :movements, icon: "fa fa-star"
-  end
+  # menu do
+  #   item :movements, icon: "fa fa-star"
+  # end
 
   collection do
     Movement.includes([:voucher, :client]).all.order(date: :desc)
   end
 
-  table do
+  table(autolink: false) do
     column :client, link: true, class: "media-title-column"
-    column :voucher, link: true, class: "media-title-column" do |movement|
+    column :voucher, link: false, class: "media-title-column" do |movement|
       movement.voucher.code
     end
     column :value, ->(movement) { number_to_currency(movement.value) }
@@ -88,6 +88,32 @@ Trestle.resource(:movements, model: Movement) do
   end
 
   controller do
-    include FixActionUpdateConcern
+    def create
+      if save_instance
+        respond_to do |format|
+          format.html do
+            flash[:message] =
+              flash_message("create.success", title: "Success!",
+message: "The %{lowercase_model_name} was successfully created.")
+            # redirect_to_return_location(:create, instance, default: admin.instance_path(instance))
+            redirect_to(vouchers_admin_path(instance.voucher))
+          end
+          format.json { render(json: instance, status: :created, location: admin.instance_path(instance)) }
+
+          yield format if block_given?
+        end
+      else
+        respond_to do |format|
+          format.html do
+            flash.now[:error] =
+              flash_message("create.failure", title: "Warning!", message: "Please correct the errors below.")
+            render("new", status: :unprocessable_entity)
+          end
+          format.json { render(json: instance.errors, status: :unprocessable_entity) }
+
+          yield format if block_given?
+        end
+      end
+    end
   end
 end

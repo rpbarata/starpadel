@@ -28,7 +28,7 @@ Trestle.resource(:clients, model: Client) do
 
   # Customize the table columns shown on the index view.
   #
-  table do
+  table(autolink: false) do
     column :name, link: true, sort: { default: true, default_order: :asc }, class: "media-title-column"
     column :member_of_club, align: :center do |client|
       if client.member_id.present?

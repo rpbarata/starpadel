@@ -30,7 +30,7 @@ Trestle.resource(:admins, model: Admin) do
     Admin.all.order(username: :asc)
   end
 
-  table do
+  table(autolink: false) do
     column :username, link: true, sort: { default: true, default_order: :asc }, class: "media-title-column"
     column :role, ->(admin) { admin.translate(:role) }
 

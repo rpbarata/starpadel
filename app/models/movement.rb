@@ -37,7 +37,8 @@ class Movement < ApplicationRecord
   validates :value, numericality: { greater_than_or_equal_to: 0 }, presence: true
 
   before_save :set_date
-  after_save :set_description, if: -> { client_lessons_group_id.present? && description.blank? }
+  after_create :set_description, if: -> { client_lessons_group_id.present? && description.blank? }
+  after_create :update_voucher
 
   private
 
@@ -46,8 +47,15 @@ class Movement < ApplicationRecord
   end
 
   def set_description
-    self.description = "Pagamento #{client_lessons_group&.lessons_type&.name}"
+    self.description = "Pagamento: #{client_lessons_group&.lessons_type&.name}"
 
     save!
+  end
+
+  def update_voucher
+    old_voucher_value_used = voucher.value_used
+    new_voucher_value_used = old_voucher_value_used + value
+
+    voucher.update(value_used: new_voucher_value_used)
   end
 end

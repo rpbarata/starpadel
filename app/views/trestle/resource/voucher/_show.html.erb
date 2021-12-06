@@ -7,17 +7,26 @@
   <div class="col-4">
     <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'code', value: instance.code } %>
   </div>
+</div>
+
+<div class="row">
   <div class="col-4">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'value', value: instance.value } %>
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'created_at', value: instance.created_at } %>
+  </div>
+  <div class="col-4">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'validity', value: instance.formated_validity } %>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-6">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'created_at', value: instance.created_at } %>
+  <div class="col-4">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'value', value: number_to_currency(instance.value) } %>
   </div>
-  <div class="col-6">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'validity', value: instance.validity } %>
+  <div class="col-4">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'value_used', value: number_to_currency(instance.value_used) } %>
+  </div>
+  <div class="col-4">
+    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'value_remaining', value: number_to_currency(instance.value_remaining) } %>
   </div>
 </div>
 

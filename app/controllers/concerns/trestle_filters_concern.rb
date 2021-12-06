@@ -30,6 +30,21 @@ module TrestleFiltersConcern
       end
     end
 
+    @filter_dropdown_lists << {
+      name: "status", label: "Estado do Pagamento",
+      options: [["Todas", nil], ["Pago", "paid"], ["Por Pagar", "unpaid"]],
+      query_param: "status",
+    }
+
+    if params[:status].present?
+      case params[:status]
+      when "paid"
+        @credited_lessons = @credited_lessons.paid
+      when "unpaid"
+        @credited_lessons = @credited_lessons.unpaid
+      end
+    end
+
     @filter_dates = true
 
     if params[:start_date].present? && params[:end_date].present?

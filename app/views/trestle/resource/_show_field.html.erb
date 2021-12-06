@@ -4,7 +4,9 @@
   </span>
 </dt>
 <dd class="well">
-  <% if value.is_a?(TrueClass) %>
+  <% if value.blank? %>
+    <p>Sem dados</p>
+  <% elsif value.is_a?(TrueClass) %>
     <span class="badge badge-success"><i class="fa fa-check"></i></span>
   <% elsif value.is_a?(FalseClass) %>
     <span class="badge badge-danger"><i class="fa fa-times"></i></span>

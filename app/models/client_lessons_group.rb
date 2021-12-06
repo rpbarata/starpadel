@@ -29,6 +29,9 @@
 class ClientLessonsGroup < ApplicationRecord
   attr_accessor :new_payment, :voucher_id
 
+  scope :paid, -> { where("payment = lesson_price") }
+  scope :unpaid, -> { where("payment < lesson_price") }
+
   belongs_to :lessons_type
   belongs_to :client
   has_many :client_lessons, dependent: :restrict_with_error
@@ -91,7 +94,7 @@ class ClientLessonsGroup < ApplicationRecord
     end
   end
 
-  def paid
+  def paid?
     payment == lesson_price
   end
 

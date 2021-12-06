@@ -45,7 +45,7 @@ class ClientLesson < ApplicationRecord
     if start_time.blank? && end_time.present?
       errors.add(:start_time, "não pode estar em branco")
       errors.add(:end_time, "")
-    elsif start_time > end_time
+    elsif (start_time.present? && end_time.present?) && (start_time > end_time)
       errors.add(:start_time, "deve ser antes da data de fim")
       errors.add(:end_time, "deve ser depois da data de início")
     end

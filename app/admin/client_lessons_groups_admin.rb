@@ -25,7 +25,7 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     ClientLessonsGroup.includes([:client, :lessons_type]).all.order(created_at: :desc)
   end
 
-  table do
+  table(autolink: false) do
     column :client, link: true, class: "media-title-column"
     column :lessons_type, sort: false, link: true, class: "media-title-column" do |lesson|
       link_to(lesson.lessons_type.name, lessons_type_admin_path(lesson.lessons_type))
@@ -39,7 +39,7 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     column :created_at, sort: { default: true, default_order: :desc }
     column :remaining_lessons_str, align: :center, sort: false
     column :payment_left_str, sort: false do |lesson|
-      if lesson.paid
+      if lesson.paid?
         status_tag("Pago", :success)
       else
         lesson.payment_left_str
@@ -49,7 +49,7 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     actions do |toolbar, instance, _admin|
       toolbar.link("Pagar", instance, action: :payment_modal,
         params: { index_params: params.to_enum.to_h.merge(from: request.controller_class.to_s) },
-        style: :success, data: { behavior: "dialog" }) unless instance.paid
+        style: :success, data: { behavior: "dialog" }) unless instance.paid?
       toolbar.show
     end
   end
@@ -113,6 +113,7 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
 
     def update_payment_modal
       instance.new_payment = payment_modal_params[:new_payment]
+      # instance.voucher_id = payment_modal_params[:voucher_id]
       instance.add_payment(payment_modal_params)
 
       if instance.save

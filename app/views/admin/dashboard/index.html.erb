@@ -28,12 +28,6 @@
     </div>
   </div>
 
-  <div class="row mt-2">
-    <div class="col">
-      <%= line_chart lessons_type_line_chart_path(start_date: params[:start_date], end_date: params[:end_date]), title: "Creditação de Aulas"  %>
-    </div>
-  </div>
-
   <div class="row mt-3">
     <div class="col">
       <%= pie_chart clients_pie_chart_path(start_date: params[:start_date], end_date: params[:end_date]), title: "Total de Clientes" %>
@@ -43,6 +37,12 @@
     </div>
     <div class="col">
       <%= pie_chart adults_and_childrens_pie_chart_path(start_date: params[:start_date], end_date: params[:end_date]), title: "Adultos e Crianças" %>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col">
+      <%= line_chart lessons_type_line_chart_path(start_date: params[:start_date], end_date: params[:end_date]), title: "Creditação de Aulas"  %>
     </div>
   </div>
 
@@ -64,6 +64,12 @@
     </div>
     <div class="col mt-4">
       <%= bar_chart lessons_type_pie_chart_path(start_date: params[:start_date], end_date: params[:end_date]) %>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col">
+      <%= line_chart vouchers_line_chart_path(start_date: params[:start_date], end_date: params[:end_date]), title: "Vouchers"  %>
     </div>
   </div>
 <% end %>

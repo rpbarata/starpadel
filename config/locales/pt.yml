@@ -114,6 +114,8 @@ pt:
         client_id: Cliente
         client: Cliente
         active: Ativo?
+        value_used: Valor Utilizado
+        value_remaining: Valor por Utilizar
     errors:
       models:
         admin:
@@ -165,6 +167,9 @@ pt:
       client_lessons_group:
         green_time: Green Time
         red_time: Red Time
+      vouchers:
+        not_expired: Válidos
+        expired: Expirados
   devise:
     confirmations:
       confirmed: "A sua conta foi confirmada com sucesso."

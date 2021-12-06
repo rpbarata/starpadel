@@ -9,6 +9,7 @@
 #  comments   :text
 #  validity   :datetime
 #  value      :decimal(8, 2)    default(0.0)
+#  value_used :decimal(, )      default(0.0)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  client_id  :bigint           not null
@@ -25,7 +26,13 @@ class Voucher < ApplicationRecord
   attr_accessor :from_client
 
   belongs_to :client
-  has_many :movements
+  has_many :movements, dependent: :destroy
+
+  scope :expired, -> { where("validity <= :today", today: Time.zone.now) }
+  scope :not_expired, -> {
+                        (where("validity > :today", today: Time.zone.now).or(where(validity: nil))).and(where("value_used < value"))
+                      }
+  scope :fully_used, -> { where("value = value_used") }
 
   validates :value, numericality: { greater_than_or_equal_to: 0 }, presence: true
   validates :code, presence: true
@@ -33,8 +40,44 @@ class Voucher < ApplicationRecord
 
   before_validation :generate_code, on: :create
 
+  class << self
+    def select_by_date(start_date, end_date)
+      if start_date.present? && end_date.present?
+        where("created_at BETWEEN :start_date AND :end_date",
+          start_date: start_date.beginning_of_day, end_date: end_date.end_of_day).distinct
+      elsif start_date.present?
+        where("created_at > :start_date", start_date: start_date.beginning_of_day).distinct
+      elsif end_date.present?
+        where("created_at < :end_date", end_date: end_date.end_of_day).distinct
+      else
+        where("created_at BETWEEN :start_date AND :end_date",
+          start_date: (Time.zone.now.beginning_of_day - 31.days), end_date: Time.zone.now.end_of_day).distinct
+      end
+    end
+  end
+
   def format_srt
     "#{client.name} - #{code}"
+  end
+
+  def formated_validity
+    validity.presence || "Sem validade"
+  end
+
+  def expired?
+    validity <= Time.zone.now
+  end
+
+  # def value_used
+  #   movements.sum(:value)
+  # end
+
+  def value_remaining
+    value - value_used
+  end
+
+  def fully_used?
+    value == value_used
   end
 
   private

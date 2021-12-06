@@ -34,7 +34,7 @@
       <span class="label label-info">
         <%= t("activerecord.attributes.#{class_name}.payment_left_str") %>
         <dd class="well">
-          <% if instance.paid %>
+          <% if instance.paid? %>
             <span class="badge badge-success">
               Pago
             </span>

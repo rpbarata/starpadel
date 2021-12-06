@@ -3,7 +3,7 @@
 Trestle.resource(:vouchers, model: Voucher) do
   authorize_with cancan: Ability
 
-  remove_action :destroy
+  remove_action :destroy, :edit
 
   menu do
     item :vouchers, icon: "fas fa-gift", priority: 4
@@ -13,24 +13,36 @@ Trestle.resource(:vouchers, model: Voucher) do
     Voucher.includes([:client]).all.order(created_at: :desc)
   end
 
+  scopes do
+    scope :all, default: true, label: t("activerecord.scopes.default")
+    scope :not_expired, label: t("activerecord.scopes.vouchers.not_expired")
+    scope :fully_used, label: "Usados"
+    scope :expired, label: t("activerecord.scopes.vouchers.expired")
+  end
+
   search do |query|
     if query
       collection.where("code ILIKE :q", q_id: query&.to_i, q: "%#{query}%")
-    else
-      collection
     end
   end
 
-  table do
+  table(autolink: false) do
     column :client, link: true, class: "media-title-column"
-    column :code
+    column :code, class: "font-weight-bold"
     column :value, ->(voucher) { number_to_currency(voucher.value) }
+    column :value_used, ->(voucher) { number_to_currency(voucher.value_used) }
+    column :value_remaining, ->(voucher) { number_to_currency(voucher.value_remaining) }
     column :created_at, sort: { default: true, default_order: :desc }
-    column :validity
+    column :validity do |voucher|
+      if voucher.validity.present?
+        status_tag(voucher.validity, voucher.expired? ? :danger : :success)
+      else
+        "Sem validade"
+      end
+    end
 
     actions do |toolbar, _instance, _admin|
       toolbar.show
-      toolbar.edit
     end
   end
 
@@ -54,7 +66,7 @@ Trestle.resource(:vouchers, model: Voucher) do
       col(sm: 6) { datetime_field :validity }
     end
 
-    editor :comments
+    # editor :comments
 
     hidden_field :from_client, value: params[:from_client]
     if params[:client_id].present?
@@ -76,18 +88,15 @@ Trestle.resource(:vouchers, model: Voucher) do
 
     def create
       if save_instance
-        # if params[:voucher][:client_id].present?
-        #   instance = Client.find(params[:voucher][:client_id])
-        # end
         respond_to do |format|
           format.html do
             flash[:message] =
               flash_message("create.success", title: "Success!",
-message: "The %{lowercase_model_name} was successfully created.")
+                message: "The %{lowercase_model_name} was successfully created.")
             if params[:voucher][:from_client].present?
               redirect_to("#{clients_admin_path(params[:voucher][:client_id])}#!tab-vouchers")
             else
-              redirect_to(vouchers_admin_index_path)
+              redirect_to_return_location(:create, instance, default: admin.instance_path(instance))
             end
           end
           format.json { render(json: instance, status: :created, location: admin.instance_path(instance)) }
