@@ -9,7 +9,7 @@ class AddBecomeMemberAtToClients < ActiveRecord::Migration[6.1]
 
     reversible do |dir|
       dir.up do
-        Client.members_of_club.update_all(become_member_at: Time.current)
+        Client.members_of_club.update_all(become_member_at: Time.current) # rubocop:disable Rails/SkipsModelValidations
       end
     end
   end

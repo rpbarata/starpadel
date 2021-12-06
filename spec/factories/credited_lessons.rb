@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: client_lessons_groups
+# Table name: credited_lessons
 #
 #  id              :bigint           not null, primary key
 #  comments        :text
@@ -16,18 +16,17 @@
 #
 # Indexes
 #
-#  index_client_lessons_groups_on_client_id        (client_id)
-#  index_client_lessons_groups_on_created_at       (created_at)
-#  index_client_lessons_groups_on_lessons_type_id  (lessons_type_id)
-#  index_client_lessons_groups_on_time_period      (time_period)
+#  index_credited_lessons_on_client_id        (client_id)
+#  index_credited_lessons_on_created_at       (created_at)
+#  index_credited_lessons_on_lessons_type_id  (lessons_type_id)
+#  index_credited_lessons_on_time_period      (time_period)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (client_id => clients.id)
 #  fk_rails_...  (lessons_type_id => lessons_types.id)
 #
-require "rails_helper"
-
-RSpec.describe(ClientLessonsGroup, type: :model) do
-  pending "add some examples to (or delete) #{__FILE__}"
+FactoryBot.define do
+  factory :credited_lesson do
+  end
 end

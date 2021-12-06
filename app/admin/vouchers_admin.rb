@@ -54,7 +54,12 @@ Trestle.resource(:vouchers, model: Voucher) do
     row do
       col(sm: 12) do
         select :client_id,
-          options_from_collection_for_select(Client.all.order(name: :asc), :id, :name, instance.client_id || params[:client_id]),
+          options_from_collection_for_select(
+            Client.all.order(name: :asc),
+            :id,
+            :name,
+            instance.client_id || params[:client_id]
+          ),
           include_blank: "Escolha um cliente", disabled: params[:client_id].present? || !voucher.new_record?
       end
     end

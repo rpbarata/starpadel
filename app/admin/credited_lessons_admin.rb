@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
+Trestle.resource(:credited_lessons, model: CreditedLesson) do
   authorize_with cancan: Ability
 
   remove_action :destroy, :update, :edit
@@ -11,8 +11,8 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
 
   scopes do
     scope :all, default: true,  label: t("activerecord.scopes.default")
-    scope :green_time,          label: t("activerecord.scopes.client_lessons_group.green_time")
-    scope :red_time,            label: t("activerecord.scopes.client_lessons_group.red_time")
+    scope :green_time,          label: t("activerecord.scopes.credited_lesson.green_time")
+    scope :red_time,            label: t("activerecord.scopes.credited_lesson.red_time")
   end
 
   # search do |query|
@@ -22,7 +22,7 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
   # end
 
   collection do
-    ClientLessonsGroup.includes([:client, :lessons_type]).all.order(created_at: :desc)
+    CreditedLesson.includes([:client, :lessons_type]).all.order(created_at: :desc)
   end
 
   table(autolink: false) do
@@ -65,7 +65,12 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
       end
       col(sm: 12) do
         select :client_id,
-          options_from_collection_for_select(Client.all.order(name: :asc), :id, :name, instance.client_id || params[:client_id]),
+          options_from_collection_for_select(
+            Client.all.order(name: :asc),
+            :id,
+            :name,
+            instance.client_id || params[:client_id]
+          ),
           include_blank: "Escolha um cliente", disabled: params[:client_id].present?
       end
       # end
@@ -74,7 +79,12 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     row do
       col(sm: 12) do
         select :lessons_type_id,
-          options_from_collection_for_select(LessonsType.actives.order(name: :asc), :id, :name, instance.lessons_type_id),
+          options_from_collection_for_select(
+            LessonsType.actives.order(name: :asc),
+            :id,
+            :name,
+            instance.lessons_type_id
+          ),
           include_blank: "Escolha um tipo de aula", disabled: !client_lesson.new_record?
       end
     end
@@ -82,7 +92,7 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     row do
       col(sm: 12) do
         select :time_period,
-          ClientLessonsGroup.defined_enums["time_period"].keys.map { |status|
+          CreditedLesson.defined_enums["time_period"].keys.map { |status|
             [I18n.t("activerecord.enums.time_period.#{status}"), status]
           }
       end
@@ -101,7 +111,7 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     def index
       super
 
-      initialize_client_lessons_groups_filters if @collection.present?
+      initialize_credited_lessons_filters if @collection.present?
     end
 
     def show
@@ -113,13 +123,12 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
 
     def update_payment_modal
       instance.new_payment = payment_modal_params[:new_payment]
-      # instance.voucher_id = payment_modal_params[:voucher_id]
       instance.add_payment(payment_modal_params)
 
-      
       movement_is_valid = true
-      if(payment_modal_params[:voucher_id].present?)
-        movement_is_valid = instance.create_movement(payment_modal_params[:voucher_id], payment_modal_params[:new_payment].to_d)
+      if payment_modal_params[:voucher_id].present?
+        movement_is_valid = instance.create_movement(payment_modal_params[:voucher_id],
+          payment_modal_params[:new_payment].to_d)
         unless movement_is_valid
           instance.errors.add(:new_payment, "ultrapassa o valor do voucher")
         end
@@ -128,15 +137,15 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
       if movement_is_valid && instance.save
         flash[:message] = "Pagamento Registado"
         render_url =
-          if params[:client_lessons_group][:index_params][:from] == "ClientLessonsGroupsAdmin::AdminController"
-            if params[:client_lessons_group][:index_params][:action] == "index"
-              client_lessons_groups_admin_index_path
-            elsif params[:client_lessons_group][:index_params][:action] == "show"
-              client_lessons_group_id = params[:client_lessons_group][:index_params][:id]
-              client_lessons_groups_admin_path(client_lessons_group_id)
+          if params[:credited_lesson][:index_params][:from] == "CreditedLessonsAdmin::AdminController"
+            if params[:credited_lesson][:index_params][:action] == "index"
+              credited_lessons_admin_index_path
+            elsif params[:credited_lesson][:index_params][:action] == "show"
+              credited_lesson_id = params[:credited_lesson][:index_params][:id]
+              credited_lessons_admin_path(credited_lesson_id)
             end
-          elsif params[:client_lessons_group][:index_params][:from] == "ClientsAdmin::AdminController"
-            client_id = params[:client_lessons_group][:index_params][:id]
+          elsif params[:credited_lesson][:index_params][:from] == "ClientsAdmin::AdminController"
+            client_id = params[:credited_lesson][:index_params][:id]
             "#{clients_admin_path(client_id)}/#!tab-credited_lessons"
           end
 
@@ -145,7 +154,7 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
         end
       else
         @errors = instance.errors
-        render("admin/client_lessons_groups/update_payment_modal.js")
+        render("admin/credited_lessons/update_payment_modal.js")
         nil
       end
     end
@@ -153,7 +162,7 @@ Trestle.resource(:client_lessons_groups, model: ClientLessonsGroup) do
     private
 
     def payment_modal_params
-      params.require(:client_lessons_group).permit(:new_payment, :voucher_id)
+      params.require(:credited_lesson).permit(:new_payment, :voucher_id)
     end
   end
 

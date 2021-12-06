@@ -242,10 +242,12 @@ Trestle.configure do |config|
       :hr,
       :paste,
     ]
+    # rubocop:disable Layout/LineLength
     c.toolbar = [
       "styleselect | bold italic underline strikethrough | subscript superscript hr | alignleft aligncenter alignright alignjustify",
       "bullist numlist | indent outdent | undo redo | link unlink | image charmap table | code",
     ]
+    # rubocop:enable Layout/LineLength
     c.link_context_toolbar = true
     c.convert_urls = false
     c.language = "pt_PT"

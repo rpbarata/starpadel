@@ -13,7 +13,7 @@ pt:
       client_lesson:
         one: Aula
         other: Aulas
-      client_lessons_group:
+      credited_lesson:
         one: Aula Creditada
         other: Aulas Creditadas
       voucher:
@@ -75,7 +75,7 @@ pt:
         start_time: Hora de Inicio
         lesson_group: Pack ID
         time_period: Horário
-      client_lessons_group:
+      credited_lesson:
         id: Identificador
         created_at: Criada em
         updated_at: Atualizada em
@@ -95,11 +95,11 @@ pt:
         comments: Obervações
         date: Data
         description: Descrição
-        from_client_lessons_group: Pagar Aula?
+        from_credited_lesson: Pagar Aula?
         value: Valor
-        client_lessons_group_id: Aula
+        credited_lesson_id: Aula
         voucher_id: Voucher
-        client_lessons_group: Aula
+        credited_lesson: Aula
         voucher: Voucher
         client: Cliente
         client_id: Cliente
@@ -164,7 +164,7 @@ pt:
       lessons_types:
         packs: Packs de Aulas
         not_packs: Aulas
-      client_lessons_group:
+      credited_lesson:
         green_time: Green Time
         red_time: Red Time
       vouchers:

@@ -41,7 +41,7 @@ class Client < ApplicationRecord
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :validatable
 
-  has_many :client_lessons_groups, dependent: :destroy
+  has_many :credited_lessons, dependent: :destroy
   has_many :vouchers, dependent: :destroy
   has_many :movements, dependent: :destroy
 

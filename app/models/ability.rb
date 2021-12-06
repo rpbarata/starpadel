@@ -11,14 +11,14 @@ class Ability
       can([:index, :read], Client)
       can([:index, :read], LessonsType)
       can(:manage, ClientLesson)
-      can(:manage, ClientLessonsGroup)
+      can(:manage, CreditedLesson)
     end
 
     if user.secretariat_admin?
       can(:manage, Client)
       can([:index, :show], LessonsType)
       can(:manage, ClientLesson)
-      can(:manage, ClientLessonsGroup)
+      can(:manage, CreditedLesson)
     end
   end
 end

@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: client_lessons_groups
+# Table name: credited_lessons
 #
 #  id              :bigint           not null, primary key
 #  comments        :text
@@ -16,17 +16,17 @@
 #
 # Indexes
 #
-#  index_client_lessons_groups_on_client_id        (client_id)
-#  index_client_lessons_groups_on_created_at       (created_at)
-#  index_client_lessons_groups_on_lessons_type_id  (lessons_type_id)
-#  index_client_lessons_groups_on_time_period      (time_period)
+#  index_credited_lessons_on_client_id        (client_id)
+#  index_credited_lessons_on_created_at       (created_at)
+#  index_credited_lessons_on_lessons_type_id  (lessons_type_id)
+#  index_credited_lessons_on_time_period      (time_period)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (client_id => clients.id)
 #  fk_rails_...  (lessons_type_id => lessons_types.id)
 #
-class ClientLessonsGroup < ApplicationRecord
+class CreditedLesson < ApplicationRecord
   attr_accessor :new_payment, :voucher_id
 
   scope :paid, -> { where("payment = lesson_price") }
@@ -35,7 +35,7 @@ class ClientLessonsGroup < ApplicationRecord
   belongs_to :lessons_type
   belongs_to :client
   has_many :client_lessons, dependent: :restrict_with_error
-  has_many :movements
+  has_many :movements, dependent: :destroy
 
   enum time_period: { green_time: 1, red_time: 2 }
 
@@ -44,20 +44,18 @@ class ClientLessonsGroup < ApplicationRecord
 
   validates :time_period, presence: true
   validate :validate_new_payment
-  # validates_associated :movements
-  # validate :validate_movement
 
   class << self
     def select_by_date(start_date, end_date)
       if start_date.present? && end_date.present?
-        where("client_lessons_groups.created_at BETWEEN :start_date AND :end_date",
+        where("credited_lessons.created_at BETWEEN :start_date AND :end_date",
           start_date: start_date.beginning_of_day, end_date: end_date.end_of_day).distinct
       elsif start_date.present?
-        where("client_lessons_groups.created_at > :start_date", start_date: start_date.beginning_of_day).distinct
+        where("credited_lessons.created_at > :start_date", start_date: start_date.beginning_of_day).distinct
       elsif end_date.present?
-        where("client_lessons_groups.created_at < :end_date", end_date: end_date.end_of_day).distinct
+        where("credited_lessons.created_at < :end_date", end_date: end_date.end_of_day).distinct
       else
-        where("client_lessons_groups.created_at BETWEEN :start_date AND :end_date",
+        where("credited_lessons.created_at BETWEEN :start_date AND :end_date",
           start_date: (Time.zone.now.beginning_of_day - 31.days), end_date: Time.zone.now.end_of_day).distinct
       end
     end
@@ -86,9 +84,9 @@ class ClientLessonsGroup < ApplicationRecord
 
   def create_movement(voucher_id, value)
     movement = Movement.new(
-      from_client_lessons_group: true,
+      from_credited_lesson: true,
       value: value,
-      client_lessons_group_id: id,
+      credited_lesson_id: id,
       voucher_id: voucher_id,
       client_id: client.id
     )
@@ -135,13 +133,6 @@ class ClientLessonsGroup < ApplicationRecord
   def validate_new_payment
     if payment > lesson_price
       errors.add(:new_payment, "não pode exceder o valor em dívida")
-    end
-  end
-
-  def validate_movement
-    byebug
-    unless movement.valid?
-      errors.add(:new_payment, "bad bad boy")
     end
   end
 end
