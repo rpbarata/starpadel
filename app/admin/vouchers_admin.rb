@@ -83,7 +83,7 @@ Trestle.resource(:vouchers, model: Voucher) do
     def show
       super
 
-      @movements = instance.movements
+      @movements = instance.movements.includes([:client])
     end
 
     def create
