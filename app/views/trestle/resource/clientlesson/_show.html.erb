@@ -18,8 +18,8 @@
       <span class="label label-info">
         <%= t("activerecord.attributes.#{class_name}.time_period") %>
         <dd class="well">
-          <span class="badge badge-<%= instance.client_lessons_group.green_time? ? 'success' : 'danger'%>">
-            <%= t("activerecord.enums.time_period_list.#{instance.client_lessons_group.time_period}") %>
+          <span class="badge badge-<%= instance.credited_lesson.green_time? ? 'success' : 'danger'%>">
+            <%= t("activerecord.enums.time_period_list.#{instance.credited_lesson.time_period}") %>
           </span>
         </dd>
       </span>

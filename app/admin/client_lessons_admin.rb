@@ -25,7 +25,12 @@ Trestle.resource(:client_lessons, model: ClientLesson) do
     row do
       col(sm: 12) do
         select :lessons_type_id,
-          options_from_collection_for_select(LessonsType.actives.order(name: :asc), :id, :name, instance.lessons_type_id),
+          options_from_collection_for_select(
+            LessonsType.actives.order(name: :asc),
+            :id,
+            :name,
+            instance.lessons_type_id
+          ),
           include_blank: "Escolha um tipo de aula", disabled: !client_lesson.new_record?
       end
     end
@@ -54,10 +59,9 @@ Trestle.resource(:client_lessons, model: ClientLesson) do
         respond_to do |format|
           format.html do
             flash[:message] =
-              flash_message("update.success", title: "Success!",
-message: "The %{lowercase_model_name} was successfully updated.")
-            # redirect_to(client_lessons_groups_admin_path(instance.client_lessons_group))
-            # redirect_to_return_location(:update, instance.client_lessons_group, default: admin.instance_path(instance.client_lessons_group))
+              flash_message("update.success",
+                title: "Success!",
+                message: "The %{lowercase_model_name} was successfully updated.")
           end
           format.json { render(json: instance, status: :ok) }
 

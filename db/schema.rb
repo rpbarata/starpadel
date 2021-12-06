@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_06_012021) do
+ActiveRecord::Schema.define(version: 2021_12_06_194255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,29 +45,14 @@ ActiveRecord::Schema.define(version: 2021_12_06_012021) do
     t.text "comments"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "client_lessons_group_id", null: false
+    t.bigint "credited_lesson_id", null: false
     t.index ["client_id"], name: "index_client_lessons_on_client_id"
-    t.index ["client_lessons_group_id"], name: "index_client_lessons_on_client_lessons_group_id"
     t.index ["created_at"], name: "index_client_lessons_on_created_at"
+    t.index ["credited_lesson_id"], name: "index_client_lessons_on_credited_lesson_id"
     t.index ["end_time"], name: "index_client_lessons_on_end_time"
     t.index ["lessons_type_id"], name: "index_client_lessons_on_lessons_type_id"
     t.index ["start_time", "end_time"], name: "index_client_lessons_on_start_time_and_end_time"
     t.index ["start_time"], name: "index_client_lessons_on_start_time"
-  end
-
-  create_table "client_lessons_groups", force: :cascade do |t|
-    t.bigint "client_id", null: false
-    t.bigint "lessons_type_id", null: false
-    t.text "comments"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "time_period"
-    t.decimal "payment", precision: 8, scale: 2, default: "0.0"
-    t.decimal "lesson_price", precision: 8, scale: 2, default: "0.0"
-    t.index ["client_id"], name: "index_client_lessons_groups_on_client_id"
-    t.index ["created_at"], name: "index_client_lessons_groups_on_created_at"
-    t.index ["lessons_type_id"], name: "index_client_lessons_groups_on_lessons_type_id"
-    t.index ["time_period"], name: "index_client_lessons_groups_on_time_period"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -99,6 +84,21 @@ ActiveRecord::Schema.define(version: 2021_12_06_012021) do
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
   end
 
+  create_table "credited_lessons", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.bigint "lessons_type_id", null: false
+    t.text "comments"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "time_period"
+    t.decimal "payment", precision: 8, scale: 2, default: "0.0"
+    t.decimal "lesson_price", precision: 8, scale: 2, default: "0.0"
+    t.index ["client_id"], name: "index_credited_lessons_on_client_id"
+    t.index ["created_at"], name: "index_credited_lessons_on_created_at"
+    t.index ["lessons_type_id"], name: "index_credited_lessons_on_lessons_type_id"
+    t.index ["time_period"], name: "index_credited_lessons_on_time_period"
+  end
+
   create_table "lessons_types", force: :cascade do |t|
     t.string "name"
     t.text "comments"
@@ -122,13 +122,13 @@ ActiveRecord::Schema.define(version: 2021_12_06_012021) do
     t.decimal "value", precision: 8, scale: 2, default: "0.0"
     t.string "description"
     t.text "comments"
-    t.bigint "client_lessons_group_id"
-    t.boolean "from_client_lessons_group"
+    t.bigint "credited_lesson_id"
+    t.boolean "from_credited_lesson"
     t.bigint "client_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["client_id"], name: "index_movements_on_client_id"
-    t.index ["client_lessons_group_id"], name: "index_movements_on_client_lessons_group_id"
+    t.index ["credited_lesson_id"], name: "index_movements_on_credited_lesson_id"
     t.index ["voucher_id"], name: "index_movements_on_voucher_id"
   end
 
@@ -156,13 +156,13 @@ ActiveRecord::Schema.define(version: 2021_12_06_012021) do
     t.index ["client_id"], name: "index_vouchers_on_client_id"
   end
 
-  add_foreign_key "client_lessons", "client_lessons_groups"
   add_foreign_key "client_lessons", "clients"
+  add_foreign_key "client_lessons", "credited_lessons"
   add_foreign_key "client_lessons", "lessons_types"
-  add_foreign_key "client_lessons_groups", "clients"
-  add_foreign_key "client_lessons_groups", "lessons_types"
-  add_foreign_key "movements", "client_lessons_groups"
+  add_foreign_key "credited_lessons", "clients"
+  add_foreign_key "credited_lessons", "lessons_types"
   add_foreign_key "movements", "clients"
+  add_foreign_key "movements", "credited_lessons"
   add_foreign_key "movements", "vouchers"
   add_foreign_key "vouchers", "clients"
 end

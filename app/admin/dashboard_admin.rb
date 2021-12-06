@@ -38,7 +38,7 @@ Trestle.admin(:dashboard) do
       LessonsType.all.find_each do |lesson_type|
         @lessons_type_line_chart << {
           name: lesson_type.name,
-          data: ClientLessonsGroup.select_by_date(start_date, end_date)
+          data: CreditedLesson.select_by_date(start_date, end_date)
             .where(lessons_type: lesson_type)
             .group_by_day(:created_at)
             .distinct
@@ -72,7 +72,7 @@ Trestle.admin(:dashboard) do
       end_date = params[:end_date]&.in_time_zone
 
       @lessons_type_pie_chart =
-        ClientLessonsGroup.joins(:lessons_type).select_by_date(start_date, end_date).group("lessons_types.name").count
+        CreditedLesson.joins(:lessons_type).select_by_date(start_date, end_date).group("lessons_types.name").count
 
       render(json: @lessons_type_pie_chart.chart_json)
     end
@@ -81,7 +81,7 @@ Trestle.admin(:dashboard) do
       start_date = params[:start_date]&.in_time_zone
       end_date = params[:end_date]&.in_time_zone
 
-      @client_lessons_groups = ClientLessonsGroup.select_by_date(start_date, end_date)
+      @credited_lessons = CreditedLesson.select_by_date(start_date, end_date)
       @lessons_type_summary = lessons_type_summary
 
       render(partial: "admin/lessons_type_summary")

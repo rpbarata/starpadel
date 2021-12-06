@@ -101,15 +101,15 @@ Trestle.resource(:clients, model: Client) do
       super
 
       client = instance
-      @credited_lessons = client.client_lessons_groups.includes([:lessons_type]).order(created_at: :desc)
+      @credited_lessons = client.credited_lessons.includes([:lessons_type]).order(created_at: :desc)
       @vouchers = client.vouchers.order(created_at: :desc)
 
-      initialize_client_lessons_groups_filters
+      initialize_credited_lessons_filters
 
       @tabs = [
         { tab_id: "tab-client", tab_name: "client", record: client.as_json, instance: instance },
         { tab_id: "tab-credited_lessons", tab_name: "credited_lessons",
-          records: @credited_lessons.page(params[:page]).per(50), trestle_class: ClientLessonsGroupsAdmin,
+          records: @credited_lessons.page(params[:page]).per(50), trestle_class: CreditedLessonsAdmin,
           filters: @filter_dropdown_lists, search: true, filter_dates: @filter_dates, },
         { tab_id: "tab-vouchers", tab_name: "vouchers",
           records: @vouchers.page(params[:page]).per(50), trestle_class: VouchersAdmin, },

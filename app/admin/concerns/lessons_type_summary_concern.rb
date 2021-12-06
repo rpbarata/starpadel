@@ -7,9 +7,9 @@ module LessonsTypeSummaryConcern
     @lessons_type_summary = LessonsType.all.order(name: :asc).map do |lesson_type|
       {
         lesson_type_name: lesson_type.name,
-        green_time: @client_lessons_groups.where(lessons_type: lesson_type, time_period: :green_time).size,
-        red_time: @client_lessons_groups.where(lessons_type: lesson_type, time_period: :red_time).size,
-        total: @client_lessons_groups.where(lessons_type: lesson_type).size,
+        green_time: @credited_lessons.where(lessons_type: lesson_type, time_period: :green_time).size,
+        red_time: @credited_lessons.where(lessons_type: lesson_type, time_period: :red_time).size,
+        total: @credited_lessons.where(lessons_type: lesson_type).size,
       }
     end
   end

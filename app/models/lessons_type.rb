@@ -24,7 +24,7 @@
 #  index_lessons_types_on_name       (name)
 #
 class LessonsType < ApplicationRecord
-  has_many :client_lessons_groups, dependent: :restrict_with_error
+  has_many :credited_lessons, dependent: :restrict_with_error
 
   scope :packs, -> { where(is_pack: true) }
   scope :not_packs, -> { where(is_pack: [false, nil, ""]) }

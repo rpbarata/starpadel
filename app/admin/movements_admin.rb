@@ -35,7 +35,7 @@ Trestle.resource(:movements, model: Movement) do
   #   collection.reorder("voucher.code #{order} NULLS LAST")
   # end
 
-  form dialog: true do |movement|
+  form dialog: true do |_movement|
     row do
       col(sm: 12) do
         select :client_id,
@@ -58,18 +58,21 @@ Trestle.resource(:movements, model: Movement) do
     end
 
     row(class: "mt-3") do
-      col(sm: 6) { check_box :from_client_lessons_group }
+      col(sm: 6) { check_box :from_credited_lesson }
     end
 
     row(id: "movement_lesson_row", style: "display: none") do
       col(sm: 12) do
-        select :client_lessons_group_id,
+        select :credited_lesson_id,
           options_from_collection_for_select(
-            ClientLessonsGroup.includes([:client,
-                                         :lessons_type,]).get(instance.client_id || params[:client_id]), :id, :formated_str, instance.client_lessons_group_id || params[:client_lessons_group_id]
+            CreditedLesson.includes([:client, :lessons_type])
+                          .get(instance.client_id || params[:client_id]),
+            :id,
+            :formated_str,
+            instance.credited_lesson_id || params[:credited_lesson_id]
           ),
           include_blank: "Escolha uma aula",
-          disabled: params[:client_lessons_group_id].present? || instance.client_lessons_group_id.present?
+          disabled: params[:credited_lesson_id].present? || instance.credited_lesson_id.present?
       end
     end
 

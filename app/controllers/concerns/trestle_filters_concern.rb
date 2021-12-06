@@ -3,7 +3,7 @@
 module TrestleFiltersConcern
   extend ActiveSupport::Concern
 
-  def initialize_client_lessons_groups_filters
+  def initialize_credited_lessons_filters
     @credited_lessons = @collection if @collection.present?
 
     @filter_dropdown_lists = [
@@ -50,20 +50,20 @@ module TrestleFiltersConcern
     if params[:start_date].present? && params[:end_date].present?
       @credited_lessons =
         @credited_lessons.where(
-          "client_lessons_groups.created_at BETWEEN :start_date AND :end_date",
+          "credited_lessons.created_at BETWEEN :start_date AND :end_date",
           start_date: params[:start_date].in_time_zone.beginning_of_day,
           end_date: params[:end_date].in_time_zone.end_of_day
         )
     elsif params[:start_date].present?
       @credited_lessons =
         @credited_lessons.where(
-          "client_lessons_groups.created_at >= :start_date",
+          "credited_lessons.created_at >= :start_date",
           start_date: params[:start_date].in_time_zone.beginning_of_day
         )
     elsif params[:end_date].present?
       @credited_lessons =
         @credited_lessons.where(
-          "client_lessons_groups.created_at <= :end_date",
+          "credited_lessons.created_at <= :end_date",
           end_date: params[:end_date].in_time_zone.end_of_day
         )
     end

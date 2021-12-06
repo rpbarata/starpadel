@@ -30,7 +30,8 @@ class Voucher < ApplicationRecord
 
   scope :expired, -> { where("validity <= :today", today: Time.zone.now) }
   scope :not_expired, -> {
-                        (where("validity > :today", today: Time.zone.now).or(where(validity: nil))).and(where("value_used < value"))
+                        (where("validity > :today", today: Time.zone.now).or(where(validity: nil)))
+                          .and(where("value_used < value"))
                       }
   scope :fully_used, -> { where("value = value_used") }
 

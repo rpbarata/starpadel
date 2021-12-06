@@ -28,7 +28,7 @@ document.addEventListener('turbolinks:load', () => {
     }
   })
 
-  $('#movement_from_client_lessons_group').click(function (e) {
+  $('#movement_from_credited_lesson').click(function (e) {
     if (e.currentTarget.checked) {
       console.log("checked")
       $('#movement_lesson_row')[0].style.display = "block";
