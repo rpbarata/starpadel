@@ -24,6 +24,8 @@
 #  index_lessons_types_on_name       (name) UNIQUE
 #
 class LessonsType < ApplicationRecord
+  has_paper_trail
+  
   has_many :credited_lessons, dependent: :restrict_with_error
 
   scope :packs, -> { where(is_pack: true) }

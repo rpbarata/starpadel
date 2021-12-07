@@ -31,6 +31,8 @@
 #  fk_rails_...  (lessons_type_id => lessons_types.id)
 #
 class ClientLesson < ApplicationRecord
+  has_paper_trail
+  
   belongs_to :credited_lesson, dependent: :destroy
   belongs_to :lessons_type
   belongs_to :client, dependent: :destroy
