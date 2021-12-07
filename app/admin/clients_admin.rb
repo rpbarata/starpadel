@@ -96,11 +96,18 @@ Trestle.resource(:clients, model: Client) do
   controller do
     include FixActionUpdateConcern
     include TrestleFiltersConcern
+    include ExportPathConcern
 
     def index
       super
 
-      @export_clients_url = export_clients_admin_index_path
+      if current_user.super_admin? || current_user.secretariat_admin?
+        @export = {
+          path: export_clients_admin_index_path,
+          params: export_clients_params(params),
+          text: "Exportar Clientes",
+        }
+      end
     end
 
     def show
@@ -116,12 +123,17 @@ Trestle.resource(:clients, model: Client) do
         { tab_id: "tab-client", tab_name: "client", record: client.as_json, instance: instance },
         { tab_id: "tab-credited_lessons", tab_name: "credited_lessons",
           records: @credited_lessons.page(params[:page]).per(50), trestle_class: CreditedLessonsAdmin,
-          filters: @filter_dropdown_lists, search: true, filter_dates: @filter_dates, },
+          filters: @filter_dropdown_lists, search: true, filter_dates: @filter_dates,
+          button_path: new_credited_lessons_admin_path(client_id: instance.id), button_text: "Creditar",
+          button_behavior: "dialog", },
       ]
 
       if current_user.super_admin? || current_user.secretariat_admin?
-        @tabs << { tab_id: "tab-vouchers", tab_name: "vouchers", records: @vouchers.page(params[:page]).per(50),
-trestle_class: VouchersAdmin, }
+        @tabs << {
+          tab_id: "tab-vouchers", tab_name: "vouchers", records: @vouchers.page(params[:page]).per(50),
+          trestle_class: VouchersAdmin, button_path: new_vouchers_admin_path(client_id: instance.id, from_client: true),
+          button_text: "Adicionar", button_behavior: "dialog",
+        }
       end
     end
 

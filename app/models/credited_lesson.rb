@@ -31,7 +31,7 @@
 #
 class CreditedLesson < ApplicationRecord
   has_paper_trail
-  
+
   attr_accessor :new_payment, :voucher_id
 
   scope :paid, -> { where("payment = lesson_price") }

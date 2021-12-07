@@ -4,13 +4,13 @@
   <%= t.new %>
 <% end %>
 
-<% if (current_user.super_admin? || current_user.secretariat_admin?) && @export_clients_url.present? %>
+<% if @export.present? %>
   <% toolbar(:secondary) do |t| %>
-    <%= link_to("#{@export_clients_url}?#{export_clients_params(params)}", class: "btn-export", remote: false) do %>
-      <i class="fas fa-download"></i><span>Exportar Clientes</span>
+    <%= link_to("#{@export[:path]}?#{@export[:params]}", class: "btn-export", remote: false) do %>
+      <i class="fas fa-download"></i><span><%= @export[:text] %></span>
     <% end %>
     <br>
-    <p>Este export é apenas um proof of concept. Nem sei se vai funcionar em staging...</p>
+    <p style="color: red;">Este export é apenas um proof of concept. Nem sei se vai funcionar em staging...</p>
   <% end %>
 <% end %>
 
@@ -30,8 +30,6 @@
 
   <footer class="main-content-footer">
     <%= hook("resource.index.footer") %>
-
     <%= pagination collection: collection, entry_name: admin.model_name, remote: false %>
-    <%# = paginate collection, remote: false %>
   </footer>
 <% end %>
