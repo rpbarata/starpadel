@@ -59,7 +59,8 @@ class Voucher < ApplicationRecord
   end
 
   def format_srt
-    "#{client.name} - #{code}"
+    # "#{client.name} - #{code} (€#{value_remaining})"
+    "#{code} (€#{value_remaining})"
   end
 
   def formated_validity

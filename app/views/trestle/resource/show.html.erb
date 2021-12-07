@@ -55,7 +55,7 @@
         <% @tabs&.each_with_index do |tab, index| %>
           <div id="<%= tab[:tab_id] %>" class="tab-pane <%= active_tab(tab[:tab_id],index, params[:page]) %>" role="tabpanel">
 
-          <% if tab[:tab_id] == "tab-credited_lessons" && (current_user.super_admin? || current_user.secretariat_admin?) %>
+          <% if tab[:tab_id] == "tab-credited_lessons" %>
             <div class="btn-toolbar primary-toolbar d-flex justify-content-end" role="toolbar">
               <%= link_to "Creditar", new_credited_lessons_admin_path(client_id: instance.id), class: "btn btn-success", data: { behavior: "dialog" } %>
             </div>

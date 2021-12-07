@@ -3,11 +3,11 @@
 module Exports
   class ClientsXlsxJob < ApplicationJob
     def perform(client_ids)
-      clients = Client.where(id: client_ids)
+      clients = Client.where(id: client_ids).order(name: :asc)
 
       Dir.mkdir("tmp/exports") unless File.exist?("tmp/exports")
 
-      date = Time.current.strftime("%d_%m_%Y__%H_%M")
+      date = Time.current.strftime("%Y%m%d%H%M")
       filename = "tmp/exports/clients_#{date}.xlsx"
 
       workbook = WriteXLSX.new(filename, { "constant_memory": true })
