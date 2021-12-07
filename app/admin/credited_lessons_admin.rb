@@ -47,9 +47,11 @@ Trestle.resource(:credited_lessons, model: CreditedLesson) do
     end
 
     actions do |toolbar, instance, _admin|
-      toolbar.link("Pagar", instance, action: :payment_modal,
-        params: { index_params: params.to_enum.to_h.merge(from: request.controller_class.to_s) },
-        style: :success, data: { behavior: "dialog" }) unless instance.paid?
+      if (current_user.super_admin? || current_user.secretariat_admin?) && !instance.paid?
+        toolbar.link("Pagar", instance, action: :payment_modal,
+          params: { index_params: params.to_enum.to_h.merge(from: request.controller_class.to_s) },
+          style: :success, data: { behavior: "dialog" })
+      end
       toolbar.show
     end
   end

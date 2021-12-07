@@ -115,7 +115,7 @@ pt:
         client: Cliente
         active: Ativo?
         value_used: Valor Utilizado
-        value_remaining: Valor por Utilizar
+        value_remaining: Valor Disponível
     errors:
       models:
         admin:

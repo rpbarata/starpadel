@@ -117,13 +117,16 @@ Trestle.resource(:clients, model: Client) do
         { tab_id: "tab-credited_lessons", tab_name: "credited_lessons",
           records: @credited_lessons.page(params[:page]).per(50), trestle_class: CreditedLessonsAdmin,
           filters: @filter_dropdown_lists, search: true, filter_dates: @filter_dates, },
-        { tab_id: "tab-vouchers", tab_name: "vouchers",
-          records: @vouchers.page(params[:page]).per(50), trestle_class: VouchersAdmin, },
       ]
+
+      if current_user.super_admin? || current_user.secretariat_admin?
+        @tabs << { tab_id: "tab-vouchers", tab_name: "vouchers", records: @vouchers.page(params[:page]).per(50),
+trestle_class: VouchersAdmin, }
+      end
     end
 
     def export
-      @collection = Client.all.order(name: :asc)
+      @collection = Client.all
 
       @collection = @collection.where("name ILIKE :q", q: "%#{params[:q]}%") if params[:q].present?
 

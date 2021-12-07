@@ -49,7 +49,7 @@ Trestle.resource(:movements, model: Movement) do
     row do
       col(sm: 6) do
         select :voucher_id,
-          options_from_collection_for_select(Voucher.all.order(code: :asc), :id, :code,
+          options_from_collection_for_select(Voucher.all.order(code: :asc), :id, :format_srt,
             instance.voucher_id || params[:voucher_id]),
           include_blank: "Escolha um voucher",
           disabled: params[:voucher_id].present? || instance.voucher_id.present?
