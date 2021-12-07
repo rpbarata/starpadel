@@ -20,6 +20,7 @@
 #
 #  index_movements_on_client_id           (client_id)
 #  index_movements_on_credited_lesson_id  (credited_lesson_id)
+#  index_movements_on_date                (date)
 #  index_movements_on_voucher_id          (voucher_id)
 #
 # Foreign Keys

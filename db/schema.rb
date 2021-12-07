@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_06_194255) do
+ActiveRecord::Schema.define(version: 2021_12_07_165845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,7 +95,10 @@ ActiveRecord::Schema.define(version: 2021_12_06_194255) do
     t.decimal "lesson_price", precision: 8, scale: 2, default: "0.0"
     t.index ["client_id"], name: "index_credited_lessons_on_client_id"
     t.index ["created_at"], name: "index_credited_lessons_on_created_at"
+    t.index ["lesson_price", "payment"], name: "index_credited_lessons_on_lesson_price_and_payment"
+    t.index ["lesson_price"], name: "index_credited_lessons_on_lesson_price"
     t.index ["lessons_type_id"], name: "index_credited_lessons_on_lessons_type_id"
+    t.index ["payment"], name: "index_credited_lessons_on_payment"
     t.index ["time_period"], name: "index_credited_lessons_on_time_period"
   end
 
@@ -113,7 +116,7 @@ ActiveRecord::Schema.define(version: 2021_12_06_194255) do
     t.boolean "is_active", default: true
     t.index ["is_active"], name: "index_lessons_types_on_is_active"
     t.index ["is_pack"], name: "index_lessons_types_on_is_pack"
-    t.index ["name"], name: "index_lessons_types_on_name"
+    t.index ["name"], name: "index_lessons_types_on_name", unique: true
   end
 
   create_table "movements", force: :cascade do |t|
@@ -129,6 +132,7 @@ ActiveRecord::Schema.define(version: 2021_12_06_194255) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["client_id"], name: "index_movements_on_client_id"
     t.index ["credited_lesson_id"], name: "index_movements_on_credited_lesson_id"
+    t.index ["date"], name: "index_movements_on_date"
     t.index ["voucher_id"], name: "index_movements_on_voucher_id"
   end
 
@@ -154,6 +158,11 @@ ActiveRecord::Schema.define(version: 2021_12_06_194255) do
     t.datetime "updated_at", precision: 6, null: false
     t.decimal "value_used", default: "0.0"
     t.index ["client_id"], name: "index_vouchers_on_client_id"
+    t.index ["code"], name: "index_vouchers_on_code", unique: true
+    t.index ["validity"], name: "index_vouchers_on_validity"
+    t.index ["value", "value_used"], name: "index_vouchers_on_value_and_value_used"
+    t.index ["value"], name: "index_vouchers_on_value"
+    t.index ["value_used"], name: "index_vouchers_on_value_used"
   end
 
   add_foreign_key "client_lessons", "clients"

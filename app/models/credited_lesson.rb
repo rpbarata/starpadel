@@ -16,10 +16,13 @@
 #
 # Indexes
 #
-#  index_credited_lessons_on_client_id        (client_id)
-#  index_credited_lessons_on_created_at       (created_at)
-#  index_credited_lessons_on_lessons_type_id  (lessons_type_id)
-#  index_credited_lessons_on_time_period      (time_period)
+#  index_credited_lessons_on_client_id                 (client_id)
+#  index_credited_lessons_on_created_at                (created_at)
+#  index_credited_lessons_on_lesson_price              (lesson_price)
+#  index_credited_lessons_on_lesson_price_and_payment  (lesson_price,payment)
+#  index_credited_lessons_on_lessons_type_id           (lessons_type_id)
+#  index_credited_lessons_on_payment                   (payment)
+#  index_credited_lessons_on_time_period               (time_period)
 #
 # Foreign Keys
 #

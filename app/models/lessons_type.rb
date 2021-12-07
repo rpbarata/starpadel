@@ -21,7 +21,7 @@
 #
 #  index_lessons_types_on_is_active  (is_active)
 #  index_lessons_types_on_is_pack    (is_pack)
-#  index_lessons_types_on_name       (name)
+#  index_lessons_types_on_name       (name) UNIQUE
 #
 class LessonsType < ApplicationRecord
   has_many :credited_lessons, dependent: :restrict_with_error
