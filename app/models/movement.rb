@@ -30,6 +30,8 @@
 #  fk_rails_...  (voucher_id => vouchers.id)
 #
 class Movement < ApplicationRecord
+  has_paper_trail
+  
   belongs_to :voucher
   belongs_to :credited_lesson, optional: true
   belongs_to :client

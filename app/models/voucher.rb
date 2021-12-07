@@ -28,6 +28,8 @@
 #  fk_rails_...  (client_id => clients.id)
 #
 class Voucher < ApplicationRecord
+  has_paper_trail
+  
   attr_accessor :from_client
 
   belongs_to :client
