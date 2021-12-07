@@ -16,7 +16,12 @@
 #
 # Indexes
 #
-#  index_vouchers_on_client_id  (client_id)
+#  index_vouchers_on_client_id             (client_id)
+#  index_vouchers_on_code                  (code) UNIQUE
+#  index_vouchers_on_validity              (validity)
+#  index_vouchers_on_value                 (value)
+#  index_vouchers_on_value_and_value_used  (value,value_used)
+#  index_vouchers_on_value_used            (value_used)
 #
 # Foreign Keys
 #
