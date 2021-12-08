@@ -48,9 +48,7 @@ Trestle.resource(:credited_lessons, model: CreditedLesson) do
 
     actions do |toolbar, instance, _admin|
       if (current_user.super_admin? || current_user.secretariat_admin?) && !instance.paid?
-        toolbar.link("Pagar", instance, action: :payment_modal,
-          params: { index_params: params.to_enum.to_h.merge(from: request.controller_class.to_s) },
-          style: :success, data: { behavior: "dialog" })
+        toolbar.link("Pagar", instance, action: :payment_modal, style: :success, data: { behavior: "dialog" })
       end
       toolbar.show
     end
@@ -138,26 +136,8 @@ Trestle.resource(:credited_lessons, model: CreditedLesson) do
 
       if movement_is_valid && instance.save
         flash[:message] = "Pagamento Registado"
-        render_url =
-          if params[:credited_lesson][:index_params][:from] == "CreditedLessonsAdmin::AdminController"
-            if params[:credited_lesson][:index_params][:action] == "index"
-              credited_lessons_admin_index_path
-            elsif params[:credited_lesson][:index_params][:action] == "show"
-              credited_lesson_id = params[:credited_lesson][:index_params][:id]
-              credited_lessons_admin_path(credited_lesson_id)
-            end
-          elsif params[:credited_lesson][:index_params][:from] == "ClientsAdmin::AdminController"
-            client_id = params[:credited_lesson][:index_params][:id]
-            "#{clients_admin_path(client_id)}/#!tab-credited_lessons"
-          end
-
-        respond_to do |format|
-          format.js { render(js: "window.location.href='" + render_url + "'") }
-        end
       else
         @errors = instance.errors
-        render("admin/credited_lessons/update_payment_modal.js")
-        nil
       end
     end
 
