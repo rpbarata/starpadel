@@ -3,7 +3,7 @@
 Trestle.resource(:movements, model: Movement) do
   authorize_with cancan: Ability
 
-  remove_action :destroy
+  remove_action :destroy, :show
 
   # menu do
   #   item :movements, icon: "fa fa-star"
@@ -21,10 +21,6 @@ Trestle.resource(:movements, model: Movement) do
     column :value, ->(movement) { number_to_currency(movement.value) }
     column :date, sort: { default: true, default_order: :desc }
     column :description
-
-    actions do |toolbar, _instance, _admin|
-      toolbar.show
-    end
   end
 
   # # sort_column(:client) do |collection, order|
