@@ -5,4 +5,6 @@
     $("#errors-div").append("<li style='color: #721c24;'><%= error %></li>");
   <% end %>
   $("#modal-errors").closest('div.modal').animate({ scrollTop: 0 }, 'slow');
+<% else %>
+  location.reload();
 <% end %>

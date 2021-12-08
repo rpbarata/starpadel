@@ -48,8 +48,7 @@
             <% if current_user.super_admin? || current_user.secretariat_admin? %>
               <div class="row">
                 <div class="col">
-                  <%= admin_link_to("Pagar", instance, action: :payment_modal,
-                    params: { index_params: params.to_enum.to_h.merge(from: request.controller_class.to_s) },
+                  <%= admin_link_to("Pagar", instance, action: :payment_modal, 
                     class: "btn btn-success", data: { behavior: "dialog" }) %>
                 </div>
               </div>
