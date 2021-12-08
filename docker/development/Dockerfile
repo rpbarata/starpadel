@@ -27,6 +27,6 @@ RUN mkdir $BUNDLE_PATH && chown meideiteam:meideiteam $BUNDLE_PATH
 
 USER meideiteam
 
-ENTRYPOINT [ "docker/development/entrypoint" ]
+ENTRYPOINT [ "docker/development/entrypoint.sh" ]
 
 EXPOSE 3000

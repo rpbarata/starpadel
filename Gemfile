@@ -45,6 +45,7 @@ gem "trestle-auth", github: "TrestleAdmin/trestle-auth", branch: "authorization"
   ref: "7d164117a60ffb46f657c721874c01950c64a566"
 gem "trestle-tinymce"
 gem "trestle-search"
+# gem 'trestle-sidekiq'
 
 gem "paper_trail", "~> 11.1"
 gem "paper_trail-globalid", "~> 0.2.0"
@@ -56,6 +57,7 @@ gem "phonelib"
 
 gem "sentry-ruby"
 gem "sentry-rails"
+gem "sentry-sidekiq"
 
 # Authorization
 gem "cancancan", "~> 3.2", ">= 3.2.1"
@@ -65,6 +67,9 @@ gem "faker" # This is not save to be in where.
 gem "render_async"
 
 gem "write_xlsx"
+
+gem "sidekiq"
+gem "sidekiq-scheduler"
 
 group :development, :test do
   gem "bullet"

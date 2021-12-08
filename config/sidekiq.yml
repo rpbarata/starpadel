@@ -1,0 +1,12 @@
+---
+:concurrency: 5
+production:
+  :concurrency: 2
+:queues:
+  - exports
+  - default
+:schedule:
+  sanity_test:
+    cron: "0 * * * * *" # Execute every minute (for testing)
+    class: SanityTestJob
+    description: "Sanity test to check if sidekiq is working"
