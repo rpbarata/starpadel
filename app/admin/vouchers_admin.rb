@@ -88,7 +88,7 @@ Trestle.resource(:vouchers, model: Voucher) do
     def show
       super
 
-      @movements = instance.movements.includes([:client])
+      @movements = instance.movements.includes([:client]).order(date: :desc)
     end
 
     def create
