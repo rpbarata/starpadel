@@ -2,6 +2,8 @@
 
 module Exports
   class ClientsXlsxJob < ApplicationJob
+    queue_as :exports
+
     def perform(client_ids)
       clients = Client.where(id: client_ids).order(name: :asc)
 

@@ -32,8 +32,8 @@ if [ ! -f "$HOME/.setup_complete" ]; then
   touch "$HOME/.setup_complete"
 fi
 
-echo "=== CONFIGURING GIT ==="
-config-git
+# echo "=== CONFIGURING GIT ==="
+# config-git
 
 echo "=== APPLYING LATEST MIGRATIONS ==="
 rails db:migrate
