@@ -8,8 +8,10 @@ Trestle.resource(:client_lessons, model: ClientLesson) do
   table(autolink: false) do
     column :start_time
     column :end_time
-    actions do |toolbar, _instance, _admin|
-      toolbar.edit
+    column :coach_admin
+
+    actions do |toolbar, instance, _admin|
+      toolbar.link("Registar", instance, action: :edit, style: :success, date: { behavior: "dialog"}, icon: "far fa-calendar-check" )
     end
   end
 
@@ -35,6 +37,19 @@ Trestle.resource(:client_lessons, model: ClientLesson) do
       end
     end
 
+    row do
+      col(sm: 12) do
+        select :coach_admin_id,
+          options_from_collection_for_select(
+            Admin.coach_admin.order(username: :asc),
+            :id,
+            :username,
+            instance.coach_admin_id
+          ),
+          include_blank: "Escolha um treinador"
+      end
+    end
+
     unless client_lesson.new_record?
       row do
         col(sm: 6) { datetime_field :start_time }
@@ -54,6 +69,10 @@ Trestle.resource(:client_lessons, model: ClientLesson) do
       @hide_breadcrumbs = true
     end
 
+    def edit
+      super
+    end
+
     def update
       if update_instance
         respond_to do |format|
@@ -62,6 +81,8 @@ Trestle.resource(:client_lessons, model: ClientLesson) do
               flash_message("update.success",
                 title: "Success!",
                 message: "The %{lowercase_model_name} was successfully updated.")
+          # redirect_to_return_location(:update, instance.credited_lesson, default: admin.instance_path(instance.credited_lesson))
+          # redirect_to(credited_lessons_admin_path(instance.credited_lesson))
           end
           format.json { render(json: instance, status: :ok) }
 

@@ -11,6 +11,7 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  client_id          :bigint           not null
+#  coach_admin_id     :bigint
 #  credited_lesson_id :bigint           not null
 #  lessons_type_id    :bigint           not null
 #
@@ -36,6 +37,7 @@ class ClientLesson < ApplicationRecord
   belongs_to :credited_lesson, dependent: :destroy
   belongs_to :lessons_type
   belongs_to :client, dependent: :destroy
+  belongs_to :coach_admin, class_name: "Admin", optional: true
 
   validate :validate_dates, if: -> { start_time.present? || end_time.present? }
 

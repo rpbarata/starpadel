@@ -11,6 +11,7 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  client_id          :bigint           not null
+#  coach_admin_id     :bigint
 #  credited_lesson_id :bigint           not null
 #  lessons_type_id    :bigint           not null
 #

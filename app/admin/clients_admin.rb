@@ -53,6 +53,7 @@ Trestle.resource(:clients, model: Client) do
         status_tag(icon("fa fa-times"), :danger)
       end
     end
+    column :created_at
 
     actions do |toolbar, _instance, _admin|
       toolbar.edit
