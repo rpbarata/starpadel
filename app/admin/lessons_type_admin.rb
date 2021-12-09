@@ -67,23 +67,19 @@ Trestle.resource(:lessons_type, model: LessonsType) do
 
     row do
       col(sm: 6) do
-        number_field :green_time_not_member_price, min: 0, step: 0.01, prepend: icon("fas fa-euro-sign"),
-          disabled: lesson_type.credited_lessons.any?
+        number_field :green_time_not_member_price, min: 0, step: 0.01, prepend: icon("fas fa-euro-sign")
       end
       col(sm: 6) do
-        number_field :red_time_not_member_price, min: 0, step: 0.01, prepend: icon("fas fa-euro-sign"),
-          disabled: lesson_type.credited_lessons.any?
+        number_field :red_time_not_member_price, min: 0, step: 0.01, prepend: icon("fas fa-euro-sign")
       end
     end
 
     row do
       col(sm: 6) do
-        number_field :green_time_member_price, min: 0, step: 0.01, prepend: icon("fas fa-euro-sign"),
-          disabled: lesson_type.credited_lessons.any?
+        number_field :green_time_member_price, min: 0, step: 0.01, prepend: icon("fas fa-euro-sign")
       end
       col(sm: 6) do
-        number_field :red_time_member_price, min: 0, step: 0.01, prepend: icon("fas fa-euro-sign"),
-          disabled: lesson_type.credited_lessons.any?
+        number_field :red_time_member_price, min: 0, step: 0.01, prepend: icon("fas fa-euro-sign")
       end
     end
 
