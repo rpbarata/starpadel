@@ -27,7 +27,9 @@ Trestle.resource(:vouchers, model: Voucher) do
   end
 
   table(autolink: false) do
-    column :client, link: true, class: "media-title-column"
+    column :client, link: true, class: "media-title-column" do |voucher|
+      voucher.client.presence || ""
+    end
     column :code, class: "font-weight-bold"
     column :value, ->(voucher) { number_to_currency(voucher.value) }
     column :value_used, ->(voucher) { number_to_currency(voucher.value_used) }

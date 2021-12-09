@@ -14,7 +14,9 @@ Trestle.resource(:movements, model: Movement) do
   end
 
   table(autolink: false) do
-    column :client, link: true, class: "media-title-column"
+    # column :client, link: true, class: "media-title-column" do |movement|
+    #   movement.client.present? ? movement.client : ""
+    # end
     column :voucher, link: false, class: "media-title-column" do |movement|
       movement.voucher.code
     end
