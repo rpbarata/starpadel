@@ -12,6 +12,7 @@
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  identification_number  :string
+#  is_deleted             :boolean          default(FALSE)
 #  is_master_member       :boolean          default(FALSE)
 #  name                   :string
 #  nif                    :string
@@ -50,6 +51,9 @@ class Client < ApplicationRecord
   scope :master_members, -> { where(is_master_member: true) }
   scope :adults, -> { where("birth_date <= :today", today: (Time.zone.now.end_of_day - 18.years)) }
   scope :childrens, -> { where("birth_date > :today", today: (Time.zone.now.end_of_day - 18.years)) }
+  scope :non_actives, -> { where(is_deleted: true) }
+
+  default_scope { where(is_deleted: false) }
 
   has_paper_trail
 
@@ -95,6 +99,32 @@ class Client < ApplicationRecord
 
   def adult?
     birth_date.present? && ((Time.zone.now - birth_date.to_time) / 1.year.seconds).floor >= 18
+  end
+
+  def anonymise
+    id = Client.unscoped.non_actives.size
+
+    self.name = "Anónimo"
+    self.address = nil
+    self.become_member_at = nil
+    self.birth_date = nil
+    self.comments = nil
+    self.email = "anonimo_#{id}@anonimo.com"
+    self.identification_number = nil
+    self.is_master_member = nil
+    self.nif = nil
+    self.phone_number = nil
+    self.remember_created_at = nil
+    self.reset_password_sent_at = nil
+    self.reset_password_token = nil
+    self.rfid_number = nil
+    self.fpp_id = nil
+    self.member_id = nil
+    self.created_at = Time.zone.now
+
+    self.is_deleted = true
+
+    save!
   end
 
   private

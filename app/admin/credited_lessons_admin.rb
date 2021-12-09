@@ -26,7 +26,9 @@ Trestle.resource(:credited_lessons, model: CreditedLesson) do
   end
 
   table(autolink: false) do
-    column :client, link: true, class: "media-title-column"
+    column :client, link: true, class: "media-title-column" do |lesson|
+      lesson.client.presence || ""
+    end
     column :lessons_type, sort: false, link: true, class: "media-title-column" do |lesson|
       link_to(lesson.lessons_type.name, lessons_type_admin_path(lesson.lessons_type))
     end
@@ -47,7 +49,7 @@ Trestle.resource(:credited_lessons, model: CreditedLesson) do
     end
 
     actions do |toolbar, instance, _admin|
-      if (current_user.super_admin? || current_user.secretariat_admin?) && !instance.paid?
+      if (current_user.super_admin? || current_user.secretariat_admin?) && !instance.paid? && instance.client.present?
         toolbar.link("Pagar", instance, action: :payment_modal, style: :success, data: { behavior: "dialog" })
       end
       toolbar.show

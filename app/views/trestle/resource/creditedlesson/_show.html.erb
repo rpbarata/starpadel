@@ -45,7 +45,7 @@
               </div>
             </div>
 
-            <% if current_user.super_admin? || current_user.secretariat_admin? %>
+            <% if (current_user.super_admin? || current_user.secretariat_admin?) && instance.client.present? %>
               <div class="row">
                 <div class="col">
                   <%= admin_link_to("Pagar", instance, action: :payment_modal, 

@@ -11,7 +11,10 @@ Trestle.resource(:client_lessons, model: ClientLesson) do
     column :coach_admin
 
     actions do |toolbar, instance, _admin|
-      toolbar.link("Registar", instance, action: :edit, style: :success, date: { behavior: "dialog"}, icon: "far fa-calendar-check" )
+      if instance.client.present?
+        toolbar.link("Registar", instance, action: :edit, style: :success, date: { behavior: "dialog" },
+icon: "far fa-calendar-check")
+      end
     end
   end
 
@@ -81,8 +84,8 @@ Trestle.resource(:client_lessons, model: ClientLesson) do
               flash_message("update.success",
                 title: "Success!",
                 message: "The %{lowercase_model_name} was successfully updated.")
-          # redirect_to_return_location(:update, instance.credited_lesson, default: admin.instance_path(instance.credited_lesson))
-          # redirect_to(credited_lessons_admin_path(instance.credited_lesson))
+            # redirect_to_return_location(:update, instance.credited_lesson, default: admin.instance_path(instance.credited_lesson))
+            # redirect_to(credited_lessons_admin_path(instance.credited_lesson))
           end
           format.json { render(json: instance, status: :ok) }
 
