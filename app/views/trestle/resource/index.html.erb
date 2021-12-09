@@ -9,8 +9,6 @@
     <%= link_to("#{@export[:path]}?#{@export[:params]}", class: "btn-export", remote: false) do %>
       <i class="fas fa-download"></i><span><%= @export[:text] %></span>
     <% end %>
-    <br>
-    <p style="color: red;">Este export é apenas um proof of concept. Nem sei se vai funcionar em staging...</p>
   <% end %>
 <% end %>
 

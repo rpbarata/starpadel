@@ -13,7 +13,7 @@ Trestle.resource(:client_lessons, model: ClientLesson) do
     actions do |toolbar, instance, _admin|
       if instance.client.present?
         toolbar.link("Registar", instance, action: :edit, style: :success, date: { behavior: "dialog" },
-icon: "far fa-calendar-check")
+          icon: "far fa-calendar-check")
       end
     end
   end
@@ -47,9 +47,14 @@ icon: "far fa-calendar-check")
             Admin.coach_admin.order(username: :asc),
             :id,
             :username,
-            instance.coach_admin_id
+            instance.coach_admin_id || (current_user.coach_admin? ? current_user.id : nil)
           ),
-          include_blank: "Escolha um treinador"
+          include_blank: "Escolha um treinador",
+          disabled: current_user.coach_admin?
+
+        if current_user.coach_admin?
+          hidden_field :coach_admin_id, value: current_user.id
+        end
       end
     end
 
@@ -66,11 +71,11 @@ icon: "far fa-calendar-check")
   controller do
     # include FixActionUpdateConcern
 
-    def show
-      super
+    # def show
+    #   super
 
-      @hide_breadcrumbs = true
-    end
+    #   @hide_breadcrumbs = true
+    # end
 
     def edit
       super
@@ -84,7 +89,7 @@ icon: "far fa-calendar-check")
               flash_message("update.success",
                 title: "Success!",
                 message: "The %{lowercase_model_name} was successfully updated.")
-            # redirect_to_return_location(:update, instance.credited_lesson, default: admin.instance_path(instance.credited_lesson))
+            # redirect_to_return_location(:update, instance, default: admin.instance_path(instance))
             # redirect_to(credited_lessons_admin_path(instance.credited_lesson))
           end
           format.json { render(json: instance, status: :ok) }

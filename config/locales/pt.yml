@@ -75,6 +75,8 @@ pt:
         start_time: Hora de Inicio
         lesson_group: Pack ID
         time_period: Horário
+        coach_admin_id: Treinador
+        coach_admin: Treinador
       credited_lesson:
         id: Identificador
         created_at: Criada em

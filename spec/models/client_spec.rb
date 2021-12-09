@@ -9,7 +9,7 @@
 #  become_member_at       :datetime
 #  birth_date             :date
 #  comments               :text
-#  email                  :string           default(""), not null
+#  email                  :string           default("")
 #  encrypted_password     :string           default(""), not null
 #  identification_number  :string
 #  is_deleted             :boolean          default(FALSE)

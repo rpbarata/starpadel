@@ -9,7 +9,7 @@
 #  become_member_at       :datetime
 #  birth_date             :date
 #  comments               :text
-#  email                  :string           default(""), not null
+#  email                  :string           default("")
 #  encrypted_password     :string           default(""), not null
 #  identification_number  :string
 #  is_deleted             :boolean          default(FALSE)
@@ -102,14 +102,12 @@ class Client < ApplicationRecord
   end
 
   def anonymise
-    id = Client.unscoped.non_actives.size
-
     self.name = "Anónimo"
     self.address = nil
     self.become_member_at = nil
     self.birth_date = nil
     self.comments = nil
-    self.email = "anonimo_#{id}@anonimo.com"
+    self.email = nil
     self.identification_number = nil
     self.is_master_member = nil
     self.nif = nil
@@ -120,7 +118,6 @@ class Client < ApplicationRecord
     self.rfid_number = nil
     self.fpp_id = nil
     self.member_id = nil
-    self.created_at = Time.zone.now
 
     self.is_deleted = true
 
