@@ -56,20 +56,10 @@ Trestle.resource(:admins, model: Admin) do
 
   # Ignore the password parameters if they are blank
   update_instance do |instance, attrs|
-    if attrs[:password].blank?
-      attrs.delete(:password)
-      attrs.delete(:password_confirmation) if attrs[:password_confirmation].blank?
-    end
+    attrs.delete(:password) if attrs[:password].blank?
 
     instance.assign_attributes(attrs)
   end
-
-  # Log the current user back in if their password was changed
-  after_action on: :update do
-    if instance == current_user && instance.encrypted_password_previously_changed?
-      login!(instance)
-    end
-  end if Devise.sign_in_after_reset_password
 
   controller do
     include FixActionUpdateConcern

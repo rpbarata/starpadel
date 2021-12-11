@@ -4,31 +4,27 @@
 #
 # Table name: admins
 #
-#  id                     :bigint           not null, primary key
-#  current_sign_in_at     :datetime
-#  current_sign_in_ip     :string
-#  email                  :string           default(""), not null
-#  encrypted_password     :string           default(""), not null
-#  last_sign_in_at        :datetime
-#  last_sign_in_ip        :string
-#  remember_created_at    :datetime
-#  reset_password_sent_at :datetime
-#  reset_password_token   :string
-#  role                   :integer
-#  sign_in_count          :integer          default(0), not null
-#  username               :string
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  id                        :bigint           not null, primary key
+#  email                     :string
+#  password_digest           :string
+#  remember_token            :string
+#  remember_token_expires_at :datetime
+#  role                      :integer
+#  username                  :string
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
 #
 # Indexes
 #
-#  index_admins_on_email                 (email)
-#  index_admins_on_reset_password_token  (reset_password_token) UNIQUE
-#  index_admins_on_role                  (role)
-#  index_admins_on_username              (username) UNIQUE
-#  index_admins_on_username_and_email    (username,email)
+#  index_admins_on_username  (username) UNIQUE
 #
 FactoryBot.define do
   factory :admin do
+    email { "MyString" }
+    password_digest { "MyString" }
+    first_name { "MyString" }
+    last_name { "MyString" }
+    remember_token { "MyString" }
+    remember_token_expires_at { "2021-12-11 15:22:17" }
   end
 end

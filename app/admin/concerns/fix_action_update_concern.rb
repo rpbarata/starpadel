@@ -29,8 +29,4 @@ module FixActionUpdateConcern
       end
     end
   end
-
-  def current_user
-    current_admin
-  end
 end

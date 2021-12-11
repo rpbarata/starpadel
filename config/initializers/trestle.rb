@@ -133,26 +133,37 @@ Trestle.configure do |config|
 
   # == Authentication Options
   #
-  # Set the authentication backend to use Devise.
-  #
-  config.auth.backend = :devise
-
-  # Specify the Devise/Warden mapping/scope.
-  #
-  config.auth.warden.scope = :admin
-
   # Specify the user class to be used by trestle-auth.
   #
   config.auth.user_class = -> { Admin }
 
+  # Specify the scope for valid admin users.
+  # Defaults to config.auth.user_class (unscoped).
+  #
+  # config.auth.user_scope = -> { User.where(admin: true) }
+
   # Specify the Trestle admin for managing the current user (My Account).
   #
-  config.auth.user_admin = -> { :admins }
+  config.auth.user_admin = -> { :admin }
 
   # Specify the parameter (along with a password) to be used to
-  # authenticate an administrator. Defaults to :email if not specified below.
+  # authenticate an administrator. Defaults to :email.
   #
-  config.auth.authenticate_with = -> { :username }
+  config.auth.authenticate_with = :username
+
+  # Customize the method for authenticating a user given login parameters.
+  # The block should return an instance of the auth user class, or nil.
+  #
+  # config.auth.authenticate = ->(params) {
+  #   User.authenticate(params[:login], params[:password])
+  # }
+
+  # Customize the method for finding a user given an ID from the session.
+  # The block should return an instance of the auth user class, or nil.
+  #
+  # config.auth.find_user = ->(id) {
+  #   User.find_by(id: id)
+  # }
 
   # Customize the rendering of user avatars. Can be disabled by setting to false.
   # Defaults to the Gravatar based on the user's email address.
@@ -202,18 +213,18 @@ Trestle.configure do |config|
   #
   config.auth.redirect_on_logout = -> { "/admin/login" }
 
+  # Specify the redirect location when access is denied.
+  # Defaults to the admin index (if authorized), otherwise falling back to
+  # the main Trestle admin path.
+  #
+  # config.auth.redirect_on_access_denied = -> { "/" }
+
   # Enable or disable the built-in login/logout form and actions. Defaults to true.
   # You may wish to disable these if you are using a custom backend and
   # handling authentication entirely within your main application.
   #
   # config.auth.enable_login = true
   # config.auth.enable_logout = true
-
-  # Specify the path to redirect to when login is required.
-  # Defaults to the trestle-auth login page. You may wish to change
-  # this if you have also disabled the login form/action above.
-  #
-  # config.auth.login_url = -> { "/users/sign_in" }
 
   # Specify the logo used on the login form.
   # If not specified, will fall back to config.site_logo,
@@ -224,6 +235,30 @@ Trestle.configure do |config|
   # Enable or disable remember me functionality. Defaults to true.
   #
   # config.auth.remember.enabled = false
+
+  # Specify remember me expiration time. Defaults to 2 weeks.
+  #
+  # config.auth.remember.for = 30.days
+
+  # Customize the method for authenticating a user given a remember token.
+  #
+  # config.auth.remember.authenticate = ->(token) {
+  #   User.authenticate_with_remember_token(token)
+  # }
+
+  # Customize the method for remembering a user.
+  #
+  # config.auth.remember.remember_me = ->(user) { user.remember_me! }
+
+  # Customize the method for forgetting a user.
+  #
+  # config.auth.remember.forget_me = ->(user) { user.forget_me! }
+
+  # Customize the method for generating the remember cookie.
+  #
+  # config.auth.remember.cookie = ->(user) {
+  #   { value: user.remember_token, expires: user.remember_token_expires_at }
+  # }
 
   config.tinymce.default.configure do |c|
     c.skin = "trestle"
