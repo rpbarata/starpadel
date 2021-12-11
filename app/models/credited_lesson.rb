@@ -104,7 +104,7 @@ class CreditedLesson < ApplicationRecord
   end
 
   def formated_str
-    "#{client.name} - #{lessons_type.name}"
+    "#{client.name} - #{lessons_type.name} (#{payment_left_str})"
   end
 
   private
