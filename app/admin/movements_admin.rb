@@ -63,8 +63,7 @@ Trestle.resource(:movements, model: Movement) do
       col(sm: 12) do
         select :credited_lesson_id,
           options_from_collection_for_select(
-            CreditedLesson.includes([:client, :lessons_type])
-                          .get(instance.client_id || params[:client_id]),
+            CreditedLesson.includes([:client, :lessons_type]).unpaid.get(instance.client_id || params[:client_id]),
             :id,
             :formated_str,
             instance.credited_lesson_id || params[:credited_lesson_id]
