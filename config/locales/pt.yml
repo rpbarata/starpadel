@@ -512,7 +512,7 @@ pt:
       my_account: "Minha Conta"
       login: "Entrar"
       logout: "Sair"
-      error: "Email ou Senha incorretos."
+      error: "Nome de Utilizador ou Senha incorretos."
       remember_me: "Lembrar-me"
       deleted_account: "A conta já não está ativa."
       auth/account:

@@ -11,5 +11,6 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => "/admin/sidekiq"
   end
 
+  get "dashboard", to: "athlete#index"
   root "dashboard_admin/admin#index"
 end

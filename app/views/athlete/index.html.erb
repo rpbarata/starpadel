@@ -1,0 +1,43 @@
+<h1>As Minhas Aulas Creditadas</h1>
+
+<table>
+  <tr>
+    <th>Tipo de Aula</th>
+    <th>time_period</th>
+    <th>created_at</th>
+    <th>remaining_lessons_str</th>
+    <th>payment_left_str</th>
+  </tr>
+  <% @credited_lessons.each do |credited_lesson| %>
+    <tr>
+      <td><%= credited_lesson.lessons_type.name %></td>
+      <td><%= credited_lesson.time_period %></td>
+      <td><%= credited_lesson.created_at %></td>
+      <td><%= credited_lesson.remaining_lessons_str %></td>
+      <td><%= credited_lesson.payment_left_str %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h1>Vouchers</h1>
+
+<table>
+  <tr>
+    <th>code</th>
+    <th>value</th>
+    <th>value_used</th>
+    <th>value_remaining</th>
+    <th>created_at</th>
+    <th>validity</th>
+  </tr>
+  <% @vouchers.each do |voucher| %>
+    <tr>
+      <td><%= voucher.code %></td>
+      <td><%= voucher.value %></td>
+      <td><%= voucher.value_used %></td>
+      <td><%= voucher.value_remaining %></td>
+      <td><%= voucher.created_at %></td>
+      <td><%= voucher.validity %></td>
+    </tr>
+  <% end %>
+</table>
