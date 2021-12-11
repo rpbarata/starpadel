@@ -37,7 +37,7 @@ class Movement < ApplicationRecord
   belongs_to :client
 
   validates :description, presence: true, if: -> { credited_lesson_id.blank? }
-  validates :value, numericality: { greater_than_or_equal_to: 0 }, presence: true
+  validates :value, numericality: { greater_than: 0 }, presence: true
   validate :validate_voucher_value
 
   before_save :set_date
