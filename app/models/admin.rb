@@ -4,42 +4,26 @@
 #
 # Table name: admins
 #
-#  id                     :bigint           not null, primary key
-#  current_sign_in_at     :datetime
-#  current_sign_in_ip     :string
-#  email                  :string           default(""), not null
-#  encrypted_password     :string           default(""), not null
-#  last_sign_in_at        :datetime
-#  last_sign_in_ip        :string
-#  remember_created_at    :datetime
-#  reset_password_sent_at :datetime
-#  reset_password_token   :string
-#  role                   :integer
-#  sign_in_count          :integer          default(0), not null
-#  username               :string
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  id                        :bigint           not null, primary key
+#  email                     :string
+#  password_digest           :string
+#  remember_token            :string
+#  remember_token_expires_at :datetime
+#  role                      :integer
+#  username                  :string
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
 #
 # Indexes
 #
-#  index_admins_on_email                 (email)
-#  index_admins_on_reset_password_token  (reset_password_token) UNIQUE
-#  index_admins_on_role                  (role)
-#  index_admins_on_username              (username) UNIQUE
-#  index_admins_on_username_and_email    (username,email)
+#  index_admins_on_username  (username) UNIQUE
 #
 class Admin < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, and :omniauthable, :registerable, :recoverable
-  devise :database_authenticatable, :rememberable, :validatable, :trackable
+  include Trestle::Auth::ModelMethods
+  include Trestle::Auth::ModelMethods::Rememberable
 
   enum role: { super_admin: 1, coach_admin: 2, secretariat_admin: 3 }
   validates :username, presence: true, uniqueness: true
 
-  has_many :client_lessons
-
-  # Skips email validations. For now this is not necessary
-  def email_required?
-    false
-  end
+  has_many :client_lessons, dependent: :restrict_with_error
 end

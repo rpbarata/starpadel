@@ -45,7 +45,7 @@ gem "trestle-auth", github: "TrestleAdmin/trestle-auth", branch: "authorization"
   ref: "7d164117a60ffb46f657c721874c01950c64a566"
 gem "trestle-tinymce"
 gem "trestle-search"
-# gem 'trestle-sidekiq'
+gem "trestle-sidekiq"
 
 gem "paper_trail", "~> 11.1"
 gem "paper_trail-globalid", "~> 0.2.0"
