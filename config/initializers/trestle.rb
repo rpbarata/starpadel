@@ -152,7 +152,7 @@ Trestle.configure do |config|
   # Specify the parameter (along with a password) to be used to
   # authenticate an administrator. Defaults to :email if not specified below.
   #
-  config.auth.authenticate_with = -> { Devise.authentication_keys.first }
+  config.auth.authenticate_with = -> { :username }
 
   # Customize the rendering of user avatars. Can be disabled by setting to false.
   # Defaults to the Gravatar based on the user's email address.

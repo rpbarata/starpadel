@@ -11,6 +11,19 @@
   </head>
 
   <body>
-    <%= yield %>
-  </body>
+    <% if alert.present? %>
+
+      <%= alert %>
+
+    </div>
+  <% end %>
+
+  <% if notice.present? %>
+
+    <%= notice %>
+
+  <% end %>
+
+  <%= yield %>
+</body>
 </html>
