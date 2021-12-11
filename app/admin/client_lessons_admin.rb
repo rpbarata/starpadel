@@ -91,6 +91,7 @@ Trestle.resource(:client_lessons, model: ClientLesson) do
                 message: "The %{lowercase_model_name} was successfully updated.")
             # redirect_to_return_location(:update, instance, default: admin.instance_path(instance))
             # redirect_to(credited_lessons_admin_path(instance.credited_lesson))
+            render(:edit, status: :ok)
           end
           format.json { render(json: instance, status: :ok) }
 
@@ -101,7 +102,7 @@ Trestle.resource(:client_lessons, model: ClientLesson) do
           format.html do
             flash.now[:error] =
               flash_message("update.failure", title: "Warning!", message: "Please correct the errors below.")
-            render("show", status: :unprocessable_entity)
+            render("edit", status: :unprocessable_entity)
           end
           format.json { render(json: instance.errors, status: :unprocessable_entity) }
 
