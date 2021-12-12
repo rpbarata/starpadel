@@ -27,8 +27,12 @@ Trestle.resource(:vouchers, model: Voucher) do
   end
 
   table(autolink: false) do
-    column :client, link: true, class: "media-title-column" do |voucher|
-      voucher.client.presence || ""
+    column :client, link: false, class: "media-title-column" do |voucher|
+      if voucher.client.present?
+        link_to(voucher.client.name, clients_admin_path(voucher.client))
+      else
+        content_tag(:span, "Cliente Apagado", class: "blank")
+      end
     end
     column :code, class: "font-weight-bold"
     column :value, ->(voucher) { number_to_currency(voucher.value) }
@@ -36,11 +40,7 @@ Trestle.resource(:vouchers, model: Voucher) do
     column :value_remaining, ->(voucher) { number_to_currency(voucher.value_remaining) }
     column :created_at, sort: { default: true, default_order: :desc }
     column :validity do |voucher|
-      if voucher.validity.present?
-        status_tag(voucher.validity, voucher.expired? ? :danger : :success)
-      else
-        "Sem validade"
-      end
+      voucher.validity.present? ? status_tag(voucher.validity, voucher.expired? ? :danger : :success) : "Sem validade"
     end
 
     actions do |toolbar, _instance, _admin|

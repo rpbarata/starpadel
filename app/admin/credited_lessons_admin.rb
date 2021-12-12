@@ -26,8 +26,12 @@ Trestle.resource(:credited_lessons, model: CreditedLesson) do
   end
 
   table(autolink: false) do
-    column :client, link: true, class: "media-title-column" do |lesson|
-      lesson.client.presence || ""
+    column :client, link: false, class: "media-title-column" do |lesson|
+      if lesson.client.present?
+        link_to(lesson.client.name, clients_admin_path(lesson.client))
+      else
+        content_tag(:span, "Cliente Apagado", class: "blank")
+      end
     end
     column :lessons_type, sort: false, link: true, class: "media-title-column" do |lesson|
       link_to(lesson.lessons_type.name, lessons_type_admin_path(lesson.lessons_type))
@@ -41,11 +45,7 @@ Trestle.resource(:credited_lessons, model: CreditedLesson) do
     column :created_at, sort: { default: true, default_order: :desc }
     column :remaining_lessons_str, align: :center, sort: false
     column :payment_left_str, sort: false do |lesson|
-      if lesson.paid?
-        status_tag("Pago", :success)
-      else
-        lesson.payment_left_str
-      end
+      lesson.paid? ? status_tag("Pago", :success) : lesson.payment_left_str
     end
 
     actions do |toolbar, instance, _admin|
