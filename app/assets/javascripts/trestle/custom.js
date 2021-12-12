@@ -9,7 +9,7 @@
 //= require chartkick
 //= require Chart.bundle
 
-document.addEventListener('turbolinks:load', () => {
+$(document).on('turbolinks:load', function () {
   $('#client_member_id').on('input', function (e) {
     if (e.currentTarget.value.length > 0) {
       $('#client_is_master_member').attr('disabled', false);
@@ -28,15 +28,15 @@ document.addEventListener('turbolinks:load', () => {
     }
   })
 
-  $('#movement_from_credited_lesson').click(function (e) {
-    if (e.currentTarget.checked) {
-      console.log("checked")
-      $('#movement_lesson_row')[0].style.display = "block";
-      $('#movement_description_row')[0].style.display = "none";
-    } else {
-      console.log("not checked")
-      $('#movement_lesson_row')[0].style.display = "none";
-      $('#movement_description_row')[0].style.display = "block";
-    }
-  })
+  // $('#movement_from_credited_lesson').click(function (e) {
+  //   if (e.currentTarget.checked) {
+  //     console.log("checked")
+  //     $('#movement_lesson_row')[0].style.display = "block";
+  //     $('#movement_description_row')[0].style.display = "none";
+  //   } else {
+  //     console.log("not checked")
+  //     $('#movement_lesson_row')[0].style.display = "none";
+  //     $('#movement_description_row')[0].style.display = "block";
+  //   }
+  // })
 })

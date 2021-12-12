@@ -59,7 +59,7 @@ Trestle.resource(:movements, model: Movement) do
       col(sm: 6) { check_box :from_credited_lesson }
     end
 
-    row(id: "movement_lesson_row", style: "display: none") do
+    row(id: "movement_lesson_row", style: "display: #{instance.from_credited_lesson ? "block" : "none"}") do
       col(sm: 12) do
         select :credited_lesson_id,
           options_from_collection_for_select(
@@ -69,11 +69,12 @@ Trestle.resource(:movements, model: Movement) do
             instance.credited_lesson_id || params[:credited_lesson_id]
           ),
           include_blank: "Escolha uma aula",
-          disabled: params[:credited_lesson_id].present? || instance.credited_lesson_id.present?
+          disabled: params[:credited_lesson_id].present? ||
+            (instance.persisted? && instance.credited_lesson_id.present?)
       end
     end
 
-    row(id: "movement_description_row") do
+    row(id: "movement_description_row", style: "display: #{instance.from_credited_lesson ? "none" : "block"}") do
       col(sm: 12) { text_field :description }
     end
 

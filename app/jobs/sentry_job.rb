@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class SentryJob < ApplicationJob
   queue_as :default
 
