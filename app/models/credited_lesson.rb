@@ -83,8 +83,8 @@ class CreditedLesson < ApplicationRecord
       unit: "€")} de #{ActionController::Base.helpers.number_to_currency(lesson_price, unit: "€")}"
   end
 
-  def add_payment(params)
-    self.payment += params[:new_payment].to_d
+  def add_payment(new_payment)
+    self.payment += new_payment
   end
 
   def create_movement(voucher_id, value)

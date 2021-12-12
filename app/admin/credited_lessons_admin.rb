@@ -125,7 +125,7 @@ Trestle.resource(:credited_lessons, model: CreditedLesson) do
 
     def update_payment_modal
       instance.new_payment = payment_modal_params[:new_payment]
-      instance.add_payment(payment_modal_params)
+      instance.add_payment(payment_modal_params[:new_payment].to_d)
 
       movement_is_valid = true
       if payment_modal_params[:voucher_id].present?

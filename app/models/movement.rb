@@ -36,13 +36,14 @@ class Movement < ApplicationRecord
   belongs_to :credited_lesson, optional: true
   belongs_to :client
 
-  validates :description, presence: true, if: -> { credited_lesson_id.blank? }
+  validates :description, presence: true, if: -> { !from_credited_lesson }
   validates :value, numericality: { greater_than: 0 }, presence: true
   validate :validate_voucher_value
+  validate :validate_lesson_payment, if: -> { from_credited_lesson }
 
   before_save :set_date
-  before_create :set_description, if: -> { credited_lesson_id.present? && description.blank? }
-  before_create :update_voucher
+  before_create :set_description, if: -> { from_credited_lesson && description.blank? }
+  before_create :do_payment
 
   private
 
@@ -54,11 +55,18 @@ class Movement < ApplicationRecord
     self.description = "Pagamento: #{credited_lesson&.lessons_type&.name}"
   end
 
-  def update_voucher
-    old_voucher_value_used = voucher.value_used
-    new_voucher_value_used = old_voucher_value_used + value
+  def do_payment
+    ActiveRecord::Base.transaction do
+      old_voucher_value_used = voucher.value_used
+      new_voucher_value_used = old_voucher_value_used + value
 
-    voucher.update(value_used: new_voucher_value_used)
+      voucher.update(value_used: new_voucher_value_used)
+
+      if from_credited_lesson
+        credited_lesson.add_payment(value)
+        credited_lesson.save!
+      end
+    end
   end
 
   def validate_voucher_value
@@ -67,6 +75,13 @@ class Movement < ApplicationRecord
 
     if new_voucher_value_used > voucher.value
       errors.add(:value, "ultrapassa o valor disponível do voucher")
+    end
+  end
+
+  def validate_lesson_payment
+    credited_lesson = CreditedLesson.find(credited_lesson_id)
+    if value > (credited_lesson.lesson_price - credited_lesson.payment)
+      errors.add(:value, "não pode exceder o valor em dívida da aula")
     end
   end
 end

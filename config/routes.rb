@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   get "health", to: "application#health"
-  
+
   devise_for :clients
 
   get "dashboard", to: "athlete#index"
