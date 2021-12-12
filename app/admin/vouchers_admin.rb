@@ -31,7 +31,7 @@ Trestle.resource(:vouchers, model: Voucher) do
       if voucher.client.present?
         link_to(voucher.client.name, clients_admin_path(voucher.client))
       else
-        content_tag(:span, "Cliente Apagado", class: "blank")
+        content_tag(:span, voucher.client.name, class: "blank")
       end
     end
     column :code, class: "font-weight-bold"
