@@ -5,8 +5,8 @@ production:
 :queues:
   - exports
   - default
-# :schedule:
-#   health_test:
-#     cron: "* * * * * *" # Execute every minute (for testing)
-#     class: HealthJob
-#     description: "Health test to check if APP is working"
+:schedule:
+  health_test:
+    cron: "0 */25 * * * *"
+    class: HealthJob
+    description: "Health test to check if APP is working"
