@@ -67,8 +67,8 @@ Trestle.resource(:clients, model: Client) do
     text_field :name
 
     row do
-      col(sm: 6) { text_field :email }
-      col(sm: 6) { text_field :phone_number }
+      col(sm: 6) { email_field :email }
+      col(sm: 6) { telephone_field :phone_number }
     end
 
     text_field :address

@@ -19,6 +19,7 @@ class Ability
       can([:index, :show], LessonsType)
       can(:manage, ClientLesson)
       can(:manage, CreditedLesson)
+      can(:manage, Voucher)
     end
   end
 end

@@ -4,7 +4,7 @@ class HealthJob < ApplicationJob
   queue_as :default
 
   def perform
-  raise "Health Test FAILED" if request != "OK"
+    raise "Health Test FAILED" if request != "OK"
   rescue => exception
     SentryJob.perform_now(exception, { source: "HealthJob", res: request })
     nil
