@@ -18,7 +18,8 @@ Trestle.resource(:client_lessons, model: ClientLesson) do
     end
   end
 
-  form dialog: true do |client_lesson|
+  # FIX: this should be a dialog. But something is wrong with the redirect
+  form do |client_lesson|
     row do
       col(sm: 12) do
         select :client_id,
@@ -69,14 +70,6 @@ Trestle.resource(:client_lessons, model: ClientLesson) do
   end
 
   controller do
-    # include FixActionUpdateConcern
-
-    # def show
-    #   super
-
-    #   @hide_breadcrumbs = true
-    # end
-
     def edit
       super
     end
@@ -90,11 +83,10 @@ Trestle.resource(:client_lessons, model: ClientLesson) do
                 title: "Success!",
                 message: "The %{lowercase_model_name} was successfully updated.")
             # redirect_to_return_location(:update, instance, default: admin.instance_path(instance))
-            # redirect_to(credited_lessons_admin_path(instance.credited_lesson))
-            render(:edit, status: :ok)
+            redirect_to(credited_lessons_admin_path(instance.credited_lesson))
+            # render(:edit, status: :ok)
           end
           format.json { render(json: instance, status: :ok) }
-
           yield format if block_given?
         end
       else
