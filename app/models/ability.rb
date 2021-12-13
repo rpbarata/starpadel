@@ -20,6 +20,7 @@ class Ability
       can(:manage, ClientLesson)
       can(:manage, CreditedLesson)
       can(:manage, Voucher)
+      can(:manage, Movement)
     end
   end
 end
