@@ -8,4 +8,10 @@ module ExportPathConcern
 
     export_params.to_query
   end
+
+  def export_client_lessons_params(params)
+    export_params = params.permit!.slice(:client, :coach, :start_date, :end_date)
+
+    export_params.to_query
+  end
 end

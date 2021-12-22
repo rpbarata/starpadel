@@ -9,7 +9,7 @@ Trestle.resource(:clients, model: Client) do
 
   search do |query|
     if query
-      collection.where("name ILIKE :q", q_id: query&.to_i, q: "%#{query}%")
+      collection.where("name ILIKE :q", q: "%#{query}%")
     end
   end
 

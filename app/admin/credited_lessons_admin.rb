@@ -6,7 +6,7 @@ Trestle.resource(:credited_lessons, model: CreditedLesson) do
   remove_action :destroy, :update, :edit
 
   menu do
-    item :"Aulas Creditadas", icon: "far fa-calendar-alt", priority: 3
+    item :"Aulas Creditadas", icon: "fa fa-shopping-cart", priority: 3
   end
 
   scopes do

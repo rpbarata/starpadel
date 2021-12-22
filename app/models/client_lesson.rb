@@ -8,6 +8,7 @@
 #  comments           :text
 #  end_time           :datetime
 #  start_time         :datetime
+#  status             :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  client_id          :bigint           not null
@@ -34,14 +35,24 @@
 class ClientLesson < ApplicationRecord
   has_paper_trail
 
+  attr_accessor :from_client_lessons
+
   belongs_to :credited_lesson, dependent: :destroy
   belongs_to :lessons_type
   belongs_to :client, dependent: :destroy
   belongs_to :coach_admin, class_name: "Admin", optional: true
 
+  enum status: { to_schedule: 1, schedule: 2, done: 3, missed: 4 }
+
   validate :validate_dates, if: -> { start_time.present? || end_time.present? }
 
   scope :done, -> { where.not(start_time: nil, end_time: nil) }
+
+  before_create :set_default_status
+
+  def duration
+    return (end_time - start_time) / 1.hour if start_time.present? && end_time.present?
+  end
 
   private
 
@@ -53,5 +64,9 @@ class ClientLesson < ApplicationRecord
       errors.add(:start_time, "deve ser antes da data de fim")
       errors.add(:end_time, "deve ser depois da data de início")
     end
+  end
+
+  def set_default_status
+    self.to_schedule!
   end
 end

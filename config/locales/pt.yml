@@ -11,8 +11,8 @@ pt:
         one: Tipo de Aula
         other: Tipos de Aulas
       client_lesson:
-        one: Aula
-        other: Aulas
+        one: Marcação de Aula
+        other: Marcação de Aulas
       credited_lesson:
         one: Aula Creditada
         other: Aulas Creditadas
@@ -77,6 +77,7 @@ pt:
         time_period: Horário
         coach_admin_id: Treinador
         coach_admin: Treinador
+        status: Estado
       credited_lesson:
         id: Identificador
         created_at: Criada em
@@ -151,6 +152,11 @@ pt:
       time_period:
         green_time: Green Time
         red_time: Red Time
+      status_list:
+        to_schedule: Por Agendar
+        schedule: Agendada
+        done: Realizada
+        missed: Faltou
     scopes:
       default: Todos
       admins:

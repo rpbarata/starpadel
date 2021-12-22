@@ -107,6 +107,10 @@ class CreditedLesson < ApplicationRecord
     "#{client.name} - #{lessons_type.name} (#{payment_left_str})"
   end
 
+  def name
+    "#{lessons_type.name} #{green_time? ? "GT" : "RT"}"
+  end
+
   private
 
   def generate_client_lessons
