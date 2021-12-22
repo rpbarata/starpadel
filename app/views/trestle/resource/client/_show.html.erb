@@ -2,6 +2,9 @@
 
 <% if current_user.super_admin? || current_user.secretariat_admin? %>
   <div class="btn-toolbar primary-toolbar d-flex justify-content-end" role="toolbar">
+    <% unless instance.active %>
+      <%= link_to "Gerar Credenciais", generate_credentials_clients_admin_path(instance), method: :patch, class: "btn btn-info" %>
+    <% end %>
     <%= link_to "Editar", edit_clients_admin_path(instance), class: "btn btn-warning" %>
   </div>
 <% end %>

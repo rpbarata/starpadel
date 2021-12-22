@@ -99,6 +99,8 @@ Trestle.resource(:clients, model: Client) do
     include TrestleFiltersConcern
     include ExportPathConcern
 
+    before_action :load_instance, only: [:show, :edit, :update, :destroy, :generate_credentials]
+
     def index
       super
 
@@ -189,9 +191,23 @@ message: "The %{lowercase_model_name} was successfully deleted.")
         yield format if block_given?
       end
     end
+
+    def generate_credentials
+      if instance.generate_new_credentials
+        flash[:message] = { title: "Sucesso!", message: "Credenciais Geradas com sucesso." }
+      else
+        flash[:error] = { title: "Aviso!", message: "Não foi possível gerar as Credenciais." }
+      end
+
+      redirect_to("#{clients_admin_path(instance)}#!tab-client")
+    end
   end
 
   routes do
     get :export, on: :collection
+
+    member do
+      patch :generate_credentials
+    end
   end
 end
