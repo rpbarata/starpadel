@@ -5,6 +5,7 @@
 # Table name: clients
 #
 #  id                     :bigint           not null, primary key
+#  active                 :boolean          default(FALSE)
 #  address                :string
 #  become_member_at       :datetime
 #  birth_date             :date
@@ -42,7 +43,7 @@ class Client < ApplicationRecord
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :validatable
 
-  devise :database_authenticatable
+  devise :database_authenticatable, :validatable
 
   has_many :credited_lessons, dependent: :destroy
   has_many :vouchers, dependent: :destroy
@@ -120,10 +121,26 @@ class Client < ApplicationRecord
     self.rfid_number = nil
     self.fpp_id = nil
     self.member_id = nil
+    self.active = false
 
     self.is_deleted = true
 
     save!
+  end
+
+  def generate_new_credentials
+    password =
+      if ActiveModel::Type::Boolean.new.cast(ENV.fetch("DEFAULT_CLIENTS_PASSWORD", "false"))
+        "123456"
+      else
+        SecureRandom.base64(10)
+      end
+
+    self.password = password
+    self.password_confirmation = password
+    self.active = true
+
+    save
   end
 
   private
