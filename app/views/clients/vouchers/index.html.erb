@@ -18,7 +18,7 @@
           <td><%= number_to_currency(voucher.value_used) %></td>
           <td><%= number_to_currency(voucher.value_remaining) %></td>
           <td><%= l(voucher.created_at, format: :short) %></td>
-          <td><%= l(voucher.validity, format: :short) %></td>
+          <td><%= voucher.validity.present? ? l(voucher.validity, format: :short) : "Sem Validade" %></td>
           <td><%= link_to("Movimentos", clients_voucher_movements_path(voucher)) %>
           </tr>
         <% end %>
