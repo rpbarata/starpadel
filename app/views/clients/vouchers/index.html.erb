@@ -1,0 +1,25 @@
+<h1>Vouchers</h1>
+
+<table>
+  <tr>
+    <th>Código</th>
+    <th>Valor</th>
+    <th>Valor Utilizado</th>
+    <th>Valor Disponível</th>
+    <th>Criado em</th>
+    <th>Validade</th>
+    <th>
+      <th>
+      </tr>
+      <% @vouchers.each do |voucher| %>
+        <tr>
+          <td><%= voucher.code %></td>
+          <td><%= voucher.value %></td>
+          <td><%= number_to_currency(voucher.value_used) %></td>
+          <td><%= number_to_currency(voucher.value_remaining) %></td>
+          <td><%= l(voucher.created_at, format: :short) %></td>
+          <td><%= l(voucher.validity, format: :short) %></td>
+          <td><%= link_to("Movimentos", clients_voucher_movements_path(voucher)) %>
+          </tr>
+        <% end %>
+      </table>

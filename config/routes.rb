@@ -1,10 +1,21 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get "health", to: "application#health"
-
   devise_for :clients
 
-  get "dashboard", to: "athlete#index"
-  root "dashboard_admin/admin#index"
+  namespace :clients do
+    get "/", to: "client#index"
+    resources :credited_lessons, only: [:index] do
+      resources :lessons, only: [:index]
+    end
+    resources :vouchers, only: [:index] do
+      resources :movements, only: [:index]
+    end
+  end
+
+  get "home/index"
+  get "health", to: "application#health"
+
+  # root "dashboard_admin/admin#index"
+  root "home#index"
 end

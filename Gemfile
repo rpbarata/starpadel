@@ -71,6 +71,8 @@ gem "write_xlsx"
 gem "sidekiq"
 gem "sidekiq-scheduler"
 
+gem "breadcrumbs_on_rails"
+
 group :development, :test do
   gem "bullet"
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

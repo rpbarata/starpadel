@@ -1,0 +1,15 @@
+<p>Nome: <%= current_client.name %></p>
+<p>Email: <%= current_client.email %></p>
+<p>Número de Telemóvel: <%= current_client.phone_number %></p>
+<p>Morada: <%= current_client.address %></p>
+<p>Número de Sócio Star Padel: <%= current_client.member_id %></p>
+<p>Sócio Master? <%= t("boolean.#{current_client.is_master_member}") %></p>
+<p>Número de Sócio FPP: <%= current_client.fpp_id %></p>
+<p>Nº de CC: <%= current_client.identification_number %></p>
+<p>NIF: <%= current_client.nif %></p>
+<p>Data de Nascimento: <%= l(current_client.birth_date) %></p>
+<p>Adulto? </span>
+<% if current_client.birth_date.present? %>
+  <%= t("boolean.#{current_client.adult?}") %>
+<% end %>
+</p>
