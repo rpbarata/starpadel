@@ -1,0 +1,33 @@
+<table>
+  <tr>
+    <th>Código</th>
+    <th>Valor</th>
+    <th>Valor Utilizado</th>
+    <th>Valor Disponível</th>
+    <th>Criado em</th>
+    <th>Validade</th>
+  </tr>
+  <tr>
+    <td><%= @voucher.code %></td>
+    <td><%= @voucher.value %></td>
+    <td><%= number_to_currency(@voucher.value_used) %></td>
+    <td><%= number_to_currency(@voucher.value_remaining) %></td>
+    <td><%= l(@voucher.created_at, format: :short) %></td>
+    <td><%= l(@voucher.validity, format: :short) %></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>Valor</th>
+    <th>Data</th>
+    <th>Descrição</th>
+  </tr>
+  <% @movements.each do |movement| %>
+    <tr>
+      <td><%= number_to_currency(movement.value) %></td>
+      <td><%= l(movement.date, format: :short) %></td>
+      <td><%= movement.description %></td>
+    </tr>
+  <% end %>
+</table>

@@ -7,7 +7,7 @@ pt:
       client:
         one: Cliente
         other: Clientes
-      lessons_type: 
+      lessons_type:
         one: Tipo de Aula
         other: Tipos de Aulas
       client_lesson:
@@ -470,7 +470,7 @@ pt:
     formats:
       default: "%A, %d de %B de %Y, %H:%Mh"
       long: "%A, %d de %B de %Y, %H:%Mh"
-      short: "%d/%m, %H:%M hs"
+      short: "%d/%m/%Y %H:%M"
     pm: pm
   views:
     pagination:
