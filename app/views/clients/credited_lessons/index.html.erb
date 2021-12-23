@@ -1,0 +1,22 @@
+<h1>As Minhas Aulas Creditadas</h1>
+
+<table>
+  <tr>
+    <th>Tipo de Aula</th>
+    <th>Horário</th>
+    <th>Credita em</th>
+    <th>Nº de Aulas</th>
+    <th>Estado do Pagamento</th>
+    <th></th>
+  </tr>
+  <% @credited_lessons.each do |credited_lesson| %>
+    <tr>
+      <td><%= credited_lesson.lessons_type.name %></td>
+      <td><%= t("activerecord.enums.time_period.#{credited_lesson.time_period}") %></td>
+      <td><%= l(credited_lesson.created_at, format: :short) %></td>
+      <td><%= credited_lesson.remaining_lessons_str %></td>
+      <td><%= credited_lesson.payment_left_str %></td>
+      <td><%= link_to("Mostrar", clients_credited_lesson_lessons_path(credited_lesson)) %></td>
+    </tr>
+  <% end %>
+</table>
