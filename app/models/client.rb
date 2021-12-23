@@ -39,11 +39,11 @@
 #
 class Client < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :registerable, :timeoutable, :trackable and :omniauthable
-  # devise :database_authenticatable, :registerable,
-  #        :recoverable, :rememberable, :validatable
+  # :confirmable, :timeoutable, :trackable and :omniauthable, :recoverable, :rememberable, :validatable
 
-  devise :database_authenticatable, :validatable
+  devise :database_authenticatable, :validatable, :registerable
+
+  attr_accessor :skip_password_validation # virtual attribute to skip password validation while saving
 
   has_many :credited_lessons, dependent: :destroy
   has_many :vouchers, dependent: :destroy
@@ -161,5 +161,12 @@ class Client < ApplicationRecord
     if member_id.blank?
       errors.add(:is_master_member, "deve ser sócio")
     end
+  end
+
+  protected
+
+  def password_required?
+    return false if skip_password_validation
+    super
   end
 end

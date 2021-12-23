@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :clients
+  devise_for :clients # , skip: [:registrations]
+  # as :client do
+  #   get 'clients/edit' => 'devise/registrations#edit', :as => 'edit_client_registration'
+  # end
 
   namespace :clients do
     get "/", to: "client#index"
