@@ -201,6 +201,11 @@ message: "The %{lowercase_model_name} was successfully deleted.")
 
       redirect_to("#{clients_admin_path(instance)}#!tab-client")
     end
+
+    def create
+      instance.skip_password_validation = true
+      super
+    end
   end
 
   routes do

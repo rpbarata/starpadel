@@ -5,6 +5,7 @@
 # Table name: clients
 #
 #  id                     :bigint           not null, primary key
+#  active                 :boolean          default(FALSE)
 #  address                :string
 #  become_member_at       :datetime
 #  birth_date             :date

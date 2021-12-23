@@ -49,6 +49,9 @@ pt:
         phone_number: Número de Telemóvel
         is_adult: Adulto?
         is_master_member: Sócio Master?
+        password: Palavra-Pass
+        password_confirmation: Confirmação da Palavra-Pass
+        current_password: Palavra-Pass Atual
       lessons_type:
         id: Identificador
         created_at: Criado em

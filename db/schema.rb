@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2021_12_22_222126) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "credited_lesson_id", null: false
     t.bigint "coach_admin_id"
+    t.integer "status"
     t.index ["client_id"], name: "index_client_lessons_on_client_id"
     t.index ["created_at"], name: "index_client_lessons_on_created_at"
     t.index ["credited_lesson_id"], name: "index_client_lessons_on_credited_lesson_id"
