@@ -129,18 +129,13 @@ class Client < ApplicationRecord
   end
 
   def generate_new_credentials
-    password =
-      if ActiveModel::Type::Boolean.new.cast(ENV.fetch("DEFAULT_CLIENTS_PASSWORD", "false"))
-        "123456"
-      else
-        SecureRandom.base64(10)
-      end
+    password = SecureRandom.base64(10)
 
     self.password = password
     self.password_confirmation = password
     self.active = true
 
-    save
+    password
   end
 
   private
