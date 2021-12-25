@@ -88,6 +88,7 @@ group :development do
   gem "brakeman"
   # preview emails in browser
   gem "letter_opener"
+  gem "letter_opener_web", "~> 2.0"
   # To annotate models
   gem "annotate"
   # Ruby linting
