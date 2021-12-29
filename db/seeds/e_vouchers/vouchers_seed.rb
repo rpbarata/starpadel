@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-if ActiveModel::Type::Boolean.new.cast(ENV.fetch("SEED_VOUCHERS", "false")) && !Voucher.any?
+if ActiveModel::Type::Boolean.new.cast(ENV.fetch("TESTING", "false")) && !Voucher.any?
   STDOUT.puts("Seeding with Vouchers for testing")
 
   Faker::Config.locale = "en"

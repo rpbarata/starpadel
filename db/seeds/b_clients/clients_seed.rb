@@ -52,7 +52,7 @@ def client_hash(seed)
   }
 end
 
-if ActiveModel::Type::Boolean.new.cast(ENV.fetch("SEED_CLIENTS", "false")) && !Client.any?
+if ActiveModel::Type::Boolean.new.cast(ENV.fetch("TESTING", "false")) && !Client.any?
   STDOUT.puts("Seeding with deterministic clients for testing")
 
   Faker::Config.locale = "en"

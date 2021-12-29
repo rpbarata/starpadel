@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-if ActiveModel::Type::Boolean.new.cast(ENV.fetch("SEED_LESSONS", "false")) && !CreditedLesson.any?
+if ActiveModel::Type::Boolean.new.cast(ENV.fetch("TESTING", "false")) && !CreditedLesson.any?
   STDOUT.puts("Seeding with CreditedLessons for testing")
 
   Faker::Config.locale = "en"
