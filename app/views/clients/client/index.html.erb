@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-<p>Nome: <%= current_client.name %></p>
-<p>Email: <%= current_client.email %></p>
-<p>Número de Telemóvel: <%= current_client.phone_number %></p>
-<p>Morada: <%= current_client.address %></p>
-<p>Número de Sócio Star Padel: <%= current_client.member_id %></p>
-<p>Sócio Master? <%= t("boolean.#{current_client.is_master_member}") %></p>
-<p>Número de Sócio FPP: <%= current_client.fpp_id %></p>
-<p>Nº de CC: <%= current_client.identification_number %></p>
-<p>NIF: <%= current_client.nif %></p>
-<p>Data de Nascimento: <%= current_client.birth_date.present? ? l(current_client.birth_date) : "" %></p>
-<p>Adulto? </span>
-<% if current_client.birth_date.present? %>
-=======
 <%= stylesheet_link_tag "client.css" %>
 
 <p><text class="texto">Nome:</text> <text class="info"><%= current_client.name %></text></p>
@@ -22,11 +8,12 @@
 <p><text class="texto">Sócio Master:</text> <text class="info"><%= t("boolean.#{current_client.is_master_member}") %></text></p>
 <p><text class="texto">Número de Sócio FPP:</text> <text class="info"><%= current_client.fpp_id %></text></p>
 <p><text class="texto">Nº de CC:</text> <text class="info"><%= current_client.identification_number %></text></p>
-<p><text class="texto">NIF:</text> <text class="info"><%= current_client.nif %></p>
-<p><text class="texto">Data de Nascimento:</text> <text class="info"><%= l(current_client.birth_date) %></text></p>
+<p><text class="texto">NIF:</text> <text class="info"><%= current_client.nif %></text></p>
+<p><text class="texto">Data de Nascimento:</text> <text class="info"><%= current_client.birth_date.present? ? l(current_client.birth_date) : "" %></text></p>
 <p><text class="texto">Adulto:</text> </span>
-<text class="info"><% if current_client.birth_date.present? %>
->>>>>>> table styling
-  <%= t("boolean.#{current_client.adult?}") %>
-<% end %></text>
+<text class="info">
+  <% if current_client.birth_date.present? %>
+    <%= t("boolean.#{current_client.adult?}") %>
+  <% end %>
+</text>
 </p>
