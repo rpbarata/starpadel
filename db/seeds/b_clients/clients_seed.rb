@@ -49,7 +49,7 @@ def client_hash(seed)
     # phone_number: phone_number,
     comments: comments,
     is_master_member: is_master_member,
-    skip_password_validation: true
+    skip_password_validation: true,
   }
 end
 
