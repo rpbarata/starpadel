@@ -33,12 +33,15 @@
 #  fk_rails_...  (lessons_type_id => lessons_types.id)
 #
 class ClientLesson < ApplicationRecord
+  attr_accessor :tmp_original_client_id
+  attr_accessor :tmp_team_ids
   has_paper_trail
 
-  belongs_to :credited_lesson, dependent: :destroy
+  belongs_to :credited_lesson, dependent: :destroy, counter_cache: :client_lessons_count
   belongs_to :lessons_type
-  belongs_to :client, dependent: :destroy
   belongs_to :coach_admin, class_name: "Admin", optional: true
+
+  has_and_belongs_to_many :clients
 
   validate :validate_dates, if: -> { start_time.present? || end_time.present? }
 

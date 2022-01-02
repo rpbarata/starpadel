@@ -98,6 +98,15 @@ class Client < ApplicationRecord
           start_date: (Time.zone.now.beginning_of_day - 31.days), end_date: Time.zone.now.end_of_day).distinct
       end
     end
+
+    def build_team(lesson_type_id)
+      number_of_lessons = LessonsType.find(lesson_type_id).number_of_lessons
+
+      Client.joins(:credited_lessons)
+            .where(credited_lessons: { lessons_type_id: lesson_type_id })
+            .and(where('credited_lessons.client_lessons_count < ?', number_of_lessons))
+            .order(name: :asc)
+    end
   end
 
   def adult?

@@ -80,6 +80,8 @@ pt:
         time_period: Horário
         coach_admin_id: Treinador
         coach_admin: Treinador
+        tmp_original_client_id: Client
+        tmp_team_ids: Turma
       credited_lesson:
         id: Identificador
         created_at: Criada em

@@ -25,5 +25,13 @@ class Admin < ApplicationRecord
   enum role: { super_admin: 1, coach_admin: 2, secretariat_admin: 3 }
   validates :username, presence: true, uniqueness: true
 
-  has_many :client_lessons, dependent: :restrict_with_error
+  # has_many :client_lessons, dependent: :restrict_with_error
+
+  def client_lessons
+    if coach_admin?
+      ClientLesson.where(coach_admin_id: id)
+    else
+      ClientLesson.all
+    end
+  end
 end

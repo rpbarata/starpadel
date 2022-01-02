@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_22_222126) do
+ActiveRecord::Schema.define(version: 2021_12_27_214500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2021_12_22_222126) do
     t.integer "time_period"
     t.decimal "payment", precision: 8, scale: 2, default: "0.0"
     t.decimal "lesson_price", precision: 8, scale: 2, default: "0.0"
+    t.integer "client_lessons_count"
     t.index ["client_id"], name: "index_credited_lessons_on_client_id"
     t.index ["created_at"], name: "index_credited_lessons_on_created_at"
     t.index ["lesson_price", "payment"], name: "index_credited_lessons_on_lesson_price_and_payment"

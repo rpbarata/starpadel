@@ -61,4 +61,11 @@
 </div>
 
 <br>
+
+<div class="row">
+  <div class="col-3">
+    <%= link_to("Agendar Aula", new_client_lessons_admin_path(lesson_type_id: instance.lessons_type.id, client_id: instance.client.id, credited_lesson_id: instance), class: "btn btn-success") %>
+  </div>
+</div>
+
 <%= table ClientLessonsAdmin.table, collection: @lessons.page(params[:page]).per(50) %>
