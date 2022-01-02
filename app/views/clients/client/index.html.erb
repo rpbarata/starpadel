@@ -7,7 +7,7 @@
 <p>Número de Sócio FPP: <%= current_client.fpp_id %></p>
 <p>Nº de CC: <%= current_client.identification_number %></p>
 <p>NIF: <%= current_client.nif %></p>
-<p>Data de Nascimento: <%= l(current_client.birth_date) %></p>
+<p>Data de Nascimento: <%= current_client.birth_date.present? ? l(current_client.birth_date) : "" %></p>
 <p>Adulto? </span>
 <% if current_client.birth_date.present? %>
   <%= t("boolean.#{current_client.adult?}") %>
