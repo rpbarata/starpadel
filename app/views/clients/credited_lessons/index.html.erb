@@ -1,7 +1,12 @@
-<h1>As Minhas Aulas Creditadas</h1>
 
-<table>
-  <tr>
+<%= stylesheet_link_tag "creditedlessons.css" %>
+
+<h1 class="title">As Minhas Aulas Creditadas</h1>
+
+
+<div class="table-responsive">
+<table class="table">
+  <tr class="thead-dark">
     <th>Tipo de Aula</th>
     <th>Horário</th>
     <th>Credita em</th>
@@ -16,7 +21,8 @@
       <td><%= l(credited_lesson.created_at, format: :short) %></td>
       <td><%= credited_lesson.remaining_lessons_str %></td>
       <td><%= credited_lesson.payment_left_str %></td>
-      <td><%= link_to("Mostrar", clients_credited_lesson_lessons_path(credited_lesson)) %></td>
+      <td><%= link_to("Mostrar", clients_credited_lesson_lessons_path(credited_lesson),class: 'show') %></td>
     </tr>
   <% end %>
 </table>
+</div>
