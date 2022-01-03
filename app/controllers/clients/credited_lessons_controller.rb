@@ -8,7 +8,7 @@ module Clients
     before_action :authenticate_client!
 
     def index
-      @credited_lessons = current_client.credited_lessons
+      @credited_lessons = current_client.credited_lessons.includes([:lessons_type])
     end
   end
 end

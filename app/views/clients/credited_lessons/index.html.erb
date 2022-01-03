@@ -1,28 +1,24 @@
-
 <%= stylesheet_link_tag "creditedlessons.css" %>
 
 <h1 class="title">As Minhas Aulas Creditadas</h1>
 
-
-<div class="table-responsive">
-<table class="table">
-  <tr class="thead-dark">
-    <th>Tipo de Aula</th>
-    <th>Horário</th>
-    <th>Credita em</th>
-    <th>Nº de Aulas</th>
-    <th>Estado do Pagamento</th>
-    <th></th>
-  </tr>
-  <% @credited_lessons.each do |credited_lesson| %>
-    <tr>
-      <td><%= credited_lesson.lessons_type.name %></td>
-      <td><%= t("activerecord.enums.time_period.#{credited_lesson.time_period}") %></td>
-      <td><%= l(credited_lesson.created_at, format: :short) %></td>
-      <td><%= credited_lesson.remaining_lessons_str %></td>
-      <td><%= credited_lesson.payment_left_str %></td>
-      <td><%= link_to("Mostrar", clients_credited_lesson_lessons_path(credited_lesson),class: 'show') %></td>
+<div class="table-responsive" data-controller="creditedLessons">
+  <table class="table table-hover">
+    <tr class="thead-dark">
+      <th>Tipo de Aula</th>
+      <th>Horário</th>
+      <th>Credita em</th>
+      <th>Nº de Aulas</th>
+      <th>Estado do Pagamento</th>
     </tr>
-  <% end %>
-</table>
+    <% @credited_lessons.each do |credited_lesson| %>
+      <tr data-href="<%= clients_credited_lesson_lessons_path(credited_lesson) %>" data-action="click->creditedLessons#openHref" style="cursor: pointer;" class="pointer">
+        <td><%= credited_lesson.lessons_type.name %></td>
+        <td><%= t("activerecord.enums.time_period.#{credited_lesson.time_period}") %></td>
+        <td><%= l(credited_lesson.created_at, format: :short) %></td>
+        <td><%= credited_lesson.remaining_lessons_str %></td>
+        <td><%= credited_lesson.payment_left_str %></td>
+      </tr>
+    <% end %>
+  </table>
 </div>
