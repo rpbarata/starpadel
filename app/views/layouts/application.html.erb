@@ -11,17 +11,21 @@
   </head>
 
   <body>
+    <div class="app-wrapper">
+      <div class="app-container">
+        <%= render partial: "layouts/header" %>
+        <%= render_breadcrumbs(@breadcrumbs) %>
+        <%= render partial: "layouts/alert" %>
+        <%= render partial: "layouts/notice" %>
 
-    <%= render partial: "layouts/header" %>
-    <%= render_breadcrumbs(@breadcrumbs) %>
-    <%= render partial: "layouts/alert" %>
-    <%= render partial: "layouts/notice" %>
+        <main class="app-main">
+          <div class="container mt-3">
+            <%= yield %>
+          </div>
+        </main>
 
-    <div class="container mt-3">
-      <%= yield %>
+        <%= render partial: "layouts/footer" %>
+      </div>
     </div>
-
-    <%= render partial: "layouts/footer" %>
-
   </body>
 </html>

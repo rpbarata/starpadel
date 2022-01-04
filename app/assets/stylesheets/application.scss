@@ -16,24 +16,6 @@
 
 @import "bootstrap/scss/bootstrap";
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}
-
-.footer {
-  position: absolute;
-  bottom: 0%;
-  width: 100%;
-  height: 60px;
-  line-height: 60px;
-  background-color: #343a40;
-}
-
 /* unvisited link */
 a:link {
   color: #ffa722;
@@ -52,6 +34,29 @@ a:hover {
 /* selected link */
 a:active {
   color: #ca8319;
+}
+
+a.icon:link {
+  color: white;
+  text-decoration: none;
+}
+
+/* visited link */
+a.icon:visited {
+  color: white;
+  text-decoration: none;
+}
+
+/* mouse over link */
+a.icon:hover {
+  color: rgb(231, 229, 229);
+  text-decoration: none;
+}
+
+/* selected link */
+a.icon:active {
+  color: white;
+  text-decoration: none;
 }
 
 /*
@@ -155,4 +160,90 @@ a:active {
 .breadcrumb-arrow li.active:after,
 .breadcrumb-arrow li.active:before {
   border-left-color: #ca7900;
+}
+
+body,
+html {
+  min-height: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #333;
+  text-align: left;
+  background-color: #f3f3f3;
+}
+
+.app-wrapper,
+body {
+  display: flex;
+  overflow: hidden;
+}
+
+.app-wrapper {
+  flex: 1;
+  align-items: stretch;
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.app-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.app-main {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-footer {
+  flex-shrink: 0;
+  background: #30353b;
+  color: #fff;
+  padding: 0.5rem 1.4rem;
+  font-size: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  height: 75px;
+
+  box-shadow: 0 0.12rem 0.9rem rgba(0, 0, 0, 0.5) !important;
+  border-radius: 4px 4px 0 0;
+}
+
+.app-footer-icons {
+  position: fixed;
+  right: 20px;
+
+  // Small devices (landscape phones, 576px and up)
+  @media (min-width: 576px) {
+    right: 20px;
+  }
+
+  // Medium devices (tablets, 768px and up)
+  @media (min-width: 768px) {
+    left: 47%;
+  }
+
+  // Large devices (desktops, 992px and up)
+  @media (min-width: 992px) {
+    left: 47%;
+  }
+
+  // Extra large devices (large desktops, 1200px and up)
+  @media (min-width: 1200px) {
+    left: 47%;
+  }
 }
