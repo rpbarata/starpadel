@@ -75,6 +75,8 @@ gem "mailjet"
 
 gem "maily"
 
+gem "font-awesome-rails"
+
 group :development, :test do
   gem "bullet"
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

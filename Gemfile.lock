@@ -152,6 +152,8 @@ GEM
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
     ffi (1.15.4)
+    font-awesome-rails (4.7.0.8)
+      railties (>= 3.2, < 8.0)
     fugit (1.5.2)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.4)
@@ -469,6 +471,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
+  font-awesome-rails
   groupdate (~> 5.2, >= 5.2.2)
   jbuilder (~> 2.7)
   letter_opener
