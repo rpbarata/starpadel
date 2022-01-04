@@ -188,7 +188,7 @@ pt:
       last_attempt: "Tem mais uma tentativa antes de a sua conta ser bloqueada."
       not_found_in_database: "%{authentication_keys} ou palavra-passe inválidos."
       timeout: "A sua sessão expirou, por favor autentique-se novamente para continuar."
-      unauthenticated: "Antes de continuar tem de se autenticar ou efetuar um registo."
+      unauthenticated: "Antes de continuar tem de se autenticar ou dirigir-se a um balcão para lhe serem geradas credenciais de acesso."
       unconfirmed: "Tem de confirmar a sua conta antes de continuar."
     mailer:
       confirmation_instructions:

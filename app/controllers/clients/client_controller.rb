@@ -2,11 +2,13 @@
 
 module Clients
   class ClientController < ApplicationController
-    add_breadcrumb "Home", :root_path
-    add_breadcrumb "Informações", :clients_path
-
     before_action :authenticate_client!
 
-    def index; end
+    def index
+      @breadcrumbs = [
+        { text: "Home", href: root_path },
+        { text: "Informações", href: clients_path },
+      ]
+    end
   end
 end
