@@ -71,8 +71,6 @@ gem "write_xlsx"
 gem "sidekiq"
 gem "sidekiq-scheduler"
 
-gem "breadcrumbs_on_rails"
-
 gem "mailjet"
 
 gem "maily"

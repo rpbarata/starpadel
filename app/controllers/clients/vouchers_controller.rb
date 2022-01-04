@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 module Clients
-  class VouchersController < ApplicationController
-    add_breadcrumb "Home", :root_path
-    add_breadcrumb "Vouchers", :clients_vouchers_path
-
-    before_action :authenticate_client!
-
+  class VouchersController < ClientController
     def index
+      @breadcrumbs = [
+        { text: "Home", href: root_path },
+        { text: "Vouchers", href: clients_vouchers_path },
+      ]
+
       @vouchers = current_client.vouchers
     end
   end

@@ -2,9 +2,6 @@
 
 module Devise
   class RegistrationsController < DeviseController
-    add_breadcrumb "Home", :root_path
-    add_breadcrumb "Mudar Palavra-Pass", :edit_client_registration_path
-
     prepend_before_action :require_no_authentication, only: [:new, :create, :cancel]
     prepend_before_action :authenticate_scope!, only: [:edit, :update, :destroy]
     prepend_before_action :set_minimum_password_length, only: [:new, :edit]
@@ -41,6 +38,11 @@ module Devise
 
     # GET /resource/edit
     def edit
+      @breadcrumbs = [
+        { text: "Home", href: root_path },
+        { text: "Mudar Palavra-Pass", href: edit_client_registration_path },
+      ]
+
       render(:edit)
     end
 
