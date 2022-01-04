@@ -225,26 +225,26 @@ body {
 }
 
 .app-footer-icons {
-  position: fixed;
-  right: 20px;
+  margin-left: auto;
+  margin-right: -45px;
 
   // Small devices (landscape phones, 576px and up)
   @media (min-width: 576px) {
-    right: 20px;
+    margin-right: -45px;
   }
 
   // Medium devices (tablets, 768px and up)
   @media (min-width: 768px) {
-    left: 47%;
+    margin-right: auto;
   }
 
   // Large devices (desktops, 992px and up)
   @media (min-width: 992px) {
-    left: 47%;
+    margin-right: auto;
   }
 
   // Extra large devices (large desktops, 1200px and up)
   @media (min-width: 1200px) {
-    left: 47%;
+    margin-right: auto;
   }
 }
