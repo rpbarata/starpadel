@@ -5,8 +5,8 @@ module Clients
     def index
       @breadcrumbs = [
         { text: "Home", href: root_path },
-        { text: "Aulas Creditadas", href: clients_credited_lessons_path },
-        { text: "Agendamento de Aulas", href: clients_credited_lesson_lessons_path },
+        { text: "Aulas", href: clients_credited_lessons_path },
+        { text: "Agendamento", href: clients_credited_lesson_lessons_path },
       ]
 
       @credited_lesson = current_client.credited_lessons.find(params[:credited_lesson_id])
