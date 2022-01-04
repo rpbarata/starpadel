@@ -14,7 +14,7 @@
     <% @credited_lessons.each do |credited_lesson| %>
       <tr data-href="<%= clients_credited_lesson_lessons_path(credited_lesson) %>" data-action="click->creditedLessons#openHref" style="cursor: pointer;" class="pointer">
         <td><%= credited_lesson.lessons_type.name %></td>
-        <td><%= t("activerecord.enums.time_period.#{credited_lesson.time_period}") %></td>
+        <td><span class="badge badge-pill badge-<%= credited_lesson.green_time? ? "success" : "danger" %>"><%= t("activerecord.enums.time_period.#{credited_lesson.time_period}") %></span></td>
         <td><%= l(credited_lesson.created_at, format: :short) %></td>
         <td><%= credited_lesson.remaining_lessons_str %></td>
         <td><%= credited_lesson.payment_left_str %></td>

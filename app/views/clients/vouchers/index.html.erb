@@ -15,7 +15,7 @@
     <% @vouchers.each do |voucher| %>
       <tr data-href="<%= clients_voucher_movements_path(voucher) %>" data-action="click->vouchers#openHref" style="cursor: pointer;" class="pointer">
         <td><%= voucher.code %></td>
-        <td><%= voucher.value %></td>
+        <td><%= number_to_currency(voucher.value) %></td>
         <td><%= number_to_currency(voucher.value_used) %></td>
         <td><%= number_to_currency(voucher.value_remaining) %></td>
         <td><%= l(voucher.created_at, format: :short) %></td>
