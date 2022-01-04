@@ -4,15 +4,16 @@
 #
 # Table name: credited_lessons
 #
-#  id              :bigint           not null, primary key
-#  comments        :text
-#  lesson_price    :decimal(8, 2)    default(0.0)
-#  payment         :decimal(8, 2)    default(0.0)
-#  time_period     :integer
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  client_id       :bigint           not null
-#  lessons_type_id :bigint           not null
+#  id                   :bigint           not null, primary key
+#  client_lessons_count :integer
+#  comments             :text
+#  lesson_price         :decimal(8, 2)    default(0.0)
+#  payment              :decimal(8, 2)    default(0.0)
+#  time_period          :integer
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  client_id            :bigint           not null
+#  lessons_type_id      :bigint           not null
 #
 # Indexes
 #
