@@ -1,19 +1,22 @@
 <%= stylesheet_link_tag "client.css" %>
 
-<p><text class="texto">Nome:</text> <text class="info"><%= current_client.name %></text></p>
-<p><text class="texto">Email:</text> <text class="info"><%= current_client.email %></text></p>
-<p><text class="texto">Número de Telemóvel:</text> <text class="info"><%= current_client.phone_number %></text></p>
-<p><text class="texto">Morada:</text> <text class="info"><%= current_client.address %></text></p>
-<p><text class="texto">Número de Sócio Star Padel:</text> <text class="info"><%= current_client.member_id %></text></p>
-<p><text class="texto">Sócio Master:</text> <text class="info"><%= t("boolean.#{current_client.is_master_member}") %></text></p>
-<p><text class="texto">Número de Sócio FPP:</text> <text class="info"><%= current_client.fpp_id %></text></p>
-<p><text class="texto">Nº de CC:</text> <text class="info"><%= current_client.identification_number %></text></p>
-<p><text class="texto">NIF:</text> <text class="info"><%= current_client.nif %></text></p>
-<p><text class="texto">Data de Nascimento:</text> <text class="info"><%= current_client.birth_date.present? ? l(current_client.birth_date) : "" %></text></p>
-<p><text class="texto">Adulto:</text> </span>
+<h1 class="title">As Minhas Informações</h1>
+<div class="fundo">
+<p><text class="texto">Nome</text> <text class="info"><%= current_client.name %></text></p>
+<p><text class="texto">Email</text> <text class="info"><%= current_client.email %></text></p>
+<p><text class="texto">Número de Telemóvel</text> <text class="info"><%= current_client.phone_number %></text></p>
+<p><text class="texto">Morada</text> <text class="info"><%= current_client.address %></text></p>
+<p><text class="texto">Número de Sócio Star Padel</text> <text class="info"><%= current_client.member_id %></text></p>
+<p><text class="texto">Sócio Master</text> <text class="info"><%= t("boolean.#{current_client.is_master_member}") %></text></p>
+<p><text class="texto">Número de Sócio FPP</text> <text class="info"><%= current_client.fpp_id %></text></p>
+<p><text class="texto">Nº de CC</text> <text class="info"><%= current_client.identification_number %></text></p>
+<p><text class="texto">NIF</text> <text class="info"><%= current_client.nif %></text></p>
+<p><text class="texto">Data de Nascimento</text> <text class="info"><%= current_client.birth_date.present? ? l(current_client.birth_date) : "" %></text></p>
+<p><text class="texto">Adulto</text> </span>
 <text class="info">
   <% if current_client.birth_date.present? %>
     <%= t("boolean.#{current_client.adult?}") %>
   <% end %>
 </text>
 </p>
+<div>
