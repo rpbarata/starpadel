@@ -1,0 +1,10 @@
+.page-link {
+  &:hover {
+    color: rgb(255, 167, 34) !important;
+  }
+}
+
+.page-item.active .page-link {
+  background-color: #ffa722 !important;
+  border-color: #ffa722 !important;
+}
