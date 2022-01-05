@@ -477,10 +477,10 @@ pt:
     pm: pm
   views:
     pagination:
-      first: "&laquo; Primeiro"
-      last: Último &raquo;
-      next: Próximo &rsaquo;
-      previous: "&lsaquo; Anterior"
+      first: "&laquo;"
+      last: "&raquo;"
+      next: "&rsaquo;"
+      previous: "&lsaquo;"
       truncate: "&hellip;"
   trestle:
     title: "Trestle Admin"

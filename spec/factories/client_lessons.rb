@@ -8,6 +8,7 @@
 #  comments           :text
 #  end_time           :datetime
 #  start_time         :datetime
+#  status             :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  client_id          :bigint           not null
