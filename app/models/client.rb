@@ -82,6 +82,7 @@ class Client < ApplicationRecord
     numericality: { only_integer: true, greater_than_or_equal_to: 0 }, uniqueness: true, if: -> { member_id.present? }
   validate :birth_date_in_the_past, if: -> { birth_date.present? }
   validate :validate_is_master_member, if: -> { is_master_member.present? }
+  validates :avatar, aspect_ratio: :square
 
   before_save :set_become_member_at, if: -> { will_save_change_to_member_id? }
 

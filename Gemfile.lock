@@ -49,6 +49,11 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_storage_validations (0.9.6)
+      activejob (>= 5.2.0)
+      activemodel (>= 5.2.0)
+      activestorage (>= 5.2.0)
+      activesupport (>= 5.2.0)
     activejob (6.1.4.1)
       activesupport (= 6.1.4.1)
       globalid (>= 0.3.6)
@@ -465,6 +470,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  active_storage_validations
   amazing_print (~> 1.2, >= 1.2.2)
   annotate
   bootsnap (>= 1.4.4)
@@ -490,6 +496,7 @@ DEPENDENCIES
   listen (~> 3.3)
   mailjet
   maily
+  mini_magick (>= 4.9.5)
   paper_trail (~> 11.1)
   paper_trail-globalid (~> 0.2.0)
   pg (~> 1.1)
