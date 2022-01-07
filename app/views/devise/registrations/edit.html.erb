@@ -8,10 +8,7 @@
   <div class="row">
     <div class="col d-flex justify-content-center align-self-center">
       <div data-controller="client">
-        <% if current_client.avatar.attached? %>
-          <%= image_tag current_client.avatar, class: "avatar", data: { target: "client.output" } %>
-        <% end %>
-
+        <%= image_tag(avatar(current_client), class: "avatar", data: { target: "client.output" }) %>
         <div class="form-group">
           <%= f.file_field :avatar, class: "form-control-file", data: { action: "client#readURL" } %>
         </div>

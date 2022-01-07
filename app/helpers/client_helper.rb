@@ -8,4 +8,13 @@ module ClientHelper
       content_tag(:span, fa_icon("times"), class: "badge badge-pill badge-danger")
     end
   end
+
+  def avatar(client)
+    if client.avatar.attached?
+      client.avatar
+    else
+      "fallback_avatar.png"
+    end
+
+  end
 end

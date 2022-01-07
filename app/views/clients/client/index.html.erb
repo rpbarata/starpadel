@@ -2,11 +2,7 @@
 
 <div class="row mt-5" style="background-color: white;">
   <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mt-3 mb-3 d-flex justify-content-center align-self-center">
-    <% if current_client.avatar.attached? %>
-      <%= image_tag(current_client.avatar, class: "avatar", with: "300px") %>
-    <% else %>
-      <%= image_tag("fallback_avatar.png", class: "avatar") %>
-    <% end %>
+    <%= image_tag(avatar(current_client), class: "avatar") %>
   </div>
 
   <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 mt-3 mb-3">
