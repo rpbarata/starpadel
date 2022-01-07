@@ -40,7 +40,7 @@ module Devise
     def edit
       @breadcrumbs = [
         { text: "Home", href: root_path },
-        { text: "Mudar Palavra-Pass", href: edit_client_registration_path },
+        { text: "Mudar Informações", href: edit_client_registration_path },
       ]
 
       render(:edit)

@@ -14,7 +14,7 @@ Trestle.resource(:clients, model: Client) do
   end
 
   collection do
-    Client.all.order(name: :asc)
+    Client.includes([:avatar_attachment]).order(name: :asc)
   end
 
   scopes do
@@ -26,9 +26,18 @@ Trestle.resource(:clients, model: Client) do
     scope :childrens, label: t("activerecord.scopes.clients.childrens")
   end
 
+  active_storage_fields do
+    [:avatar]
+  end
+
   # Customize the table columns shown on the index view.
   #
   table(autolink: false) do
+    column :avatar, header: false, blank: nil do |client|
+      avatar(fallback: client_initials(client.name)) do
+        image_tag(main_app.url_for(client.avatar)) if client.avatar.attached?
+      end
+    end
     column :name, link: true, sort: { default: true, default_order: :asc }, class: "media-title-column"
     column :member_of_club, align: :center do |client|
       if client.member_id.present?
@@ -92,6 +101,10 @@ Trestle.resource(:clients, model: Client) do
     end
 
     editor :comments
+
+    sidebar do
+      active_storage_field :avatar, class: "custom-file-input"
+    end
   end
 
   controller do

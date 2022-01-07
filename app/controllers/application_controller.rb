@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   before_action :set_sentry_user
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def health
     render(json: "OK", status: :ok)
@@ -15,5 +16,11 @@ class ApplicationController < ActionController::Base
     if current_client.present?
       Sentry.set_user(username: current_client.name, id: current_client.id)
     end
+  end
+
+  private
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:account_update, keys: [:avatar])
   end
 end

@@ -235,8 +235,8 @@ pt:
       not_found: "não foi encontrada"
       not_locked: "não foi bloqueada"
       not_saved:
-        one: "1 erro impediu a gravação de %{resource}:"
-        other: "%{count} erros impediram a gravação de %{resource}:"
+        one: "1 erro impediu a gravação das alterações"
+        other: "%{count} erros impediram a gravação das alterações"
       accepted: tem de ser aceite
       blank: não pode estar em branco
       confirmation: não coincide com a confirmação

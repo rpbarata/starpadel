@@ -10,55 +10,67 @@
 <% end %>
 
 <div class="row">
-  <div class="col">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'name', value: instance.name } %>
-  </div>
-</div>
+  <div class="col-12 col-sm-12 col-md-9 col-lg-10 col-xl-10">
+    <div class="row">
+      <div class="col">
+        <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'name', value: instance.name } %>
+      </div>
+    </div>
 
-<div class="row">
-  <div class="col-6">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'email', value: instance.email } %>
-  </div>
-  <div class="col-6">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'phone_number', value: instance.phone_number } %>
-  </div>
-</div>
+    <div class="row">
+      <div class="col-6">
+        <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'email', value: instance.email } %>
+      </div>
+      <div class="col-6">
+        <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'phone_number', value: instance.phone_number } %>
+      </div>
+    </div>
 
-<div class="row">
-  <div class="col">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'address', value: instance.address } %>
-  </div>
-</div>
+    <div class="row">
+      <div class="col">
+        <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'address', value: instance.address } %>
+      </div>
+    </div>
 
-<div class="row">
-  <div class="col-3">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'member_id', value: instance.member_id } %>
-  </div>
-  <div class="col-3">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'is_master_member', value: instance.is_master_member } %>
-  </div>
-  <div class="col-6">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'fpp_id', value: instance.fpp_id } %>
-  </div>
-</div>
+    <div class="row">
+      <div class="col-3">
+        <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'member_id', value: instance.member_id } %>
+      </div>
+      <div class="col-3">
+        <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'is_master_member', value: instance.is_master_member } %>
+      </div>
+      <div class="col-6">
+        <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'fpp_id', value: instance.fpp_id } %>
+      </div>
+    </div>
 
-<div class="row">
-  <div class="col-3">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'identification_number', value: instance.identification_number } %>
-  </div>
-  <div class="col-3">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'nif', value: instance.nif } %>
-  </div>
-  <div class="col-3">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'birth_date', value: instance.birth_date } %>
-  </div>
-  <div class="col-3">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'is_adult', value: instance.birth_date.present? ? instance.adult? : nil } %>
-  </div>
-</div>
+    <div class="row">
+      <div class="col-3">
+        <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'identification_number', value: instance.identification_number } %>
+      </div>
+      <div class="col-3">
+        <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'nif', value: instance.nif } %>
+      </div>
+      <div class="col-3">
+        <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'birth_date', value: instance.birth_date } %>
+      </div>
+      <div class="col-3">
+        <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'is_adult', value: instance.birth_date.present? ? instance.adult? : nil } %>
+      </div>
+    </div>
 
-<div class="row mt-5">
-  <div class="col">
-    <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'comments', value: instance.comments } %>
+    <div class="row mt-5">
+      <div class="col">
+        <%= render partial: 'trestle/resource/show_field', locals: { class_name: class_name, field: 'comments', value: instance.comments } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 d-flex justify-content-center align-self-center">
+    <% if instance.avatar.attached? %>
+      <%= link_to image_tag(main_app.url_for(instance.avatar), class: "img-thumbnail img-fluid", width: "300px"), main_app.rails_blob_path(instance.avatar, disposition: "attachment") %>
+    <% else %>
+      <%= image_tag("fallback_avatar.png", class: "img-thumbnail img-fluid", width: "300px") %>
+    <% end %>
   </div>
 </div>
