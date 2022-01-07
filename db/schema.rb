@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(version: 2022_01_06_230325) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "credited_lesson_id", null: false
     t.bigint "coach_admin_id"
-    t.integer "status"
     t.index ["client_id"], name: "index_client_lessons_on_client_id"
     t.index ["created_at"], name: "index_client_lessons_on_created_at"
     t.index ["credited_lesson_id"], name: "index_client_lessons_on_credited_lesson_id"
@@ -115,7 +114,6 @@ ActiveRecord::Schema.define(version: 2022_01_06_230325) do
     t.integer "time_period"
     t.decimal "payment", precision: 8, scale: 2, default: "0.0"
     t.decimal "lesson_price", precision: 8, scale: 2, default: "0.0"
-    t.integer "client_lessons_count"
     t.index ["client_id"], name: "index_credited_lessons_on_client_id"
     t.index ["created_at"], name: "index_credited_lessons_on_created_at"
     t.index ["lesson_price", "payment"], name: "index_credited_lessons_on_lesson_price_and_payment"
