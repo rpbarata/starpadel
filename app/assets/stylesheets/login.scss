@@ -1,6 +1,11 @@
-
 .form-login {
   margin-top: 50px;
+  margin: 0 auto;
+  width: 100%;
+  margin-left: calc(50% - 150px);
+  @media (max-width: 768px) {
+    margin-left: calc(50% - 125px);
+  }
 }
 
 .background {
@@ -28,7 +33,7 @@
 }
 
 .button {
-  width: 25%;
+  width: 300px;
   border: none;
   border-radius: 8px;
   background-color: #ffa722;
@@ -38,21 +43,29 @@
   border-color: #ffa722;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
+  @media (max-width: 768px) {
+    width: 250px;
+  }
 }
 
 .field{
-  width:25%;
+  width:300px;
+  @media (max-width: 768px) {
+    width: 250px;
+  }
 }
 
 .button:hover {
-  width: 25%;
+  width: 300px;
   border: none;
   border-radius: 8px;
   background-color: #f89500;
   color: white;
   padding-top: 5px;
   padding-bottom: 5px;
-  
+  @media (max-width: 768px) {
+    width: 250px;
+  }
 }
 
 .inputfield {
@@ -69,3 +82,4 @@
 .pass {
   margin-top: 25px;
 }
+
