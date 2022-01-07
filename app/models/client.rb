@@ -45,6 +45,7 @@ class Client < ApplicationRecord
 
   attr_accessor :skip_password_validation # virtual attribute to skip password validation while saving
 
+  has_one_attached :avatar
   has_many :credited_lessons, dependent: :destroy
   has_many :vouchers, dependent: :destroy
   has_many :movements, dependent: :destroy

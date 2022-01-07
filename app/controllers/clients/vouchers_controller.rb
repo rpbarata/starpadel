@@ -8,7 +8,7 @@ module Clients
         { text: "Vouchers", href: clients_vouchers_path },
       ]
 
-      @vouchers = current_client.vouchers.page params[:page]
+      @vouchers = current_client.vouchers.page(params[:page])
     end
   end
 end

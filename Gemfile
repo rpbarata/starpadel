@@ -25,7 +25,7 @@ gem "jbuilder", "~> 2.7"
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem "image_processing", "~> 1.2"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
@@ -46,6 +46,7 @@ gem "trestle-auth", github: "TrestleAdmin/trestle-auth", branch: "authorization"
 gem "trestle-tinymce"
 gem "trestle-search"
 gem "trestle-sidekiq"
+gem "trestle-active_storage"
 
 gem "paper_trail", "~> 11.1"
 gem "paper_trail-globalid", "~> 0.2.0"
@@ -77,7 +78,7 @@ gem "maily"
 
 gem "font-awesome-rails"
 
-gem 'kaminari'
+gem "kaminari"
 
 group :development, :test do
   gem "bullet"

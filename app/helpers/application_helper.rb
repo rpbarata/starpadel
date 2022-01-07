@@ -47,6 +47,12 @@ module ApplicationHelper
     end
   end
 
+  def client_initials(client_name)
+    client_names = client_name.strip.split(/\s+/)
+
+    "#{client_names.first[0]}#{client_names.last[0]}"
+  end
+
   private
 
   def last_breadcrumb(breadcrumb)

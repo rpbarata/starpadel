@@ -1,22 +1,78 @@
 <%= stylesheet_link_tag "client.css" %>
 
-<h1 class="title">As Minhas Informações</h1>
-<div class="fundo">
-<p><text class="texto">Nome</text> <text class="info"><%= current_client.name %></text></p>
-<p><text class="texto">Email</text> <text class="info"><%= current_client.email %></text></p>
-<p><text class="texto">Número de Telemóvel</text> <text class="info"><%= current_client.phone_number %></text></p>
-<p><text class="texto">Morada</text> <text class="info"><%= current_client.address %></text></p>
-<p><text class="texto">Número de Sócio Star Padel</text> <text class="info"><%= current_client.member_id %></text></p>
-<p><text class="texto">Sócio Master</text> <text class="info"><%= t("boolean.#{current_client.is_master_member}") %></text></p>
-<p><text class="texto">Número de Sócio FPP</text> <text class="info"><%= current_client.fpp_id %></text></p>
-<p><text class="texto">Nº de CC</text> <text class="info"><%= current_client.identification_number %></text></p>
-<p><text class="texto">NIF</text> <text class="info"><%= current_client.nif %></text></p>
-<p><text class="texto">Data de Nascimento</text> <text class="info"><%= current_client.birth_date.present? ? l(current_client.birth_date) : "" %></text></p>
-<p><text class="texto">Adulto</text> </span>
-<text class="info">
-  <% if current_client.birth_date.present? %>
-    <%= t("boolean.#{current_client.adult?}") %>
-  <% end %>
-</text>
-</p>
-<div>
+<div class="row mt-5" style="background-color: white;">
+  <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mt-3 mb-3 d-flex justify-content-center align-self-center">
+    <% if current_client.avatar.attached? %>
+      <%= image_tag(current_client.avatar, class: "avatar", with: "300px") %>
+    <% else %>
+      <%= image_tag("fallback_avatar.png", class: "avatar") %>
+    <% end %>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 mt-3 mb-3">
+    <div class="row">
+      <div class="col">
+        <p class="profile-header"><text class="texto">Nome</text></p>
+        <p><text class="info"><%= current_client.name %></text></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p class="profile-header"><text class="texto">Email</text></p>
+        <p><text class="info"><%= current_client.email %></text></p>
+      </div>
+      <div class="col">
+        <p class="profile-header"><text class="texto">Número de Telemóvel</text></p>
+        <p><text class="info"><%= current_client.phone_number %></text></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p class="profile-header"><text class="texto">Morada</text></p>
+        <p><text class="info"><%= current_client.address %></text></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-3">
+        <p class="profile-header"><text class="texto">Nº de Sócio</text></p>
+        <p><text class="info"><%= current_client.member_id %></text></p>
+      </div>
+      <div class="col-3">
+        <p class="profile-header"><text class="texto">Sócio Master</text></p>
+        <p><%= boolean_badge(current_client.is_master_member) %></p>
+      </div>
+      <div class="col">
+        <p class="profile-header"><text class="texto">Nº de Sócio FPP</text></p>
+        <p><text class="info"><%= current_client.fpp_id %></text></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p class="profile-header"><text class="texto">Nº de CC</text></p>
+        <p><text class="info"><%= current_client.identification_number %></text></p>
+      </div>
+      <div class="col">
+        <p class="profile-header"><text class="texto">NIF</text></p>
+        <p><text class="info"><%= current_client.nif %></text></p>
+
+      </div>
+      <div class="col">
+        <p class="profile-header"><text class="texto">Data de Nascimento</text></p>
+        <p><text class="info"><%= current_client.birth_date.present? ? l(current_client.birth_date) : "" %></text></p>
+
+      </div>
+      <div class="col">
+        <p class="profile-header"><text class="texto">Adulto</text></p>
+        <p><text class="info">
+            <% if current_client.birth_date.present? %>
+              <%= boolean_badge(current_client.adult?) %>
+            <% end %>
+          </text></p>
+      </div>
+    </div>
+  </div>
+</div>
