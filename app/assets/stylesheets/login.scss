@@ -1,6 +1,5 @@
+
 .form-login {
-  margin: 0 auto;
-  width: 180px;
   margin-top: 50px;
 }
 
@@ -29,7 +28,7 @@
 }
 
 .button {
-  width: 100%;
+  width: 25%;
   border: none;
   border-radius: 8px;
   background-color: #ffa722;
@@ -41,8 +40,12 @@
     box-shadow 0.15s ease-in-out;
 }
 
+.field{
+  width:25%;
+}
+
 .button:hover {
-  width: 183px;
+  width: 25%;
   border: none;
   border-radius: 8px;
   background-color: #f89500;
@@ -53,12 +56,13 @@
 }
 
 .inputfield {
+  width:100%;
   border: 1px solid #ffa722;
   border-radius: 8px;
   padding-left: 5px;
   padding-top: 5px;
   padding-bottom: 5px;
-  background-color: rgba(0, 89, 255, 0.158);
+  background-color: rgba(255, 255, 255, 0.158);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
