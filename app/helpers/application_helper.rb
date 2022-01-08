@@ -53,11 +53,15 @@ module ApplicationHelper
     "#{client_names.first[0]}#{client_names.last[0]}"
   end
 
+  def badge_color(value)
+    value ? "success".html_safe : "danger".html_safe
+  end
+
   private
 
   def last_breadcrumb(breadcrumb)
     content_tag(:li, breadcrumb[:text], "aria-current": "page",
-class: "breadcrumb-item pl-0 active text-uppercase pl-4")
+      class: "breadcrumb-item pl-0 active text-uppercase pl-4")
   end
 
   def first_breadcrumb(breadcrumb)

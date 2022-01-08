@@ -1,62 +1,33 @@
-<h1 class="title">Voucher <%= @voucher.code %></h1>
+<h2 class="title">Movimentos Voucher <%= @voucher.code %></h2>
 
-<div class="container container-form" style="border-radius:20px;box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);margin-top: 50px;">
+<div class="container container-form">
 
-<div class="row">
-  <div class="col">
-    <div class="col">
-      <text class="texto">Código</text>
+  <div class="row">
+    <div class="col-6 col-sm-4 col-md-4 col-lg">
+      <p class="profile-header"><text class="texto">Valor</text></p>
+      <p><%= number_to_currency(@voucher.value) %></p>
     </div>
-    <div class="col">
-      <%= @voucher.code %>
+    <div class="col-6 col-sm-4 col-md-4 col-lg">
+      <p class="profile-header"><text class="texto">Valor Utilizado</text></p>
+      <p><%= number_to_currency(@voucher.value_used) %></p>
     </div>
-  </div>
-  <div class="col">
-    <div class="col">
-      <text class="texto">Valor</text>
+    <div class="col-12 col-sm-4 col-md-4 col-lg">
+      <p class="profile-header"><text class="texto">Valor Disponível</text></p>
+      <p><%= number_to_currency(@voucher.value_remaining) %></p>
     </div>
-    <div class="col">
-      <%= @voucher.value %>
+    <div class="col-6 col-sm-8 col-md-8 col-lg">
+      <p class="profile-header"><text class="texto">Criado em</text></p>
+      <p><%= l(@voucher.created_at, format: :short) %></p>
     </div>
-  </div>
-  <div class="col">
-    <div class="col">
-      <text class="texto">Valor Utilizado</text>
-    </div>
-    <div class="col">
-      <%= number_to_currency(@voucher.value_used) %>
-    </div>
-  </div>
-  <div class="col">
-    <div class="col">
-      <text class="texto">Valor Disponível</text>
-    </div>
-    <div class="col">
-      <%= number_to_currency(@voucher.value_remaining) %>
-    </div>
-  </div>
-  <div class="col">
-    <div class="col">
-      <text class="texto">Criado em</text>
-    </div>
-    <div class="col">
-      <%= l(@voucher.created_at, format: :short) %>
-    </div>
-  </div>
-  <div class="col">
-    <div class="col">
-      <text class="texto">Validade</text>
-    </div>
-    <div class="col">
-      <%= @voucher.validity.present? ? l(@voucher.validity, format: :short) : "Sem Validade" %>
+    <div class="col-6 col-sm-4 col-md-4 col-lg">
+      <p class="profile-header"><text class="texto">Validade</text></p>
+      <p><%= @voucher.validity.present? ? l(@voucher.validity, format: :short) : "Sem Validade" %></p>
     </div>
   </div>
 </div>
 
-<hr style="margin-top:25px">
-
-<div class="row d-flex justify-content-center" style="margin-top:40px;box-shadow:none;margin-left:10px;margin-right:10px">
-  <table class="table">
+<div class="table-responsive table-mobile mb-3">
+  <table class="table table-hover">
     <tr class="thead-dark">
       <th>Valor</th>
       <th>Data</th>
@@ -72,4 +43,12 @@
   </table>
 </div>
 
+<div class="list-group list-mobile mb-3">
+  <% @movements.each do |movement| %>
+    <div style="cursor: pointer;" class="list-group-item list-group-item-action flex-column align-items-start">
+      <p class="mb-1"><span class="profile-header texto font-weight-bold">Valor </span><%= number_to_currency(movement.value) %></p>
+      <p class="mb-1"><span class="profile-header texto font-weight-bold">Data </span><%= l(movement.date, format: :short) %></p>
+      <p class="mb-1"><span class="profile-header texto font-weight-bold">Descrição </span><%= movement.description %></p>
+    </div>
+  <% end %>
 </div>

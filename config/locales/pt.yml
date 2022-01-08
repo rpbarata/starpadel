@@ -52,6 +52,7 @@ pt:
         password: Palavra-Pass
         password_confirmation: Confirmação da Palavra-Pass
         current_password: Palavra-Pass Atual
+        new_password: Nova Palavra-Pass
       lessons_type:
         id: Identificador
         created_at: Criado em

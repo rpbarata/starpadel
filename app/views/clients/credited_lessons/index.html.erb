@@ -1,6 +1,4 @@
-<%= stylesheet_link_tag "creditedlessons.css" %>
-
-<h1 class="title">As Minhas Aulas Creditadas</h1>
+<h2 class="title">As Minhas Aulas Creditadas</h2>
 
 <div class="mb-3" data-controller="creditedLessons">
   <div class="table-responsive table-mobile">
@@ -18,7 +16,13 @@
           <td><span class="badge badge-pill badge-<%= credited_lesson.green_time? ? "success" : "danger" %>"><%= t("activerecord.enums.time_period.#{credited_lesson.time_period}") %></span></td>
           <td><%= credited_lesson.created_at.strftime("%d/%m/%Y") %></td>
           <td><%= credited_lesson.remaining_lessons_str %></td>
-          <td><%= credited_lesson.payment_left_str %></td>
+          <td>
+            <% if credited_lesson.paid? %>
+              <span class="badge badge-pill badge-success">Pago Completo</span>
+            <% else %>
+              <%= credited_lesson.payment_left_str %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </table>
@@ -28,12 +32,12 @@
     <% @credited_lessons.each do |credited_lesson| %>
       <div data-href="<%= clients_credited_lesson_lessons_path(credited_lesson) %>" data-action="click->creditedLessons#openHref" style="cursor: pointer;" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1 title"><%= credited_lesson.lessons_type.name %></h5>
+          <h5 class="mb-1 title font-weight-bold"><%= credited_lesson.lessons_type.name %></h5>
           <small><span class="badge badge-pill badge-<%= credited_lesson.green_time? ? "success" : "danger" %>"><%= t("activerecord.enums.time_period.#{credited_lesson.time_period}") %></span></small>
         </div>
-        <p class="mb-1">Credita em: <%= credited_lesson.created_at.strftime("%d/%m/%Y") %></p>
-        <p class="mb-1">Aulas: <%= credited_lesson.remaining_lessons_str %></p>
-        <p class="mb-1">Pagamento: <%= credited_lesson.payment_left_str %></p>
+        <p class="mb-1"><span class="font-weight-bold">Credita em </span><%= credited_lesson.created_at.strftime("%d/%m/%Y") %></p>
+        <p class="mb-1"><span class="font-weight-bold">Aulas </span><%= credited_lesson.remaining_lessons_str %></p>
+        <p class="mb-1"><span class="font-weight-bold">Pagamento </span><%= credited_lesson.payment_left_str %></p>
       </div>
     <% end %>
   </div>
