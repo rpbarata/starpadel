@@ -10,7 +10,7 @@ module Clients
       ]
 
       @voucher = current_client.vouchers.find(params[:voucher_id])
-      @movements = @voucher.movements
+      @movements = @voucher.movements.order(date: :desc).page(params[:page])
     end
   end
 end

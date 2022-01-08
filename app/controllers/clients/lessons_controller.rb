@@ -10,7 +10,7 @@ module Clients
       ]
 
       @credited_lesson = current_client.credited_lessons.find(params[:credited_lesson_id])
-      @lessons = @credited_lesson.client_lessons.includes([:coach_admin]).order(created_at: :desc)
+      @lessons = @credited_lesson.client_lessons.includes([:coach_admin]).order(created_at: :desc).page(params[:page])
     end
   end
 end
