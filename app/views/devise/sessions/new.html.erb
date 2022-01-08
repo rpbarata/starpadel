@@ -1,8 +1,6 @@
-<%= stylesheet_link_tag "login.css" %>
-
 <h2 class="title">Entrar</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-login" }) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-login mb-3" }) do |f| %>
   <div class="field">
     <text class="text"><%= f.label :email %></text><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "inputfield" %>

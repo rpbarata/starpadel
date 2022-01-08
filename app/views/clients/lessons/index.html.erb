@@ -1,31 +1,53 @@
-<table>
-  <tr>
-    <th>Tipo de Aula</th>
-    <th>Horário</th>
-    <th>Credita em</th>
-    <th>Nº de Aulas</th>
-    <th>Estado do Pagamento</th>
-  </tr>
-  <tr>
-    <td><%= @credited_lesson.lessons_type.name %></td>
-    <td><%= t("activerecord.enums.time_period.#{@credited_lesson.time_period}") %></td>
-    <td><%= l(@credited_lesson.created_at, format: :short) %></td>
-    <td><%= @credited_lesson.remaining_lessons_str %></td>
-    <td><%= @credited_lesson.payment_left_str %></td>
-  </tr>
-</table>
+<h2 class="title"><%= @credited_lesson.lessons_type.name %></h2>
 
-<table class="mt-3">
-  <tr>
-    <th>Hora de Inicio</th>
-    <th>Hora de Fim</th>
-    <th>Treinador</th>
-  </tr>
-  <% @lessons.find_each do |lesson| %>
-    <tr>
-      <td><%= lesson.start_time.present? ? l(lesson.start_time) : "Não Registado" %></td>
-      <td><%= lesson.end_time.present? ? l(lesson.end_time) : "Não Registado" %></td>
-      <td><%= lesson.coach_admin&.username || "Não Atribuído" %></td>
+<div class="container container-form">
+  <div class="row">
+    <div class="col-6 col-md-3">
+      <p class="profile-header"><text class="texto">Horário</text></p>
+      <p><span class="badge badge-pill badge-<%= badge_color(@credited_lesson.green_time?)%>"><%= t("activerecord.enums.time_period.#{@credited_lesson.time_period}") %></span></p>
+    </div>
+    <div class="col-6 col-md-3">
+      <p class="profile-header"><text class="texto">Credita em</text></p>
+      <p><%= l(@credited_lesson.created_at, format: :short) %></p>
+    </div>
+    <div class="col-6 col-md-3">
+      <p class="profile-header"><text class="texto">Nº de Aulas</text></p>
+      <p><%= @credited_lesson.remaining_lessons_str %></p>
+    </div>
+    <div class="col-6 col-md-3">
+      <p class="profile-header"><text class="texto">Pagamento</text></p>
+      <% if @credited_lesson.paid? %>
+        <p><span class="badge badge-pill badge-success">Completo</span></p>
+      <% else %>
+        <p><%= @credited_lesson.payment_left_str %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="table-responsive table-mobile mb-3">
+  <table class="table table-hover">
+    <tr class="thead-dark">
+      <th>Hora de Inicio</th>
+      <th>Hora de Fim</th>
+      <th>Treinador</th>
     </tr>
+    <% @lessons.find_each do |lesson| %>
+      <tr>
+        <td><%= lesson.start_time.present? ? l(lesson.start_time, format: :short) : "Não Registado" %></td>
+        <td><%= lesson.end_time.present? ? l(lesson.end_time, format: :short) : "Não Registado" %></td>
+        <td><%= lesson.coach_admin&.username || "Não Atribuído" %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<div class="list-group list-mobile mb-3">
+  <% @lessons.each do |lesson| %>
+    <div style="cursor: pointer;" class="list-group-item list-group-item-action flex-column align-items-start">
+      <p class="mb-1"><span class="profile-header texto font-weight-bold">Hora de Inicio </span><%= lesson.start_time.present? ? l(lesson.start_time, format: :short) : "Não Registado" %></p>
+      <p class="mb-1"><span class="profile-header texto font-weight-bold">Hora de Fim </span><%= lesson.end_time.present? ? l(lesson.end_time, format: :short) : "Não Registado" %></p>
+      <p class="mb-1"><span class="profile-header texto font-weight-bold">Treinador </span><%= lesson.coach_admin&.username || "Não Atribuído" %></p>
+    </div>
   <% end %>
-</table>
+</div>

@@ -17,5 +17,14 @@ p.profile-header {
   border-radius: 0.25rem !important;
   height: auto;
   vertical-align: middle;
-  border-style: none;
+  // border-style: none;
+  padding: 0.25rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+
+.info-box {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
 }

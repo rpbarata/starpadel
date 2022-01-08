@@ -1,6 +1,4 @@
-<%= stylesheet_link_tag "creditedlessons.css" %>
-
-<h1 class="title">Vouchers</h1>
+<h2 class="title">Vouchers</h2>
 
 <div class="mb-3" data-controller="vouchers">
   <div class="table-responsive table-mobile">
@@ -30,13 +28,13 @@
     <% @vouchers.each do |voucher| %>
       <div data-href="<%= clients_voucher_movements_path(voucher) %>" data-action="click->vouchers#openHref" style="cursor: pointer;" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1 title"><%= voucher.code %></h5>
+          <h5 class="mb-1 title font-weight-bold"><%= voucher.code %></h5>
           <small><%= number_to_currency(voucher.value) %></small>
         </div>
-        <p class="mb-1">Atribuído a: <%= voucher.created_at.strftime("%d/%m/%Y") %></p>
-        <p class="mb-1">Utilizado: <%= number_to_currency(voucher.value_used) %></p>
-        <p class="mb-1">Disponível: <%= number_to_currency(voucher.value_remaining) %></p>
-        <p class="mb-1">Validade: <%= voucher.validity.present? ? l(voucher.validity, format: :short) : "Sem Validade" %></p>
+        <p class="mb-1"><span class="font-weight-bold">Atribuído a </span><%= voucher.created_at.strftime("%d/%m/%Y") %></p>
+        <p class="mb-1"><span class="font-weight-bold">Utilizado </span><%= number_to_currency(voucher.value_used) %></p>
+        <p class="mb-1"><span class="font-weight-bold">Disponível </span><%= number_to_currency(voucher.value_remaining) %></p>
+        <p class="mb-1"><span class="font-weight-bold">Validade </span><%= voucher.validity.present? ? l(voucher.validity, format: :short) : "Sem Validade" %></p>
       </div>
     <% end %>
   </div>

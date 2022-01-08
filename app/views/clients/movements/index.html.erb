@@ -1,33 +1,54 @@
-<table>
-  <tr>
-    <th>Código</th>
-    <th>Valor</th>
-    <th>Valor Utilizado</th>
-    <th>Valor Disponível</th>
-    <th>Criado em</th>
-    <th>Validade</th>
-  </tr>
-  <tr>
-    <td><%= @voucher.code %></td>
-    <td><%= @voucher.value %></td>
-    <td><%= number_to_currency(@voucher.value_used) %></td>
-    <td><%= number_to_currency(@voucher.value_remaining) %></td>
-    <td><%= l(@voucher.created_at, format: :short) %></td>
-    <td><%= @voucher.validity.present? ? l(@voucher.validity, format: :short) : "Sem Validade" %></td>
-  </tr>
-</table>
+<h2 class="title">Movimentos Voucher <%= @voucher.code %></h2>
 
-<table>
-  <tr>
-    <th>Valor</th>
-    <th>Data</th>
-    <th>Descrição</th>
-  </tr>
-  <% @movements.each do |movement| %>
-    <tr>
-      <td><%= number_to_currency(movement.value) %></td>
-      <td><%= l(movement.date, format: :short) %></td>
-      <td><%= movement.description %></td>
+<div class="container container-form">
+
+  <div class="row">
+    <div class="col-6 col-sm-4 col-md-4 col-lg">
+      <p class="profile-header"><text class="texto">Valor</text></p>
+      <p><%= number_to_currency(@voucher.value) %></p>
+    </div>
+    <div class="col-6 col-sm-4 col-md-4 col-lg">
+      <p class="profile-header"><text class="texto">Valor Utilizado</text></p>
+      <p><%= number_to_currency(@voucher.value_used) %></p>
+    </div>
+    <div class="col-12 col-sm-4 col-md-4 col-lg">
+      <p class="profile-header"><text class="texto">Valor Disponível</text></p>
+      <p><%= number_to_currency(@voucher.value_remaining) %></p>
+    </div>
+    <div class="col-6 col-sm-8 col-md-8 col-lg">
+      <p class="profile-header"><text class="texto">Criado em</text></p>
+      <p><%= l(@voucher.created_at, format: :short) %></p>
+    </div>
+    <div class="col-6 col-sm-4 col-md-4 col-lg">
+      <p class="profile-header"><text class="texto">Validade</text></p>
+      <p><%= @voucher.validity.present? ? l(@voucher.validity, format: :short) : "Sem Validade" %></p>
+    </div>
+  </div>
+</div>
+
+<div class="table-responsive table-mobile mb-3">
+  <table class="table table-hover">
+    <tr class="thead-dark">
+      <th>Valor</th>
+      <th>Data</th>
+      <th>Descrição</th>
     </tr>
+    <% @movements.each do |movement| %>
+      <tr>
+        <td><%= number_to_currency(movement.value) %></td>
+        <td><%= l(movement.date, format: :short) %></td>
+        <td><%= movement.description %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<div class="list-group list-mobile mb-3">
+  <% @movements.each do |movement| %>
+    <div style="cursor: pointer;" class="list-group-item list-group-item-action flex-column align-items-start">
+      <p class="mb-1"><span class="profile-header texto font-weight-bold">Valor </span><%= number_to_currency(movement.value) %></p>
+      <p class="mb-1"><span class="profile-header texto font-weight-bold">Data </span><%= l(movement.date, format: :short) %></p>
+      <p class="mb-1"><span class="profile-header texto font-weight-bold">Descrição </span><%= movement.description %></p>
+    </div>
   <% end %>
-</table>
+</div>
