@@ -57,6 +57,10 @@ module ApplicationHelper
     value ? "success".html_safe : "danger".html_safe
   end
 
+  def status_tag(text, color)
+    content_tag(:span, text, class: "badge badge-#{color}")
+  end
+
   private
 
   def last_breadcrumb(breadcrumb)

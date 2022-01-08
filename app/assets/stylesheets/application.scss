@@ -60,6 +60,16 @@ a.icon:active {
   text-decoration: none;
 }
 
+.fixed-top {
+  @media (min-height: 512px) {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+  }
+}
+
 /*
 *
 * ==========================================
@@ -72,6 +82,7 @@ a.icon:active {
   margin-bottom: 0rem;
   box-shadow: 0 0.12rem 0.9rem rgba(0, 0, 0, 0.5) !important;
   border-radius: 0 0 0 0;
+  margin-top: 57px;
 }
 
 /* Arrow Breadcrumb */
