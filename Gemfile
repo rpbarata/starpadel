@@ -26,8 +26,8 @@ gem "jbuilder", "~> 2.7"
 
 # Use Active Storage variant
 gem "image_processing", "~> 1.2"
-gem 'active_storage_validations'
-gem 'mini_magick', '>= 4.9.5'
+gem "active_storage_validations"
+gem "mini_magick", ">= 4.9.5"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
@@ -81,6 +81,8 @@ gem "maily"
 gem "font-awesome-rails"
 
 gem "kaminari"
+
+gem "aws-sdk-s3", require: false
 
 group :development, :test do
   gem "bullet"

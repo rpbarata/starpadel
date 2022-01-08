@@ -15,6 +15,5 @@ module ClientHelper
     else
       "fallback_avatar.png"
     end
-
   end
 end
