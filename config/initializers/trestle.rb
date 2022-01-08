@@ -5,7 +5,7 @@ Trestle.configure do |config|
   #
   # Set the page title shown in the main header within the admin.
   #
-  config.site_title = "Star Padel"
+  config.site_title = "Star Padel - STAFF"
 
   # Specify a custom image to be used in place of the site title for mobile and
   # expanded/desktop navigation. These images should be placed within your
@@ -35,7 +35,7 @@ Trestle.configure do |config|
   #
   # Set the path at which to mount the Trestle admin. Defaults to /admin.
   #
-  # config.path = "/admin"
+  config.path = "/staff"
 
   # Toggle whether Trestle should automatically mount the admin within your
   # Rails application's routes. Defaults to true.
@@ -96,6 +96,10 @@ Trestle.configure do |config|
   # config.hook(:stylesheets) do
   #   stylesheet_link_tag "custom"
   # end
+
+  config.hook("view.header") do
+    render "trestle/shared/link_to_client_page"
+  end
 
   # Toggle whether Turbolinks is enabled within the admin.
   # Defaults to true if Turbolinks is available.
