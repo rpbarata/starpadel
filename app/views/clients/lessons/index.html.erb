@@ -1,31 +1,69 @@
-<table>
-  <tr>
-    <th>Tipo de Aula</th>
-    <th>Horário</th>
-    <th>Credita em</th>
-    <th>Nº de Aulas</th>
-    <th>Estado do Pagamento</th>
-  </tr>
-  <tr>
-    <td><%= @credited_lesson.lessons_type.name %></td>
-    <td><%= t("activerecord.enums.time_period.#{@credited_lesson.time_period}") %></td>
-    <td><%= l(@credited_lesson.created_at, format: :short) %></td>
-    <td><%= @credited_lesson.remaining_lessons_str %></td>
-    <td><%= @credited_lesson.payment_left_str %></td>
-  </tr>
-</table>
+<h1 class="title">Aulas <%= @credited_lesson.lessons_type.name %></h1>
 
-<table class="mt-3">
-  <tr>
-    <th>Hora de Inicio</th>
-    <th>Hora de Fim</th>
-    <th>Treinador</th>
-  </tr>
-  <% @lessons.find_each do |lesson| %>
-    <tr>
-      <td><%= lesson.start_time.present? ? l(lesson.start_time) : "Não Registado" %></td>
-      <td><%= lesson.end_time.present? ? l(lesson.end_time) : "Não Registado" %></td>
-      <td><%= lesson.coach_admin&.username || "Não Atribuído" %></td>
+
+<div class="container container-form" style="border-radius:20px;box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);margin-top: 50px;">
+
+
+<div class="row">
+  <div class="col">
+    <div class="col">
+      <text class="texto">Tipo de Aula</text>
+    </div>
+    <div class="col">
+      <%= @credited_lesson.lessons_type.name %>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col">
+      <text class="texto">Horário</text>
+    </div>
+    <div class="col">
+      <span class="badge badge-pill badge-<%= @credited_lesson.green_time? ? "success" : "danger" %>"><%= t("activerecord.enums.time_period.#{@credited_lesson.time_period}") %></span>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col">
+      <text class="texto">Credita em</text>
+    </div>
+    <div class="col">
+      <%= l(@credited_lesson.created_at, format: :short) %>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col">
+      <text class="texto">Nº de Aulas</text>
+    </div>
+    <div class="col">
+    <%= @credited_lesson.remaining_lessons_str %>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col">
+      <text class="texto">Estado do Pagamento</text>
+    </div>
+    <div class="col">
+      <%= @credited_lesson.payment_left_str %>
+    </div>
+  </div>
+</div>
+
+<hr style="margin-top:25px">
+
+<div class="row d-flex justify-content-center" style="margin-top:40px;box-shadow:none;margin-left:10px;margin-right:10px">
+  <table class="table">
+    <tr class="thead-dark">
+      <th>Hora de Inicio</th>
+      <th>Hora de Fim</th>
+      <th>Treinador</th>
     </tr>
-  <% end %>
-</table>
+    <% @lessons.find_each do |lesson| %>
+      <tr>
+        <td><%= lesson.start_time.present? ? l(lesson.start_time) : "Não Registado" %></td>
+        <td><%= lesson.end_time.present? ? l(lesson.end_time) : "Não Registado" %></td>
+        <td><%= lesson.coach_admin&.username || "Não Atribuído" %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+</div>
