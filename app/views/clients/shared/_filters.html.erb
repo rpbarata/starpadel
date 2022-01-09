@@ -1,0 +1,11 @@
+<div class="container container-form d-flex justify-content-center">
+  <%= form_tag(path_url, method: :get) do %>
+    <div class="row">
+      <div class="col">
+        <% filters_array.each do |filter| %>
+          <%= filter(filter) %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

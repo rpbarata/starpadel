@@ -215,7 +215,7 @@ Trestle.configure do |config|
   # Specify the redirect location after logging out.
   # Defaults to the trestle-auth new login path.
   #
-  config.auth.redirect_on_logout = -> { "/admin/login" }
+  config.auth.redirect_on_logout = -> { "/staff/login" }
 
   # Specify the redirect location when access is denied.
   # Defaults to the admin index (if authorized), otherwise falling back to

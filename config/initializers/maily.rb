@@ -23,5 +23,7 @@ Maily.setup do |config|
   # config.http_authorization = { username: 'meideiteam', password: 'meidei123' }
 
   # Customize welcome message
-  # config.welcome_message = "Welcome to our email testing platform. If you have any problem, please contact support team at support@example.com."
+  # config.welcome_message =
+  #   "Welcome to our email testing platform."\
+  #     "If you have any problem, please contact support team at support@example.com."
 end

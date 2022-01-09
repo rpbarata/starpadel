@@ -295,3 +295,13 @@ body {
     display: block !important;
   }
 }
+
+.filter {
+  display: inline-block;
+  width: 300px;
+  margin-right: 8px;
+}
+
+.input-group {
+  max-width: 300px;
+}

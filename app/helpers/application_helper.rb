@@ -61,6 +61,14 @@ module ApplicationHelper
     content_tag(:span, text, class: "badge badge-#{color}")
   end
 
+  def filter(filter)
+    content_tag(:div, class: "form-group filter") do
+      label_tag(filter[:name], filter[:label]) +
+        select_tag(filter[:name], options_for_select(filter[:options], params[filter[:name]]),
+          oncreate: "this.form.submit()", onchange: "this.form.submit()", class: "form-control")
+    end
+  end
+
   private
 
   def last_breadcrumb(breadcrumb)

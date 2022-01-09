@@ -130,7 +130,8 @@ module Devise
     # The default url to be used after updating a resource. You need to overwrite
     # this method in your own RegistrationsController.
     def after_update_path_for(resource)
-      sign_in_after_change_password? ? signed_in_root_path(resource) : new_session_path(resource_name)
+      # sign_in_after_change_password? ? signed_in_root_path(resource) : new_session_path(resource_name)
+      clients_path(resource)
     end
 
     # Authenticates the current scope and gets the current resource from the session.
