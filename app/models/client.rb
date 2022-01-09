@@ -39,9 +39,9 @@
 #
 class Client < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :timeoutable, :trackable and :omniauthable, :recoverable, :rememberable, :validatable
+  # :confirmable, :trackable and :omniauthable, :recoverable, :validatable
 
-  devise :database_authenticatable, :validatable, :registerable
+  devise :database_authenticatable, :validatable, :registerable, :timeoutable, :rememberable
 
   attr_accessor :skip_password_validation # virtual attribute to skip password validation while saving
 

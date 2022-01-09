@@ -1,5 +1,7 @@
 <h2 class="title">As Minhas Aulas Creditadas</h2>
 
+<%= render partial: "clients/shared/filters", locals: { path_url: clients_credited_lessons_path, filters_array: @filters_drop_down_array } %>
+
 <div class="mb-3" data-controller="creditedLessons">
   <div class="table-responsive table-mobile">
     <table class="table table-hover">
@@ -28,7 +30,7 @@
     </table>
   </div>
 
-  <div class="list-group list-mobile">
+  <div class="list-group list-mobile mt-3">
     <% @credited_lessons.each do |credited_lesson| %>
       <div data-href="<%= clients_credited_lesson_lessons_path(credited_lesson) %>" data-action="click->creditedLessons#openHref" style="cursor: pointer;" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">

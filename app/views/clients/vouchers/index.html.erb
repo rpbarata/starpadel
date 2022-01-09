@@ -1,5 +1,23 @@
 <h2 class="title">Vouchers</h2>
 
+<div class="container container-form">
+  <%= form_tag(clients_vouchers_path, method: :get) do %>
+    <div class="row">
+      <div class="col">
+        <% @filters_drop_down_array.each do |filter| %>
+          <%= filter(filter) %>
+        <% end %>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><icon class="fa fa-search"></icon></span>
+          </div>
+          <%= search_field_tag :code, params[:code], class: "form-control", autocomplete: "off", placeholder: "Procurar...", oncreate:"this.form.submit()", onchange: "this.form.submit()" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
 <div class="mb-3" data-controller="vouchers">
   <div class="table-responsive table-mobile">
     <table class="table table-hover">
@@ -30,7 +48,7 @@
     </table>
   </div>
 
-  <div class="list-group list-mobile">
+  <div class="list-group list-mobile mt-3">
     <% @vouchers.each do |voucher| %>
       <div data-href="<%= clients_voucher_movements_path(voucher) %>" data-action="click->vouchers#openHref" style="cursor: pointer;" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
@@ -40,7 +58,12 @@
         <p class="mb-1"><span class="font-weight-bold">Atribuído a </span><%= voucher.created_at.strftime("%d/%m/%Y") %></p>
         <p class="mb-1"><span class="font-weight-bold">Utilizado </span><%= number_to_currency(voucher.value_used) %></p>
         <p class="mb-1"><span class="font-weight-bold">Disponível </span><%= number_to_currency(voucher.value_remaining) %></p>
-        <p class="mb-1"><span class="font-weight-bold">Validade </span><%= voucher.validity.present? ? l(voucher.validity, format: :short) : "Sem Validade" %></p>
+        <p class="mb-1"><span class="font-weight-bold">Validade </span>
+          <% if voucher.validity.present? %>
+            <%= status_tag(l(voucher.validity, format: :short), badge_color(!voucher.expired?)) %>
+          <% else %>
+            Sem Validade
+          <% end %></p>
       </div>
     <% end %>
   </div>

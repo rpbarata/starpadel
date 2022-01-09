@@ -1,6 +1,6 @@
 <h2 class="title">As Minhas Informações</h2>
 
-<div class="row mt-5 info-box">
+<div class="row mt-5 info-box mb-3">
   <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mt-3 mb-3 d-flex justify-content-center align-self-center">
     <%= image_tag(avatar(current_client), class: "avatar") %>
   </div>
@@ -32,42 +32,33 @@
     </div>
 
     <div class="row">
-      <div class="col-3">
+      <div class="col-6 col-sm-4">
         <p class="profile-header"><text class="texto">Nº de Sócio</text></p>
         <p><text class="info"><%= current_client.member_id %></text></p>
       </div>
-      <div class="col-3">
+      <div class="col-6 col-sm-4">
         <p class="profile-header"><text class="texto">Sócio Master</text></p>
         <p><%= boolean_badge(current_client.is_master_member) %></p>
       </div>
-      <div class="col">
+      <div class="col-12 col-sm-4">
         <p class="profile-header"><text class="texto">Nº de Sócio FPP</text></p>
         <p><text class="info"><%= current_client.fpp_id %></text></p>
       </div>
     </div>
 
     <div class="row">
-      <div class="col">
+      <div class="col-6 col-sm-4 col-md-6 col-lg-4">
         <p class="profile-header"><text class="texto">Nº de CC</text></p>
         <p><text class="info"><%= current_client.identification_number %></text></p>
       </div>
-      <div class="col">
+      <div class="col-6 col-sm-4 col-md-6 col-lg-4">
         <p class="profile-header"><text class="texto">NIF</text></p>
         <p><text class="info"><%= current_client.nif %></text></p>
 
       </div>
-      <div class="col">
+      <div class="col-12 col-sm col-md-12 col-lg">
         <p class="profile-header"><text class="texto">Data de Nascimento</text></p>
         <p><text class="info"><%= current_client.birth_date.present? ? l(current_client.birth_date) : "" %></text></p>
-
-      </div>
-      <div class="col">
-        <p class="profile-header"><text class="texto">Adulto</text></p>
-        <p><text class="info">
-            <% if current_client.birth_date.present? %>
-              <%= boolean_badge(current_client.adult?) %>
-            <% end %>
-          </text></p>
       </div>
     </div>
   </div>
