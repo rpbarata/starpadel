@@ -5,28 +5,32 @@
 <div class="mb-3" data-controller="creditedLessons">
   <div class="table-responsive table-mobile">
     <table class="table table-hover">
-      <tr class="thead-dark">
-        <th>Tipo de Aula</th>
-        <th>Horário</th>
-        <th>Credita em</th>
-        <th>Nº de Aulas</th>
-        <th>Estado do Pagamento</th>
-      </tr>
-      <% @credited_lessons.each do |credited_lesson| %>
-        <tr data-href="<%= clients_credited_lesson_lessons_path(credited_lesson) %>" data-action="click->creditedLessons#openHref" style="cursor: pointer;" class="pointer">
-          <td><%= credited_lesson.lessons_type.name %></td>
-          <td><span class="badge badge-pill badge-<%= credited_lesson.green_time? ? "success" : "danger" %>"><%= t("activerecord.enums.time_period.#{credited_lesson.time_period}") %></span></td>
-          <td><%= credited_lesson.created_at.strftime("%d/%m/%Y") %></td>
-          <td><%= credited_lesson.remaining_lessons_str %></td>
-          <td>
-            <% if credited_lesson.paid? %>
-              <span class="badge badge-pill badge-success">Completo</span>
-            <% else %>
-              <%= credited_lesson.payment_left_str %>
-            <% end %>
-          </td>
+      <thead>
+        <tr class="thead-dark">
+          <th>Tipo de Aula</th>
+          <th>Horário</th>
+          <th>Credita em</th>
+          <th>Nº de Aulas</th>
+          <th>Estado Pagamento</th>
         </tr>
-      <% end %>
+      </thead>
+      <tbody>
+        <% @credited_lessons.each do |credited_lesson| %>
+          <tr data-href="<%= clients_credited_lesson_lessons_path(credited_lesson) %>" data-action="click->creditedLessons#openHref" style="cursor: pointer;" class="pointer">
+            <td><%= credited_lesson.lessons_type.name %></td>
+            <td><span class="badge badge-pill badge-<%= credited_lesson.green_time? ? "success" : "danger" %>"><%= t("activerecord.enums.time_period.#{credited_lesson.time_period}") %></span></td>
+            <td><%= credited_lesson.created_at.strftime("%d/%m/%Y") %></td>
+            <td><%= credited_lesson.remaining_lessons_str %></td>
+            <td>
+              <% if credited_lesson.paid? %>
+                <span class="badge badge-pill badge-success">Completo</span>
+              <% else %>
+                <%= credited_lesson.payment_left_str %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
     </table>
   </div>
 

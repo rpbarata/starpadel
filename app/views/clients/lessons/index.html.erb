@@ -27,18 +27,22 @@
 
 <div class="table-responsive table-mobile mb-3">
   <table class="table table-hover">
-    <tr class="thead-dark">
-      <th>Hora de Inicio</th>
-      <th>Hora de Fim</th>
-      <th>Treinador</th>
-    </tr>
-    <% @lessons.find_each do |lesson| %>
-      <tr>
-        <td><%= lesson.start_time.present? ? l(lesson.start_time, format: :short) : "Não Registado" %></td>
-        <td><%= lesson.end_time.present? ? l(lesson.end_time, format: :short) : "Não Registado" %></td>
-        <td><%= lesson.coach_admin&.username || "Não Atribuído" %></td>
+    <thead>
+      <tr class="thead-dark">
+        <th>Hora de Inicio</th>
+        <th>Hora de Fim</th>
+        <th>Treinador</th>
       </tr>
-    <% end %>
+    </thead>
+    <tbody>
+      <% @lessons.find_each do |lesson| %>
+        <tr>
+          <td><%= lesson.start_time.present? ? l(lesson.start_time, format: :short) : "Não Registado" %></td>
+          <td><%= lesson.end_time.present? ? l(lesson.end_time, format: :short) : "Não Registado" %></td>
+          <td><%= lesson.coach_admin&.username || "Não Atribuído" %></td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 </div>
 
