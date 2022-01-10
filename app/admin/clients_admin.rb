@@ -112,7 +112,7 @@ Trestle.resource(:clients, model: Client) do
     include TrestleFiltersConcern
     include ExportPathConcern
 
-    before_action :load_instance, only: [:show, :edit, :update, :destroy, :generate_credentials]
+    before_action :load_instance, only: [:show, :edit, :update, :destroy, :generate_first_credentials, :generate_new_credentials]
 
     def index
       super
@@ -205,7 +205,7 @@ message: "The %{lowercase_model_name} was successfully deleted.")
       end
     end
 
-    def generate_credentials
+    def generate_first_credentials
       password = instance.generate_new_credentials
       if instance.save
         ClientCredentialsMailer.with(client: instance, password: password).first_credentials.deliver_now
@@ -213,6 +213,19 @@ message: "The %{lowercase_model_name} was successfully deleted.")
         flash[:message] = { title: "Sucesso!", message: "Credenciais Geradas com sucesso." }
       else
         flash[:error] = { title: "Aviso!", message: "Não foi possível gerar as Credenciais." }
+      end
+
+      redirect_to("#{clients_admin_path(instance)}#!tab-client")
+    end
+
+    def generate_new_credentials
+      password = instance.generate_new_credentials
+      if instance.save
+        ClientCredentialsMailer.with(client: instance, password: password).first_credentials.deliver_now
+
+        flash[:message] = { title: "Sucesso!", message: "Novas Credenciais Geradas com sucesso." }
+      else
+        flash[:error] = { title: "Aviso!", message: "Não foi possível gerar as Novas Credenciais." }
       end
 
       redirect_to("#{clients_admin_path(instance)}#!tab-client")
@@ -228,7 +241,8 @@ message: "The %{lowercase_model_name} was successfully deleted.")
     get :export, on: :collection
 
     member do
-      patch :generate_credentials
+      patch :generate_first_credentials
+      patch :generate_new_credentials
     end
   end
 end
