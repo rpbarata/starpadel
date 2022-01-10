@@ -7,6 +7,7 @@
 #  id                     :bigint           not null, primary key
 #  active                 :boolean          default(FALSE)
 #  address                :string
+#  avatar_last_update     :datetime
 #  become_member_at       :datetime
 #  birth_date             :date
 #  comments               :text

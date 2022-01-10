@@ -7,6 +7,7 @@
 #  id                     :bigint           not null, primary key
 #  active                 :boolean          default(FALSE)
 #  address                :string
+#  avatar_last_update     :datetime
 #  become_member_at       :datetime
 #  birth_date             :date
 #  comments               :text
@@ -43,7 +44,7 @@ class Client < ApplicationRecord
 
   devise :database_authenticatable, :validatable, :registerable, :timeoutable, :rememberable
 
-  attr_accessor :skip_password_validation # virtual attribute to skip password validation while saving
+  attr_accessor :skip_password_validation, :will_save_change_to_avatar
 
   has_one_attached :avatar
   has_many :credited_lessons, dependent: :destroy
@@ -83,6 +84,7 @@ class Client < ApplicationRecord
   validate :birth_date_in_the_past, if: -> { birth_date.present? }
   validate :validate_is_master_member, if: -> { is_master_member.present? }
   validates :avatar, aspect_ratio: :square
+  validate :validates_avatar_last_update, if: -> { will_save_change_to_avatar }
 
   before_save :set_become_member_at, if: -> { will_save_change_to_member_id? }
 
@@ -162,6 +164,14 @@ class Client < ApplicationRecord
   def validate_is_master_member
     if member_id.blank?
       errors.add(:is_master_member, "deve ser sócio")
+    end
+  end
+
+  def validates_avatar_last_update
+    if avatar_last_update.present? && (avatar_last_update > (Time.zone.now - 31.days))
+      errors.add(:avatar, "só pode ser alterado uma vez por cada 31 dias")
+    else
+      self.avatar_last_update = Time.zone.now
     end
   end
 
