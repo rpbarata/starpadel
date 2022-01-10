@@ -221,7 +221,7 @@ message: "The %{lowercase_model_name} was successfully deleted.")
     def generate_new_credentials
       password = instance.generate_new_credentials
       if instance.save
-        ClientCredentialsMailer.with(client: instance, password: password).first_credentials.deliver_now
+        ClientCredentialsMailer.with(client: instance, password: password).new_credentials.deliver_now
 
         flash[:message] = { title: "Sucesso!", message: "Novas Credenciais Geradas com sucesso." }
       else
