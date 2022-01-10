@@ -5,6 +5,13 @@ class ClientCredentialsMailer < ApplicationMailer
     @client = params[:client]
     @password = params[:password]
     @url = ENV.fetch("HOST", "")
+    mail(to: @client.email, subject: "Credenciais de Acesso")
+  end
+
+  def new_credentials
+    @client = params[:client]
+    @password = params[:password]
+    @url = ENV.fetch("HOST", "")
     mail(to: @client.email, subject: "Novas Credenciais de Acesso")
   end
 end

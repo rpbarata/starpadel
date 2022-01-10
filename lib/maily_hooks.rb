@@ -7,4 +7,9 @@ Maily.hooks_for("ClientCredentialsMailer") do |mailer|
     with_params: { client: client, password: "123456" },
     description: "This email is sent when an Admin generates a client's login credentials for the first time."
   )
+  mailer.register_hook(
+    :new_credentials,
+    with_params: { client: client, password: "123456" },
+    description: "This email is sent when an Admin generates a client's login credentials for the first time."
+  )
 end

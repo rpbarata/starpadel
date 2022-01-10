@@ -3,7 +3,9 @@
 <% if current_user.super_admin? || current_user.secretariat_admin? %>
   <div class="btn-toolbar primary-toolbar d-flex justify-content-end" role="toolbar">
     <% unless instance.active %>
-      <%= link_to "Gerar Credenciais", generate_credentials_clients_admin_path(instance), method: :patch, class: "btn btn-info" %>
+      <%= link_to "Gerar Primeiras Credenciais", generate_first_credentials_clients_admin_path(instance), method: :patch, class: "btn btn-info", data: { toggle: "confirm", placement: "bottom" } %> 
+    <% else %>
+      <%= link_to "Gerar Novas Credenciais", generate_new_credentials_clients_admin_path(instance), method: :patch, class: "btn btn-info", data: { toggle: "confirm", placement: "bottom" } %>
     <% end %>
     <%= link_to "Editar", edit_clients_admin_path(instance), class: "btn btn-warning" %>
   </div>
