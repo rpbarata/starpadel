@@ -53,6 +53,7 @@ module Devise
       self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
       prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
 
+      resource.will_save_change_to_avatar = params[:client][:avatar].present?
       resource_updated = update_resource(resource, account_update_params)
       yield resource if block_given?
       if resource_updated
@@ -63,6 +64,9 @@ module Devise
       else
         clean_up_passwords(resource)
         set_minimum_password_length
+        flash[:alert] =
+          I18n.t("errors.messages.not_saved", count: resource.errors.count,
+resource: resource.class.model_name.human.downcase)
         respond_with(resource)
       end
     end

@@ -14,6 +14,10 @@
  *= require_self
  */
 
+$custom-file-text: (
+  "pt-PT": "Procurar",
+);
+
 @import "bootstrap/scss/bootstrap";
 @import "font-awesome";
 
@@ -299,4 +303,12 @@ body {
 
 .input-group {
   max-width: 300px;
+}
+
+.invalid-feedback {
+  display: block !important;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
 }

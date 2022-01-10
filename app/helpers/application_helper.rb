@@ -69,6 +69,14 @@ module ApplicationHelper
     end
   end
 
+  def field_with_errors_class(resource, field, main_class = "form-control", error_class = "is-invalid")
+    if resource.errors[field].present?
+      "#{main_class} #{error_class}"
+    else
+      main_class.to_s
+    end
+  end
+
   private
 
   def last_breadcrumb(breadcrumb)
