@@ -296,9 +296,7 @@ body {
 }
 
 .filter {
-  display: inline-block;
-  width: 300px;
-  margin-right: 8px;
+  max-width: 300px;
 }
 
 .input-group {
