@@ -226,38 +226,33 @@ body {
   color: #fff;
   padding: 0.5rem 1.4rem;
   font-size: 0.75rem;
-  display: flex;
-  justify-content: space-between;
   height: 75px;
-
   box-shadow: 0 0.12rem 0.9rem rgba(0, 0, 0, 0.5) !important;
-  // border-radius: 4px 4px 0 0;
 }
 
-.app-footer-icons {
-  margin-left: auto;
-  margin-right: -45px;
+// .ghost {
+//   display: none;
 
-  // Small devices (landscape phones, 576px and up)
-  @media (min-width: 576px) {
-    margin-right: -45px;
-  }
+//   // Small devices (landscape phones, 576px and up)
+//   @media (min-width: 576px) {
+//     display: none;
+//   }
 
-  // Medium devices (tablets, 768px and up)
-  @media (min-width: 768px) {
-    margin-right: auto;
-  }
+//   // Medium devices (tablets, 768px and up)
+//   @media (min-width: 768px) {
+//     display: block;
+//   }
 
-  // Large devices (desktops, 992px and up)
-  @media (min-width: 992px) {
-    margin-right: auto;
-  }
+//   // Large devices (desktops, 992px and up)
+//   @media (min-width: 992px) {
+//     display: block;
+//   }
 
-  // Extra large devices (large desktops, 1200px and up)
-  @media (min-width: 1200px) {
-    margin-right: auto;
-  }
-}
+//   // Extra large devices (large desktops, 1200px and up)
+//   @media (min-width: 1200px) {
+//     display: block;
+//   }
+// }
 
 .table {
   background-color: white;
