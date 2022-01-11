@@ -15,3 +15,4 @@ Turbolinks.start()
 ActiveStorage.start()
 
 require("./stimulus.js");
+require("./calendar.js");

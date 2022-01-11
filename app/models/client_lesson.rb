@@ -44,6 +44,10 @@ class ClientLesson < ApplicationRecord
 
   scope :done, -> { where.not(start_time: nil, end_time: nil) }
 
+  def title
+    coach_admin.present? ? "Com #{coach_admin.username}" : "S/ Treinador"
+  end
+
   private
 
   def validate_dates
