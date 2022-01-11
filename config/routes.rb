@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   namespace :clients do
     get "/", to: "client#index"
-    get "/calendar", to: "calendar#index"
+    # get "/calendar", to: "calendar#index"
 
     resources :credited_lessons, only: [:index] do
       resources :lessons, only: [:index]
