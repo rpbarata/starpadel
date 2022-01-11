@@ -112,7 +112,8 @@ Trestle.resource(:clients, model: Client) do
     include TrestleFiltersConcern
     include ExportPathConcern
 
-    before_action :load_instance, only: [:show, :edit, :update, :destroy, :generate_first_credentials, :generate_new_credentials]
+    before_action :load_instance,
+      only: [:show, :edit, :update, :destroy, :generate_first_credentials, :generate_new_credentials]
 
     def index
       super
