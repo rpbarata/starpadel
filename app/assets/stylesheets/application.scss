@@ -322,3 +322,7 @@ $mynewcolor:#ffa722;
   @include button-outline-variant($mynewcolor, #222222, lighten($mynewcolor,5%), $mynewcolor);
   color: white;
 }
+
+.fc-view-harness.fc-view-harness-active {
+  background-color: white;
+}
