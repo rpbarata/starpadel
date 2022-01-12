@@ -1,0 +1,38 @@
+$cookies-background-color: rgba(100, 100, 100, 0.8);
+$cookies-border-color: #e4e4e4;
+$cookies-mobile: "max-width: 767px";
+
+.cookies {
+  line-height: 50px;
+
+  position: sticky;
+  z-index: 999;
+  right: 0;
+  bottom: 1rem;
+  left: 0;
+
+  padding: 0 20px;
+
+  text-align: center;
+
+  border-top: 1px solid $cookies-border-color;
+  background: $cookies-background-color;
+  color: white;
+
+  @media ($cookies-mobile) {
+    font-size: 12px;
+    line-height: 30px;
+
+    position: initial;
+  }
+
+  .cookies-content-holder {
+    display: inline-block;
+
+    padding: 0 20px;
+  }
+
+  .cookies-button-holder {
+    display: inline-block;
+  }
+}

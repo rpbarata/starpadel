@@ -9,10 +9,9 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
 import 'bootstrap';
+require("./stimulus.js");
+// require("./calendar.js");
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-
-require("./stimulus.js");
-require("./calendar.js");

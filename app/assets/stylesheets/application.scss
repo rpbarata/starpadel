@@ -234,30 +234,6 @@ body {
   box-shadow: 0 0.12rem 0.9rem rgba(0, 0, 0, 0.5) !important;
 }
 
-// .ghost {
-//   display: none;
-
-//   // Small devices (landscape phones, 576px and up)
-//   @media (min-width: 576px) {
-//     display: none;
-//   }
-
-//   // Medium devices (tablets, 768px and up)
-//   @media (min-width: 768px) {
-//     display: block;
-//   }
-
-//   // Large devices (desktops, 992px and up)
-//   @media (min-width: 992px) {
-//     display: block;
-//   }
-
-//   // Extra large devices (large desktops, 1200px and up)
-//   @media (min-width: 1200px) {
-//     display: block;
-//   }
-// }
-
 .table {
   background-color: white;
 }
@@ -311,15 +287,26 @@ body {
   color: #dc3545;
 }
 
-$mynewcolor:#ffa722;
+$mynewcolor: #ffa722;
 
 .btn-primary {
-  @include button-variant($mynewcolor, darken($mynewcolor, 7.5%), darken($mynewcolor, 10%), lighten($mynewcolor,5%), lighten($mynewcolor, 10%), darken($mynewcolor,30%));
+  @include button-variant(
+    $mynewcolor,
+    darken($mynewcolor, 7.5%),
+    darken($mynewcolor, 10%),
+    lighten($mynewcolor, 5%),
+    lighten($mynewcolor, 10%),
+    darken($mynewcolor, 30%)
+  );
   color: white;
 }
-  
+
+.btn-primary:hover {
+  color: white;
+}
+
 .btn-outline-primary {
-  @include button-outline-variant($mynewcolor, #222222, lighten($mynewcolor,5%), $mynewcolor);
+  @include button-outline-variant($mynewcolor, #222222, lighten($mynewcolor, 5%), $mynewcolor);
   color: white;
 }
 

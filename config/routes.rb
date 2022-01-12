@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   get "home/index"
   get "health", to: "application#health"
+  get "cookies_policy", to: "static_pages#cookies_policy"
 
   # root "dashboard_admin/admin#index"
   root "home#index"
