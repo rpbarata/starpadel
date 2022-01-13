@@ -60,7 +60,7 @@ class Client < ApplicationRecord
 
   default_scope { where(is_deleted: false) }
 
-  has_paper_trail
+  # has_paper_trail
 
   # TODO: Falta ver o tamanho dos nºs de sócio
   validates :name, presence: true
