@@ -16,7 +16,7 @@ orientation: horizontal
 polymorphism: false
 sort: true
 warn: true
-title: IS-A2 ERD
+title: StarPadel ERD
 exclude: null
 only: null
 only_recursion_depth: null

@@ -31,7 +31,7 @@
 #  fk_rails_...  (lessons_type_id => lessons_types.id)
 #
 class CreditedLesson < ApplicationRecord
-  has_paper_trail
+  # has_paper_trail
 
   attr_accessor :new_payment, :voucher_id
 

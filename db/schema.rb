@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_10_004341) do
+ActiveRecord::Schema.define(version: 2022_01_13_190103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,18 +158,6 @@ ActiveRecord::Schema.define(version: 2022_01_10_004341) do
     t.index ["credited_lesson_id"], name: "index_movements_on_credited_lesson_id"
     t.index ["date"], name: "index_movements_on_date"
     t.index ["voucher_id"], name: "index_movements_on_voucher_id"
-  end
-
-  create_table "versions", force: :cascade do |t|
-    t.string "item_type"
-    t.string "{:null=>false}"
-    t.bigint "item_id", null: false
-    t.string "event", null: false
-    t.string "whodunnit"
-    t.text "object"
-    t.datetime "created_at"
-    t.json "object_changes"
-    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
   create_table "vouchers", force: :cascade do |t|
