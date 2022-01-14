@@ -17,7 +17,7 @@ services:
       - 3000:3000
     depends_on:
       - postgres
-      - sidekiq
+      # - sidekiq
 
   postgres:
     image: postgres:13
@@ -28,27 +28,27 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  redis:
-    container_name: "starpadel-redis"
-    image: redis:6.2.6-alpine
-    restart: always
-    ports:
-      - 6379:6379
+  # redis:
+  #   container_name: "starpadel-redis"
+  #   image: redis:6.2.6-alpine
+  #   restart: always
+  #   ports:
+  #     - 6379:6379
 
-  sidekiq:
-    container_name: starpadel-sidekiq
-    image: rails
-    user: "${UID}:${GID}"
-    build:
-      dockerfile: docker/development/Dockerfile
-      context: .
-    entrypoint: ./docker/development/entrypoint_sidekiq.sh
-    volumes:
-      - .:/project
-      - /project/tmp
-    env_file: .env
+  # sidekiq:
+  #   container_name: starpadel-sidekiq
+  #   image: rails
+  #   user: "${UID}:${GID}"
+  #   build:
+  #     dockerfile: docker/development/Dockerfile
+  #     context: .
+  #   entrypoint: ./docker/development/entrypoint_sidekiq.sh
+  #   volumes:
+  #     - .:/project
+  #     - /project/tmp
+  #   env_file: .env
 
 volumes:
   bundle_data: null
   postgres_data: null
-  redis_data: null
+  # redis_data: null
