@@ -18,10 +18,10 @@ Rails.application.routes.draw do
     end
   end
 
-  get "home/index"
+  # get "home/index"
   get "health", to: "application#health"
   get "cookies_policy", to: "static_pages#cookies_policy"
 
   # root "dashboard_admin/admin#index"
-  root "home#index"
+  root "clients/client#index"
 end
