@@ -1,12 +1,12 @@
 <% if cookies.kind_of? ActionDispatch::Cookies::CookieJar %>
   <% if cookies && cookies['cookie_consented'] != 'true' %>
     <div class="cookies js-cookies d-flex justify-content-around" data-controller="cookie">
-      <span class="cookies-content-holder">
+      <span class="cookies-content-holder align-self-center">
         Este site utiliza cookies para lhe proporcionar uma melhor experiência
         de utilização. Ao navegar aceita a
         <a href="<%= cookies_policy_path %>">política de cookies</a>.
       </span>
-      <span class="cookies-button-holder">
+      <span class="cookies-button-holder mt-3 mb-3 align-self-center">
         <button class="btn btn-primary btn-sm" data-action="click->cookie#accept">OK</button>
       </span>
     </div>

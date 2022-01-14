@@ -3,12 +3,12 @@ $cookies-border-color: #e4e4e4;
 $cookies-mobile: "max-width: 767px";
 
 .cookies {
-  line-height: 50px;
+  // line-height: 50px;
 
   position: sticky;
   z-index: 999;
   right: 0;
-  bottom: 1rem;
+  bottom: 0rem;
   left: 0;
 
   padding: 0 20px;
@@ -19,12 +19,12 @@ $cookies-mobile: "max-width: 767px";
   background: $cookies-background-color;
   color: white;
 
-  @media ($cookies-mobile) {
-    font-size: 12px;
-    line-height: 30px;
+  // @media ($cookies-mobile) {
+  //   font-size: 12px;
+  //   line-height: 30px;
 
-    position: initial;
-  }
+  //   position: initial;
+  // }
 
   .cookies-content-holder {
     display: inline-block;

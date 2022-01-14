@@ -21,6 +21,10 @@ $custom-file-text: (
 @import "bootstrap/scss/bootstrap";
 @import "font-awesome";
 
+.turbolinks-progress-bar {
+  background-color: #ffa722;
+}
+
 /* unvisited link */
 a:link {
   color: #ffa722;
