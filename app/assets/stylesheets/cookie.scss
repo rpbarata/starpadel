@@ -19,12 +19,12 @@ $cookies-mobile: "max-width: 767px";
   background: $cookies-background-color;
   color: white;
 
-  // @media ($cookies-mobile) {
-  //   font-size: 12px;
-  //   line-height: 30px;
+  @media ($cookies-mobile) {
+    font-size: 12px;
+    // line-height: 30px;
 
-  //   position: initial;
-  // }
+    // position: initial;
+  }
 
   .cookies-content-holder {
     display: inline-block;
