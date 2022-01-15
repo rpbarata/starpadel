@@ -153,7 +153,7 @@
 <p class="text-justify">Na tabela abaixo sistematiza-se alguma informação relacionada com os vários tipos de cookies
   utilizados e o propósito de cada um:</p>
 
-<div class="table-responsive-sm">
+<div class="table-responsive-sm table-mobile">
   <table class="table table-bordered table-hover table-sm">
     <thead>
       <tr>
@@ -164,15 +164,25 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>
-          <%= ENV["HOST"] %>
-        </td>
-        <td>Sessão</td>
-        <td>Funcionais</td>
-        <td>Estes cookies são utilizados para suporte a funcionalidades base que requerem autenticação por parte dos
-          utilizadores. Estes cookies são automaticamente eliminados quando fechar o browser.</td>
-      </tr>
+      <% @our_cookies.each do |our_cookie| %>
+        <tr>
+          <td><%= our_cookie[:source] %></td>
+          <td><%= our_cookie[:kind] %></td>
+          <td><%= our_cookie[:goal] %></td>
+          <td><%= our_cookie[:use] %></td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
+</div>
+
+<div class="list-group list-mobile ">
+  <% @our_cookies.each do |our_cookie| %>
+    <div class="list-group-item list-group-item-action flex-column align-items-start">
+      <p class="mb-1"><span class="font-weight-bold">Origem do our_Cookie </span><%= our_cookie[:source] %></p>
+      <p class="mb-1"><span class="font-weight-bold">Tipo </span><%= our_cookie[:kind] %></p>
+      <p class="mb-1"><span class="font-weight-bold">Finalidade </span><%= our_cookie[:goal] %></p>
+      <p class="mb-1"><span class="font-weight-bold">Utilização </span><%= our_cookie[:use] %></p>
+    </div>
+  <% end %>
 </div>

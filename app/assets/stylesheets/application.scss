@@ -21,6 +21,18 @@ $custom-file-text: (
 @import "bootstrap/scss/bootstrap";
 @import "font-awesome";
 
+header.fixed {
+  margin-top: 57px;
+
+  @media (min-width: 768px) {
+    margin-top: 82px;
+  }
+}
+
+header.fixed-sm {
+  margin-top: 57px;
+}
+
 .turbolinks-progress-bar {
   background-color: #ffa722;
 }

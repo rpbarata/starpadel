@@ -9,10 +9,10 @@ module Devise
 
     # GET /resource/sign_in
     def new
-      @breadcrumbs = [
-        { text: "Home", href: root_path },
-        { text: "Log In", href: new_client_session_path },
-      ]
+      # @breadcrumbs = [
+      #   { text: "Home", href: root_path },
+      #   { text: "Log In", href: new_client_session_path },
+      # ]
 
       self.resource = resource_class.new(sign_in_params)
       clean_up_passwords(resource)
