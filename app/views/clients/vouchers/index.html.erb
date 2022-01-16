@@ -42,7 +42,7 @@
             <td><%= l(voucher.created_at, format: :short) %></td>
             <td>
               <% if voucher.validity.present? %>
-                <%= status_tag(l(voucher.validity, format: :short), badge_color(!voucher.expired?)) %>
+                <%= status_tag(l(voucher.validity), badge_color(!voucher.expired?)) %>
               <% else %>
                 Sem Validade
               <% end %>
