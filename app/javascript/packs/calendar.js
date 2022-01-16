@@ -14,7 +14,6 @@ $(document).on('turbolinks:load', function () {
     aspectRatio: 1.8,
     nowIndicator: true,
     locale: 'pt-PT',
-    timezone: 'local',
     buttonText: {
       today: 'Hoje',
       month: 'Mês',
