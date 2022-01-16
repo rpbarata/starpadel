@@ -7,7 +7,7 @@
 #  id         :bigint           not null, primary key
 #  code       :string
 #  comments   :text
-#  validity   :datetime
+#  validity   :date
 #  value      :decimal(8, 2)    default(0.0)
 #  value_used :decimal(, )      default(0.0)
 #  created_at :datetime         not null

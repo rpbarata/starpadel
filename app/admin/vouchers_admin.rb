@@ -41,7 +41,7 @@ Trestle.resource(:vouchers, model: Voucher) do
     column :created_at, sort: { default: true, default_order: :desc }
     column :validity do |voucher|
       if voucher.validity.present?
-        status_tag(voucher.validity, voucher.expired? ? :danger : :success)
+        status_tag(l(voucher.validity), voucher.expired? ? :danger : :success)
       else
         "Sem validade"
       end

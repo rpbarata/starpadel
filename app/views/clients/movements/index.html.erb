@@ -21,7 +21,12 @@
     </div>
     <div class="col-6 col-sm-4 col-md-4 col-lg">
       <p class="profile-header"><text class="texto">Validade</text></p>
-      <p><%= @voucher.validity.present? ? l(@voucher.validity, format: :short) : "Sem Validade" %></p>
+      <p><% if @voucher.validity.present? %>
+          <%= status_tag(l(@voucher.validity), badge_color(!@voucher.expired?)) %>
+        <% else %>
+          Sem Validade
+        <% end %>
+      </p>
     </div>
   </div>
 </div>
