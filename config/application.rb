@@ -28,6 +28,6 @@ module Starpadel
     config.i18n.default_locale = "pt"
     config.i18n.locale = "pt"
 
-    config.assets.precompile += ['tinymce/langs/pt_PT.js']
+    config.assets.precompile += ["tinymce/langs/pt_PT.js"]
   end
 end

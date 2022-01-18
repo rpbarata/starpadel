@@ -208,6 +208,7 @@ message: "The %{lowercase_model_name} was successfully deleted.")
 
     def generate_first_credentials
       password = instance.generate_new_credentials
+      instance.send_password_change_notification_flag = false
       if instance.save
         ClientCredentialsMailer.with(client: instance, password: password).first_credentials.deliver_now
 
@@ -221,6 +222,7 @@ message: "The %{lowercase_model_name} was successfully deleted.")
 
     def generate_new_credentials
       password = instance.generate_new_credentials
+      instance.send_password_change_notification_flag = false
       if instance.save
         ClientCredentialsMailer.with(client: instance, password: password).new_credentials.deliver_now
 

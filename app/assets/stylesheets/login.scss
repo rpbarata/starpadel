@@ -86,7 +86,13 @@
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.form-login input:focus, .form-login textarea:focus, .form-login select:focus{
+.inputfield.is-invalid {
+  border-color: #dc3545;
+}
+
+.form-login input:focus,
+.form-login textarea:focus,
+.form-login select:focus {
   outline: none;
 }
 

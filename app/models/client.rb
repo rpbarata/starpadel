@@ -40,11 +40,11 @@
 #
 class Client < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :trackable and :omniauthable, :recoverable, :validatable
+  # :confirmable, :trackable and :omniauthable, :validatable
 
-  devise :database_authenticatable, :validatable, :registerable, :timeoutable, :rememberable
+  devise :database_authenticatable, :validatable, :registerable, :timeoutable, :rememberable, :recoverable
 
-  attr_accessor :skip_password_validation, :will_save_change_to_avatar
+  attr_accessor :skip_password_validation, :will_save_change_to_avatar, :send_password_change_notification_flag
 
   has_one_attached :avatar
   has_many :credited_lessons, dependent: :destroy
@@ -86,6 +86,7 @@ class Client < ApplicationRecord
   validates :avatar, aspect_ratio: :square
   validate :validates_avatar_last_update, if: -> { will_save_change_to_avatar }
 
+  after_initialize :set_default_send_password_change_notification_flag
   before_save :set_become_member_at, if: -> { will_save_change_to_member_id? }
 
   class << self
@@ -147,6 +148,23 @@ class Client < ApplicationRecord
     password
   end
 
+  def send_reset_password_instructions
+    unless active
+      errors.add(:email, "A sua conta ainda não está ativa.")
+      return false
+    end
+    super
+  end
+
+  def active_for_authentication?
+    super && active
+  end
+
+  def send_password_change_notification
+    return false unless send_password_change_notification_flag
+    super
+  end
+
   private
 
   # on: before_save if: will_save_change_to_member_id?
@@ -173,6 +191,10 @@ class Client < ApplicationRecord
     else
       self.avatar_last_update = Time.zone.now
     end
+  end
+
+  def set_default_send_password_change_notification_flag
+    @send_password_change_notification_flag = true
   end
 
   protected
