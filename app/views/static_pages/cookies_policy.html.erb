@@ -18,7 +18,7 @@
   navegador, mas isso pode significar que o website não funcionará corretamente.</p>
 
 <p class="text-justify">Para obter mais informações sobre cookies e o seu impacto sobre si e sobre a sua navegação,
-  visite <a href="http://www.aboutcookies.org">www.aboutcookies.org</a>.</p>
+  visite <a href="http://www.aboutcookies.org" target="_blank">https://www.aboutcookies.org/</a>.</p>
 
 <h2 class="font-weight-bold">TIPOS DE COOKIES</h2>
 
@@ -157,26 +157,26 @@
   <table class="table table-bordered table-hover table-sm">
     <thead>
       <tr>
-        <th scope="col">Origem do Cookie</th>
-        <th scope="col">Tipo</th>
-        <th scope="col">Finalidade</th>
-        <th scope="col">Utilização</th>
+        <th style="text-align: center;" scope="col">Origem do Cookie</th>
+        <th style="text-align: center;" scope="col">Tipo</th>
+        <th style="text-align: center;" scope="col">Finalidade</th>
+        <th style="text-align: center;" scope="col">Utilização</th>
       </tr>
     </thead>
     <tbody>
       <% @our_cookies.each do |our_cookie| %>
         <tr>
-          <td><%= our_cookie[:source] %></td>
-          <td><%= our_cookie[:kind] %></td>
-          <td><%= our_cookie[:goal] %></td>
-          <td><%= our_cookie[:use] %></td>
+          <td style="text-align: center; vertical-align: middle;"><%= our_cookie[:source] %></td>
+          <td style="text-align: center; vertical-align: middle;"><%= our_cookie[:kind] %></td>
+          <td style="text-align: center; vertical-align: middle;"><%= our_cookie[:goal] %></td>
+          <td style="text-align: center; vertical-align: middle;"><%= our_cookie[:use] %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
 
-<div class="list-group list-mobile ">
+<div class="list-group list-mobile mb-3">
   <% @our_cookies.each do |our_cookie| %>
     <div class="list-group-item list-group-item-action flex-column align-items-start">
       <p class="mb-1"><span class="font-weight-bold">Origem do our_Cookie </span><%= our_cookie[:source] %></p>
