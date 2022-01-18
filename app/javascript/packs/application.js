@@ -10,7 +10,7 @@ import "channels"
 
 import 'bootstrap';
 require("./stimulus.js");
-require("./calendar.js");
+// require("./calendar.js");
 
 Rails.start()
 Turbolinks.start()
