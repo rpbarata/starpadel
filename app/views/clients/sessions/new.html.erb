@@ -14,6 +14,10 @@
     </div>
   <% end %>
 
+  <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+    <%= link_to "Esqueci-me da Palavra-Pass", new_password_path(resource_name) %>
+  <% end %>
+
   <div class="actions">
     <%= f.submit "Entrar", class: "button" %>
   </div>
@@ -22,4 +26,4 @@
 
 <div class="background"></div>
 
-<%= render "devise/shared/links" %>
+<%#= render "devise/shared/links" %>

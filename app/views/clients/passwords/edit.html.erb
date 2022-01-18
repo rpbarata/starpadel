@@ -1,0 +1,33 @@
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "form-login" }) do |f| %>
+  <%#= render "devise/shared/error_messages", resource: resource %>
+  <%= f.hidden_field :reset_password_token %>
+
+  <div class="field pass">
+    <%= f.password_field :password, autocomplete: "new-password", class: field_with_errors_class(resource, :password, "inputfield"), placeholder: "Nova Palavra-Pass" %>
+    <div class="invalid-feedback">
+      <%= resource.errors[:password].map(&:capitalize).join('<br>').html_safe %>
+    </div>
+    <% if @minimum_password_length %>
+      <small class="form-text text-muted"><em><%= @minimum_password_length %> caracteres mínimos</em></small>
+    <% end %>
+  </div>
+
+  <div class="field pass">
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: field_with_errors_class(resource, :password_confirmation, "inputfield"), placeholder: "Confirmação da Palavra-Pass" %>
+    <div class="invalid-feedback">
+      <%= resource.errors[:password_confirmation].map(&:capitalize).join('<br>').html_safe %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Alterar a Minha Palavra-Pass", class: "button" %>
+  </div>
+
+  <%- if controller_name != 'sessions' %>
+    <%= link_to "Log in", new_session_path(resource_name) %><br />
+  <% end %>
+<% end %>
+
+<div class="background"></div>
+
+<%#= render "devise/shared/links" %>
