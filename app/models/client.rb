@@ -44,7 +44,8 @@ class Client < ApplicationRecord
 
   devise :database_authenticatable, :validatable, :registerable, :timeoutable, :rememberable, :recoverable
 
-  attr_accessor :skip_password_validation, :will_save_change_to_avatar, :send_password_change_notification_flag
+  attr_accessor :skip_password_validation, :will_save_change_to_avatar, :send_password_change_notification_flag,
+    :skip_email_validation
 
   has_one_attached :avatar
   has_many :credited_lessons, dependent: :destroy
@@ -130,6 +131,8 @@ class Client < ApplicationRecord
 
     self.is_deleted = true
 
+    self.skip_email_validation = true
+
     save!
   end
 
@@ -202,5 +205,9 @@ class Client < ApplicationRecord
   def password_required?
     return false if skip_password_validation
     super
+  end
+
+  def email_required?
+    !skip_email_validation
   end
 end
