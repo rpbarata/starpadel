@@ -127,6 +127,11 @@ Trestle.resource(:clients, model: Client) do
       end
     end
 
+    def edit
+      skip_password_validation = false
+      super
+    end
+
     def show
       super
 
@@ -187,7 +192,7 @@ Trestle.resource(:clients, model: Client) do
           if success
             flash[:message] =
               flash_message("destroy.success", title: "Success!",
-message: "The %{lowercase_model_name} was successfully deleted.")
+                message: "The %{lowercase_model_name} was successfully deleted.")
             redirect_to_return_location(:destroy, instance, default: admin.path(:index))
           else
             flash[:error] =
