@@ -21,5 +21,17 @@
 require "rails_helper"
 
 RSpec.describe(Admin, type: :model) do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it "is valid with the respective data" do
+    expect(build(:admin)).to be_valid
+  end
+
+  it "is invalid without username" do
+    expect(build(:admin, username: nil)).not_to be_valid
+  end
+
+  it "is invalid without an unique username" do
+    second_admin = Admin.create(username: "username", password_digest: "123456")
+    expect(build(:admin, username: second_admin.username)).not_to be_valid
+  end
 end

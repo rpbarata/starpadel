@@ -20,11 +20,11 @@
 #
 FactoryBot.define do
   factory :admin do
-    email { "MyString" }
+    email { Faker::Internet.unique.email }
     password_digest { "MyString" }
-    first_name { "MyString" }
-    last_name { "MyString" }
+    username { Faker::Name.unique.name }
     remember_token { "MyString" }
     remember_token_expires_at { "2021-12-11 15:22:17" }
+    role { :super_admin }
   end
 end

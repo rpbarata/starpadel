@@ -40,5 +40,19 @@
 #
 FactoryBot.define do
   factory :client do
+    active { true }
+    address { Faker::Address.full_address }
+    birth_date { Faker::Date.birthday(min_age: 8, max_age: 80) }
+    email { Faker::Internet.email }
+    fpp_id { Faker::Number.number(digits: 8)  }
+    identification_number { Faker::Number.number(digits: 8) }
+    member_id { Faker::Number.number(digits: 8) }
+    name { Faker::Name.name_with_middle }
+    nif { Faker::Number.number(digits: 9) }
+    phone_number { "915099679" }
+    comments { Faker::Lorem.paragraph(sentence_count: 5, supplemental: true, random_sentences_to_add: 10) }
+    is_master_member { true }
+    password { "starpadel" }
+    password_confirmation { "starpadel" }
   end
 end
